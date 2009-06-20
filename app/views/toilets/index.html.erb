@@ -1,0 +1,56 @@
+<h1>Listing toilets</h1>
+
+
+<div id="map" style="width: 800px; height: 400px; border: solid"></div>
+
+
+<script type="text/javascript">
+    var map = new GMap2(document.getElementById("map"));
+    map.setCenter(new GLatLng(55.864524, -4.251709), 14);
+    map.addControl(new GMapTypeControl(1));
+    map.addControl(new GLargeMapControl());
+    map.enableContinuousZoom();
+    map.enableDoubleClickZoom();
+
+    <% for toilet in @toilets %>
+    var marker = new GMarker(new GLatLng(<%= toilet.lat -%>, <%= toilet.long -%>), {icon:G_DEFAULT_ICON})
+    marker.bindInfoWindowHtml('<h3><%= toilet.name -%></h3><p><%= toilet.address -%></p><p><%= link_to 'Show', toilet %></p>');
+    map.addOverlay(marker);
+    <% end %>
+
+</script>
+
+<hr/>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Address</th>
+    <th>Venuetype</th>
+    <th>Howtoaccess</th>
+    <th>Changingbench</th>
+    <th>Hoist</th>
+    <th>Toiletlocation</th>
+    <th>Whocanuse</th>
+  </tr>
+
+  <% for toilet in @toilets %>
+      <tr>
+        <td><%= h toilet.name %></td>
+        <td><%= h toilet.address %></td>
+        <td><%= h toilet.venuetype %></td>
+        <td><%= h toilet.howtoaccess %></td>
+        <td><%= h toilet.changingbench %></td>
+        <td><%= h toilet.hoist %></td>
+        <td><%= h toilet.toiletlocation %></td>
+        <td><%= h toilet.whocanuse %></td>
+        <td><%= link_to 'Show', toilet %></td>
+        <td><%= link_to 'Edit', edit_toilet_path(toilet) %></td>
+        <td><%= link_to 'Destroy', toilet, :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+  <% end %>
+</table>
+
+<br/>
+
+<%= link_to 'New toilet', new_toilet_path %>

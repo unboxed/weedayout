@@ -1,0 +1,258 @@
+<script type="text/javascript">
+
+    var iconData = {
+        "sco": { width: 34, height: 20 },
+        "wales": { width: 34, height: 20 },
+        "ni": { width: 34, height: 20 },
+        "ireland": { width: 34, height: 20 },
+        "eng": { width: 34, height: 20 },
+        "flag-shadow": { width: 60, height: 45 },
+
+        "house": { width: 32, height: 32 },
+        "house-shadow": { width: 59, height: 32 },
+        "city": { width: 32, height: 32 },
+        "city-shadow": { width: 59, height: 32 }
+    };
+
+    var officeLayer = [
+        {
+            "zoom": [0, 6],
+            "places": [
+                {
+                    "name": "Scotland (5 changing rooms)",
+                    "icon": ["sco", "flag-shadow"],
+                    "posn": [55.95989956952263, -3.8726806640625],
+                },
+                {
+                    "name": "England (0 changing rooms)",
+                    "icon": ["eng", "flag-shadow"],
+                    "posn": [53.08082737207479, -1.0546875],
+                },
+                {
+                    "name": "Wales (0 changing rooms)",
+                    "icon": ["wales", "flag-shadow"],
+                    "posn": [52.382305628707854, -3.22998046875],
+                },
+                {
+                    "name": "Ireland (0 changing rooms)",
+                    "icon": ["ireland", "flag-shadow"],
+                    "posn": [53.27835301753182, -7.174072265625],
+                },
+                {
+                    "name": "Northern Ireland (0 changing rooms)",
+                    "icon": ["ni", "flag-shadow"],
+                    "posn": [54.55295156056188, -6.448974609375],
+                },
+            ]
+        },
+        {
+            "zoom": [7, 11],
+            "places": [
+                {
+                    "name": "Glasgow (4 changing rooms)",
+                    "icon": ["city", "city-shadow"],
+                    "posn": [55.864475427411534, -4.255399703979492],
+                },
+                {
+                    "name": "Edinburgh (1 changing rooms)",
+                    "icon": ["city", "city-shadow"],
+                    "posn": [55.95102602164931, -3.200969696044922],
+                }
+            ]
+        },
+        {
+            "zoom": [12, 17],
+            "places": [
+                <% for toilet in @toilets %>
+
+                {
+                    "name": "<%= toilet.name -%>",
+                    "posn": [<%= toilet.lat -%>, <%= toilet.long -%>],
+                    //"icon": ["house", "house-shadow"],
+                    "blurb": '<h3><%= toilet.name -%></h3><p><%= toilet.address -%></p>' +
+                             '<a href="#" onclick="new Ajax.Updater(\'info\', \'/entry/show/<%= toilet.id -%>\', {asynchronous:true, evalScripts:true, parameters:\'authenticity_token=\' + encodeURIComponent(\'7246f4b3d138b7c448e1baaeca3a4cb74e8ea1c2\')}); return false;">Show Details</a>'
+                },
+                <% end %>
+
+            ]
+        }
+    ];
+</script>
+
+<script type="text/javascript" src="javascripts/markermanager.js">
+</script>
+<script src="http://ajax.googleapis.com/ajax/libs/mootools/1.2.1/mootools.js">
+</script>
+
+
+<script type="text/javascript">
+    //<![CDATA[
+    var map;
+    var mgr;
+    var icons = {};
+    var allmarkers = [];
+
+    function load() {
+        if (GBrowserIsCompatible()) {
+            map = new GMap2(document.getElementById("map"));
+            map.addControl(new GLargeMapControl());
+            map.addControl(new GOverviewMapControl());
+            map.setCenter(new GLatLng(54.91451400766527, -2.7685546875), 5);
+            map.enableDoubleClickZoom();
+            mgr = new MarkerManager(map, {
+                trackMarkers: true
+            });
+            window.setTimeout(setupOfficeMarkers, 0);
+
+
+        }
+    }
+
+    var geocoder = new GClientGeocoder();
+
+    function showAddress(address) {
+        geocoder.getLatLng(
+                address,
+                function(point) {
+                    if (!point) {
+                        alert(address + " not found");
+                    } else {
+                        map.setCenter(point, 12);
+                    }
+                }
+                );
+
+    }
+
+    function getIcon(images) {
+        var icon = null;
+        if (images) {
+            if (icons[images[0]]) {
+                icon = icons[images[0]];
+            } else {
+                icon = new GIcon();
+                icon.image = "images/" +
+                             images[0] +
+                             ".png";
+                var size = iconData[images[0]];
+                icon.iconSize = new GSize(size.width, size.height);
+                icon.iconAnchor = new GPoint(size.width >> 1, size.height >> 1);
+                icon.shadow = "images/" +
+                              images[1] +
+                              ".png";
+                size = iconData[images[1]];
+                icon.shadowSize = new GSize(size.width, size.height);
+                icons[images[0]] = icon;
+            }
+        }
+        return icon;
+    }
+
+    function setupOfficeMarkers() {
+        allmarkers.length = 0;
+        for (var i in officeLayer) {
+            if (officeLayer.hasOwnProperty(i)) {
+                var layer = officeLayer[i];
+                var markers = [];
+                for (var j in layer["places"]) {
+                    if (layer["places"].hasOwnProperty(j)) {
+                        var place = layer["places"][j];
+                        var icon = getIcon(place["icon"]);
+                        var title = place["name"];
+                        var posn = new GLatLng(place["posn"][0], place["posn"][1]);
+                        var marker = createMarker(posn, title, icon, place["blurb"]);
+                        markers.push(marker);
+                        allmarkers.push(marker);
+                    }
+                }
+                mgr.addMarkers(markers, layer["zoom"][0], layer["zoom"][1]);
+            }
+
+        }
+        mgr.refresh();
+    }
+
+    function createMarker(posn, title, icon, blurb) {
+        var marker = new GMarker(posn, {
+            title: title,
+            icon: icon,
+            draggable: false
+        });
+
+        marker.bindInfoWindowHtml(blurb);
+
+        GEvent.addListener(marker, "click", function(latlng) {
+
+            if (latlng && map.getZoom() < 7) {
+                map.setCenter(latlng);
+                map.setZoom(7);
+            }
+
+            else if (latlng && map.getZoom() < 12) {
+                map.setCenter(latlng);
+                map.setZoom(12);
+            }
+        });
+
+        return marker;
+    }
+
+    function showMarkers() {
+        mgr.show();
+    }
+
+    function hideMarkers() {
+        mgr.hide();
+    }
+
+    function deleteMarker() {
+        var markerNum = parseInt(document.getElementById("markerNum").value);
+        mgr.removeMarker(allmarkers[markerNum]);
+    }
+
+    function clearMarkers() {
+        mgr.clearMarkers();
+    }
+
+    function reloadMarkers() {
+        setupOfficeMarkers();
+    }
+
+
+    //]]>
+</script>
+
+
+</head>
+<body onload="load()" onunload="GUnload()">
+
+<%= image_tag 'weeDayOut.png', :height => '75px', :width => '100px' %>
+
+<div style="float: left; margin-right: 2em;">
+  <div>
+    <form id="top-search-form" action="#" method="get" onsubmit="showAddress(document.getElementById('searchbox').value); return false;">
+      <input id="searchbox" type="text" value=""/>
+      <input value="Search For Place" type="submit"/>
+    </form>
+    <br/>
+  </div>
+
+  <div id="map" style="width: 600px; height: 400px; outline-style:solid">
+  </div>
+  <br/><a href="#" onClick="
+map.setCenter(new GLatLng(54.91451400766527, -2.7685546875), 5);
+">Reset Map</a>
+</div>
+
+<div id="info">
+
+  <p style="color: green"><%= flash[:notice] %></p>
+
+  <%= link_to 'Add a New Changing Place', new_toilet_path %>
+
+  <p>
+    Lorem ipsum d sit amet, consectetuer dipiscing elit. Praesent vebulum molestie lacus. Aenean nonumy hendr
+    mauris. Phasellus porta. Fusce suscipit varius is natoque penatibuset magnis... dis parturient montes, nascetur
+    ridiculus mus. Nulla dui. </p>
+</div>
+
