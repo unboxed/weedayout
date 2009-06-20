@@ -226,33 +226,51 @@
 </head>
 <body onload="load()" onunload="GUnload()">
 
-<%= image_tag 'weeDayOut.png', :height => '75px', :width => '100px' %>
 
-<div style="float: left; margin-right: 2em;">
-  <div>
-    <form id="top-search-form" action="#" method="get" onsubmit="showAddress(document.getElementById('searchbox').value); return false;">
-      <input id="searchbox" type="text" value=""/>
-      <input value="Search For Place" type="submit"/>
-    </form>
-    <br/>
+<div class="row">
+  <div class="column grid_3"><%= image_tag 'weeDayOut.png', :height => '75px', :width => '100px' %>
   </div>
 
-  <div id="map" style="width: 600px; height: 400px; outline-style:solid">
+    <div class="column grid_6">
+
+      <form id="top-search-form" action="#" method="get" onsubmit="showAddress(document.getElementById('searchbox').value); return false;">
+        <input id="searchbox" type="text" value=""/>
+        <input value="Search For Place" type="submit"/>
+      </form>
+      <br/>
+    </div>
+  <div class="column grid_3">
+    <%= link_to image_tag("add.gif", :border=>0), new_toilet_path %>
+    <span style="font-size: 20px; a:link {color: red }"><%= link_to 'Add a New Place', new_toilet_path %></span>
   </div>
-  <br/><a href="#" onClick="
-map.setCenter(new GLatLng(54.91451400766527, -2.7685546875), 5);
-">Reset Map</a>
 </div>
 
-<div id="info">
 
-  <p style="color: green"><%= flash[:notice] %></p>
+<div class="row">
+  <div class="column grid_7">
 
-  <%= link_to 'Add a New Changing Place', new_toilet_path %>
 
-  <p>
-    Lorem ipsum d sit amet, consectetuer dipiscing elit. Praesent vebulum molestie lacus. Aenean nonumy hendr
-    mauris. Phasellus porta. Fusce suscipit varius is natoque penatibuset magnis... dis parturient montes, nascetur
-    ridiculus mus. Nulla dui. </p>
+    <div id="map" style="width: 480px; height: 400px; outline-style:solid; margin-left: 2em; margin-top: 1em;"></div>
+
+    <div style="margin-top:1em">
+      <a href="#" onClick=" map.setCenter(new GLatLng(54.91451400766527, -2.7685546875), 5); ">Reset Map</a>
+    </div>
+    
+  </div>
+
+  <div id="info" class="column grid_5">
+
+    <p style="color: green"><%= flash[:notice] %></p>
+
+    <h3>About us</h3>
+
+    <p>Lorem ipsum d sit amet, consectetuer dipiscing elit. Praesent vebulum molestie lacus. Aenean nonumy hendr
+      mauris. Phasellus porta. Fusce suscipit varius is natoque penatibuset magnis... dis parturient montes, nascetur
+      ridiculus mus. Nulla dui.</p>
+
+    <h3>Contact</h3>
+
+    <p>Contact us at info@weedayout.com</p>
+  </div>
+
 </div>
-
