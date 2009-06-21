@@ -73,7 +73,7 @@
                     //"icon": ["house", "house-shadow"],
                     "blurb": '<h3>' + unescape('<%= replace_stuff(toilet.name) -%>') + '</h3><p>' + unescape('<%= replace_stuff(toilet.address) -%>') + '</p>' +
                              '<a href=\'#\' onclick=\"' +
-                             '$.get(\'/entry/show/<%= toilet.id -%>\', {}, function(data) { $(\'#aboutText\').fadeOut(1000, function () { $(\'#aboutText\').html(data); $(\'#aboutText\').fadeIn(1000); }); });'
+                             '$.get(\'/entry/show/<%= toilet.id -%>\', {}, function(data) { $(\'#content\').fadeOut(1000, function () { $(\'#content\').html(data); $(\'#content\').fadeIn(1000); }); });'
                             + '\">Show More</a>'
                 },
                 <% end %>
@@ -89,6 +89,11 @@
     var mgr;
     var icons = {};
     var allmarkers = [];
+
+    function clearDefault(el) {
+      if (el.defaultValue==el.value) el.value = ""
+    }
+    
 
     function load() {
         if (GBrowserIsCompatible()) {
@@ -224,52 +229,63 @@
 </head>
 <body onload="load()" onunload="GUnload()">
 
-<div class="row">
-  <div class="column grid_3"><%= link_to (image_tag 'weeDayOut.png', :height => '75px', :width => '100px', :border=>0), '/' %>
+
+<div id="page-wrapper">
+  <div id="header">
+
+    <div id="logo">
+      <a href="http://weedayout.com"><img src="images/wdo-logo.png" border="0" alt="WeeDayOut.com - Putting accessible toilets on the map."/></a>
+    </div>
+
+    <div id="search">
+      <h2>Find a toilet near me:</h2>
+
+      <form id="top-search-form" action="#" method="get" onsubmit="showAddress(document.getElementById('search-field').value); return false;">
+        <input id="search-field" type="field" value="Enter your town or postcode..." onFocus="clearDefault(this)" />
+        <!--<img src="images/button-search.jpg" border="0" alt="Search" />-->
+        <input type="image" src="images/button-search.jpg" alt="Search">
+
+      </form>
+    </div>
+
+
+    <div id="explore">
+      <h2>Where can I go?</h2>
+
+      <p class="description">Find new places to visit that have the facilities you need.</p>
+      <img src="images/button-explore.jpg" border="0" alt="Explore"/>
+    </div>
+
+    <div id="add">
+      <%= link_to image_tag("button-add-toilet.jpg", :border=>0), new_toilet_path %>
+      <!--<img src="images/button-add-toilet.jpg" border="0" alt="If you know of an accessible toilet, add it to the map." />-->
+      <br/><br/>
+      <%= link_to image_tag("button-add-gap.jpg", :border=>0), new_toilet_path %>
+
+      <!--<img src="images/button-add-gap.jpg" border="0" alt="Tell us where you'd like an accessible toilet. Add a gap to the map." />-->
+    </div>
   </div>
 
-  <div class="column grid_6">
+  <div id="container">
+    <div id="map"></div>
+    <div id="content">
+      <p style="color: green"><%= flash[:notice] %></p>
+      <p><strong>Weedayout.com</strong> is pinpointing accessible toilets across Scotland so you can enjoy a fun day out
+        without getting caught short. We know there are more facilities out there we just don't know where they are
+        that's why you, the people who know, can add them. And if you know where one should be, you can add a gap
+        to the map too.</p>
 
-    <form id="top-search-form" action="#" method="get" onsubmit="showAddress(document.getElementById('searchbox').value); return false;">
-      <input id="searchbox" type="text" value=""/>
-      <input value="Search For Place" type="submit"/>
-    </form>
-    <br/>
+    </div>
   </div>
-  <div class="column grid_3">
-    <%= link_to image_tag("add.gif", :border=>0), new_toilet_path %>
-    <span style="font-size: 20px; a:link {color: red }"><%= link_to 'Add a New Place', new_toilet_path %></span>
+
+  <div id="footer">
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Campaign</a></li>
+
+      <li><a href="#">Blog</a></li>
+      <li>Copyright 2009 Weedayout.com</li>
+    </ul>
   </div>
 </div>
-
-
-<div class="row">
-  <div class="column grid_7">
-
-
-    <div id="map" style="width: 480px; height: 400px; outline-style:solid; margin-left: 2em; margin-top: 1em;"></div>
-
-    <div style="margin-top:1em">
-      <a href="#" onClick=" map.setCenter(new GLatLng(54.91451400766527, -2.7685546875), 5); ">Reset Map</a>
-    </div>
-
-  </div>
-
-  <div id="info" class="column grid_5">
-
-    <p style="color: green"><%= flash[:notice] %></p>
-
-    <div id="aboutText">
-      <h3>About us</h3>
-
-      <p>Lorem ipsum d sit amet, consectetuer dipiscing elit. Praesent vebulum molestie lacus. Aenean nonumy hendr
-        mauris. Phasellus porta. Fusce suscipit varius is natoque penatibuset magnis... dis parturient montes, nascetur
-        ridiculus mus. Nulla dui.</p>
-
-
-      <h3>Contact</h3>
-
-      <p>Contact us at info@weedayout.com</p>
-    </div>
-
-  </div>
