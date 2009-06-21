@@ -1,3 +1,5 @@
+<%= javascript_include_tag 'markermanager' %>
+
 <script type="text/javascript">
 
     var iconData = {
@@ -70,7 +72,9 @@
                     "posn": [<%= toilet.lat -%>, <%= toilet.long -%>],
                     //"icon": ["house", "house-shadow"],
                     "blurb": '<h3><%= toilet.name -%></h3><p><%= toilet.address -%></p>' +
-                             '<a href="#" onclick="new Ajax.Updater(\'info\', \'/entry/show/<%= toilet.id -%>\', {asynchronous:true, evalScripts:true, parameters:\'authenticity_token=\' + encodeURIComponent(\'7246f4b3d138b7c448e1baaeca3a4cb74e8ea1c2\')}); return false;">Show Details</a>'
+                             '<a href=\'#\' onclick=\"' +
+                             '$.get(\'/entry/show/<%= toilet.id -%>\', {}, function(data) { $(\'#aboutText\').fadeOut(1000, function () { $(\'#aboutText\').html(data); $(\'#aboutText\').fadeIn(1000); }); });'
+                            + '\">Show More</a>'
                 },
                 <% end %>
 
@@ -78,12 +82,6 @@
         }
     ];
 </script>
-
-<script type="text/javascript" src="javascripts/markermanager.js">
-</script>
-<script src="http://ajax.googleapis.com/ajax/libs/mootools/1.2.1/mootools.js">
-</script>
-
 
 <script type="text/javascript">
     //<![CDATA[
@@ -226,19 +224,18 @@
 </head>
 <body onload="load()" onunload="GUnload()">
 
-
 <div class="row">
-  <div class="column grid_3"><%= image_tag 'weeDayOut.png', :height => '75px', :width => '100px' %>
+  <div class="column grid_3"><%= link_to (image_tag 'weeDayOut.png', :height => '75px', :width => '100px', :border=>0), '/' %>
   </div>
 
-    <div class="column grid_6">
+  <div class="column grid_6">
 
-      <form id="top-search-form" action="#" method="get" onsubmit="showAddress(document.getElementById('searchbox').value); return false;">
-        <input id="searchbox" type="text" value=""/>
-        <input value="Search For Place" type="submit"/>
-      </form>
-      <br/>
-    </div>
+    <form id="top-search-form" action="#" method="get" onsubmit="showAddress(document.getElementById('searchbox').value); return false;">
+      <input id="searchbox" type="text" value=""/>
+      <input value="Search For Place" type="submit"/>
+    </form>
+    <br/>
+  </div>
   <div class="column grid_3">
     <%= link_to image_tag("add.gif", :border=>0), new_toilet_path %>
     <span style="font-size: 20px; a:link {color: red }"><%= link_to 'Add a New Place', new_toilet_path %></span>
@@ -255,22 +252,24 @@
     <div style="margin-top:1em">
       <a href="#" onClick=" map.setCenter(new GLatLng(54.91451400766527, -2.7685546875), 5); ">Reset Map</a>
     </div>
-    
+
   </div>
 
   <div id="info" class="column grid_5">
 
     <p style="color: green"><%= flash[:notice] %></p>
 
-    <h3>About us</h3>
+    <div id="aboutText">
+      <h3>About us</h3>
 
-    <p>Lorem ipsum d sit amet, consectetuer dipiscing elit. Praesent vebulum molestie lacus. Aenean nonumy hendr
-      mauris. Phasellus porta. Fusce suscipit varius is natoque penatibuset magnis... dis parturient montes, nascetur
-      ridiculus mus. Nulla dui.</p>
+      <p>Lorem ipsum d sit amet, consectetuer dipiscing elit. Praesent vebulum molestie lacus. Aenean nonumy hendr
+        mauris. Phasellus porta. Fusce suscipit varius is natoque penatibuset magnis... dis parturient montes, nascetur
+        ridiculus mus. Nulla dui.</p>
 
-    <h3>Contact</h3>
 
-    <p>Contact us at info@weedayout.com</p>
+      <h3>Contact</h3>
+
+      <p>Contact us at info@weedayout.com</p>
+    </div>
+
   </div>
-
-</div>
