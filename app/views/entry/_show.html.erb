@@ -1,11 +1,11 @@
-<p>
-  <b>Name:</b>
-  <%= h @toilet.name %>
-</p>
+<h2><%= h @toilet.name %></h2>
+
+<p><i><%= h @toilet.address %></i></p>
 
 <p>
-  <b>Address:</b>
-  <%= h @toilet.address %>
+  <img src="<%= image_path 'toilet.jpg' -%>" alt="Plant 1" height='100' width='100'/>
+  <img src="<%= image_path 'hoist.jpg' -%>" alt="Plant 2" height='100' width='100'/>
+  <img src="<%= image_path 'bench.jpg' -%>" alt="Plant 3" height='100' width='100'/>
 </p>
 
 <p>
@@ -37,5 +37,6 @@
   <b>Who can use:</b>
   <%= h @toilet.whocanuse %>
 </p>
+
 
 <%= link_to 'Edit', edit_toilet_path(@toilet) %>
