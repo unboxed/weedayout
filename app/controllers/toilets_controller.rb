@@ -45,7 +45,7 @@ class ToiletsController < ApplicationController
     respond_to do |format|
       if @toilet.save
         flash[:notice] = 'Toilet was successfully created.'
-        format.html { redirect_to(@toilet) }
+        format.html { redirect_to '' }
         format.xml  { render :xml => @toilet, :status => :created, :location => @toilet }
       else
         format.html { render :action => "new" }
@@ -62,7 +62,7 @@ class ToiletsController < ApplicationController
     respond_to do |format|
       if @toilet.update_attributes(params[:toilet])
         flash[:notice] = 'Toilet was successfully updated.'
-        format.html { redirect_to(@toilet) }
+        format.html { redirect_to '' }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

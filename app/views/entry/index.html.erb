@@ -71,7 +71,7 @@
                     "name": "<%= toilet.name -%>",
                     "posn": [<%= toilet.lat -%>, <%= toilet.long -%>],
                     //"icon": ["house", "house-shadow"],
-                    "blurb": '<h3><%= toilet.name -%></h3><p><%= toilet.address -%></p>' +
+                    "blurb": '<h3>' + unescape('<%= replace_stuff(toilet.name) -%>') + '</h3><p>' + unescape('<%= replace_stuff(toilet.address) -%>') + '</p>' +
                              '<a href=\'#\' onclick=\"' +
                              '$.get(\'/entry/show/<%= toilet.id -%>\', {}, function(data) { $(\'#aboutText\').fadeOut(1000, function () { $(\'#aboutText\').html(data); $(\'#aboutText\').fadeIn(1000); }); });'
                             + '\">Show More</a>'
