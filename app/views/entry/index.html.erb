@@ -71,7 +71,7 @@
                     "name": "<%= toilet.name -%>",
                     "posn": [<%= toilet.lat -%>, <%= toilet.long -%>],
                     //"icon": ["house", "house-shadow"],
-                    "blurb": '<h3>' + unescape('<%= replace_stuff(toilet.name) -%>') + '</h3><p>' + unescape('<%= replace_stuff(toilet.address) -%>') + '</p>' +
+                    "blurb": '<h3>' + unescape('<%= replace_stuff(toilet.name) -%>') + '</h3><p>' + unescape('<%= escape_javascript(toilet.address) -%>') + '</p>' +
                              '<a href=\'#\' onclick=\"' +
                              '$.get(\'/entry/show/<%= toilet.id -%>\', {}, function(data) { $(\'#content\').fadeOut(1000, function () { $(\'#content\').html(data); $(\'#content\').fadeIn(1000); }); });'
                             + '\">Show More</a>'
@@ -260,7 +260,7 @@
       <%= link_to image_tag("button-add-toilet.jpg", :border=>0), new_toilet_path %>
       <!--<img src="images/button-add-toilet.jpg" border="0" alt="If you know of an accessible toilet, add it to the map." />-->
       <br/><br/>
-      <%= link_to image_tag("button-add-gap.jpg", :border=>0), new_toilet_path %>
+      <%= image_tag("button-add-gap.jpg", :border=>0) %>
 
       <!--<img src="images/button-add-gap.jpg" border="0" alt="Tell us where you'd like an accessible toilet. Add a gap to the map." />-->
     </div>
