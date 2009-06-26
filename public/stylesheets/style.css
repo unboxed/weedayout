@@ -92,9 +92,10 @@ a:hover{
 
 #map{
 	float: left;
-	width:530px;
+	width:520px;
 	height:400px;
 	background-color:#efefef;
+    border: solid
 }
 
 #content{
