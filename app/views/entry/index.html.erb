@@ -91,9 +91,9 @@
     var allmarkers = [];
 
     function clearDefault(el) {
-      if (el.defaultValue==el.value) el.value = ""
+        if (el.defaultValue == el.value) el.value = ""
     }
-    
+
 
     function load() {
         if (GBrowserIsCompatible()) {
@@ -229,56 +229,76 @@
 </head>
 <body onload="load()" onunload="GUnload()">
 
+<div id="header" class="row">
 
-<div id="page-wrapper">
-  <div id="header">
-
+  <div class="column grid_3">
     <div id="logo">
       <a href="http://weedayout.com"><img src="images/wdo-logo.png" border="0" alt="WeeDayOut.com - Putting accessible toilets on the map."/></a>
     </div>
+  </div>
 
+  <div class="column grid_3">
     <div id="search">
       <h2>Find a toilet near me:</h2>
 
       <form id="top-search-form" action="#" method="get" onsubmit="showAddress(document.getElementById('search-field').value); return false;">
-        <input id="search-field" type="field" value="Enter your town or postcode..." onFocus="clearDefault(this)" />
-        <!--<img src="images/button-search.jpg" border="0" alt="Search" />-->
+        <input id="search-field" type="field" value="Enter your town or postcode..." onFocus="clearDefault(this)"/>
         <input type="image" src="images/button-search.jpg" alt="Search">
-
       </form>
     </div>
+  </div>
 
-
+  <div class="column grid_3">
     <div id="explore">
       <h2>Where can I go?</h2>
 
       <p class="description">Find new places to visit that have the facilities you need.</p>
       <img src="images/button-explore.jpg" border="0" alt="Explore"/>
     </div>
+  </div>
 
+  <div class="column grid_3">
     <div id="add">
-      <%= link_to image_tag("button-add-toilet.jpg", :border=>0), new_toilet_path %>
-      <!--<img src="images/button-add-toilet.jpg" border="0" alt="If you know of an accessible toilet, add it to the map." />-->
+      <%= link_to image_tag("button-add-toilet.jpg", :border=>0, :alt => 'If you know of an accessible toilet, add it to the map'), new_toilet_path %>
       <br/><br/>
-      <%= image_tag("button-add-gap.jpg", :border=>0) %>
-
-      <!--<img src="images/button-add-gap.jpg" border="0" alt="Tell us where you'd like an accessible toilet. Add a gap to the map." />-->
+      <%= image_tag("button-add-gap.jpg", :border=>0, :alt => 'Tell us where you\'d like an accessible toilet. Add a gap to the map') %>
     </div>
   </div>
 
-  <div id="container">
+</div>
+
+<div id="container" class="row">
+
+  <div class="column grid_7">
     <div id="map"></div>
+    <div>
+      <h3>Recently Updated</h3>
+
+      |<% for recent in @recents_updated %>
+          <a href='#' onclick="
+          $.get('/entry/show/<%= recent.id -%>', {},function(data) { $('#content').fadeOut(1000, function () { $('#content').html(data); $('#content').fadeIn(1000); }); });
+          "><%= recent.name -%></a> |
+      <% end %>
+    </div>
+  </div>
+
+  <div class="column grid_5">
     <div id="content">
       <p style="color: green"><%= flash[:notice] %></p>
-      <p><strong>Weedayout.com</strong> is pinpointing accessible toilets across Scotland so you can enjoy a fun day out
+
+      <p><strong>Weedayout.com</strong> is pinpointing accessible toilets across Scotland so you can enjoy a fun day
+        out
         without getting caught short. We know there are more facilities out there we just don't know where they are
         that's why you, the people who know, can add them. And if you know where one should be, you can add a gap
         to the map too.</p>
-
     </div>
   </div>
 
-  <div id="footer">
+</div>
+
+
+<div id="footer" class="row">
+  <div class="column grid_12">
     <ul>
       <li><a href="#">Home</a></li>
       <li><a href="#">About</a></li>

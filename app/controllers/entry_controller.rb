@@ -4,6 +4,9 @@ class EntryController < ApplicationController
   
   def index
     @toilets = Toilet.find(:all)
+
+    @recents_updated = Toilet.find(:all, :order => "updated_at", :limit => 3).reverse
+    @recents_created = Toilet.find(:all, :order => "created_at", :limit => 3).reverse
   end
 
   def show
