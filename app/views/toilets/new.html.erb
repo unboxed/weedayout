@@ -44,7 +44,7 @@
     <table>
       <tr>
         <td>
-          <div class="location_selector">
+          <div class="location_selector" style="display:none;">
             <div><label for="MapAddressSearch">Map location</label></div>
             <input name="MapAddressSearch" id="MapAddressSearch" value="" size="50" />
             <input type="button" value="Locate on Map" onclick="showLocation()" />
@@ -63,7 +63,7 @@
               <td class="label"><%= f.label :long, "Longitude" %></td>
               <td class="field">
                 <%= f.text_field :long %>
-                <input type="button" value="Update map" onclick="recenterMarker()" />
+                <input type="button" value="Update map" class="updatemap" style="display:none" onclick="recenterMarker()" />
               </td>
             </tr>
           </table>
@@ -91,6 +91,8 @@
 
 <!-- R-rated code ahead, parental advisory -->
 <script type="text/javascript" charset="utf-8">
+$(".location_selector").show();
+$(".updatemap").show();
   /* <![CDATA[ */
   var marker;
 	var map;
