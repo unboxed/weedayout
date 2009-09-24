@@ -7,7 +7,7 @@ Feature: Adding toilets
   Scenario: Successful adding of toilet
     When I go to add toilet page
     And I fill in "Name" with "Westminster Bridge"
-    And I fill in "Address" with "1 Westminster Bridge, London"
+    And I fill in "Address" with "Westminster Bridge London"
     And I fill in "Venue Type" with "Bridge"
     And I fill in "How to access" with "Walk onto the bridge"
     And I check "Changing Bench?"
@@ -19,4 +19,9 @@ Feature: Adding toilets
     And I fill in "Longitude" with "52.9376"
     And I press "Create"
     Then I should see "Toilet created"
+  
+  Scenario: Submitting a blank form
+    When I go to add toilet page
+    And I press "Create"
+    Then I should see "4 errors"
     

@@ -44,8 +44,8 @@
       <tr>
         <td>
           <div class="location_selector">
-            <div><label for="Address">Map location</label></div>
-            <input name="Address" id="Address" value="" size="50" />
+            <div><label for="MapAddressSearch">Map location</label></div>
+            <input name="MapAddressSearch" id="MapAddressSearch" value="" size="50" />
             <input type="button" value="Find Address" onclick="showLocation()" />
             <div id="map" style="height: 500px; width: 500px"></div>
           </div><!-- location_selector -->
@@ -202,7 +202,7 @@
   }
 
 	function showLocation(address) {
-		address = document.getElementById('Address').value;
+		address = document.getElementById('MapAddressSearch').value;
 		geocoder.getLocations(address, addAddressToMap);
 	}
 	

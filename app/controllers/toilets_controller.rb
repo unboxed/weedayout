@@ -6,8 +6,11 @@ class ToiletsController < ApplicationController
   
   def create
     @toilet = Toilet.new(params[:toilet])
-    @toilet.save
-    flash[:notice] = "Toilet created"
-    redirect_to toilets_path
+    if @toilet.save
+      flash[:notice] = "Toilet created"
+      redirect_to toilets_path
+    else
+      render :action => "new"
+    end
   end
 end
