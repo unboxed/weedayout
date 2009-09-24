@@ -17,11 +17,18 @@ Feature: Adding toilets
     And I fill in "Description" with "It's a bridge"
     And I fill in "Latitude" with "0.0003"
     And I fill in "Longitude" with "52.9376"
+    And I pass the spam test
     And I press "Create"
     Then I should see "Toilet created"
   
   Scenario: Submitting a blank form
     When I go to add toilet page
+    And I pass the spam test
     And I press "Create"
     Then I should see "4 errors"
+  
+  Scenario: Adding toilets as a spammer
+    When I go to add toilet page
+    And I press "Create"
+    Then I should see "It appears you're a spam bot"
     

@@ -25,3 +25,7 @@ Given /^geokit will return (\d+\.\d+), (\d+\.\d+) when passed "([^\"]*)"$/ do |l
   geoloc.stub!(:success).and_return(true)
   Geokit::Geocoders::MultiGeocoder.stub!(:geocode).and_return(geoloc)
 end
+
+When /^I pass the spam test$/ do
+  When('I fill in "To prove you\'re not a spam bot, please put \'rabbit\' into this field" with "rabbit"')
+end

@@ -12,7 +12,8 @@ class ToiletsController < ApplicationController
   
   def create
     @toilet = Toilet.new(params[:toilet])
-    if @toilet.save
+    flash[:notice] = "It appears you're a spam bot" if params[:spamcheck] != "rabbit"
+    if @toilet.save && params[:spamcheck] == "rabbit"
       flash[:notice] = "Toilet created"
       redirect_to toilets_path
     else

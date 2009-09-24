@@ -2,6 +2,7 @@
 
 <% form_for(@toilet) do |f| %>
     <%= f.error_messages %>
+    <%= flash[:notice] %>
     <p>
       <%= f.label :name %><br/>
       <%= f.text_field :name %>
@@ -69,6 +70,12 @@
         </td>
       </tr>
     </table>
+    
+    <fieldset class="spamcheck_fields">
+      <label for="spamcheck">To prove you're not a spam bot, please put 'rabbit' into this field</label>
+      <%= text_field_tag :spamcheck %>
+    </fieldset>
+    
     
     <p>
       <%= f.submit "Create" %>
