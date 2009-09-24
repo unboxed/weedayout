@@ -2,6 +2,9 @@
 
 <% form_tag toilets_path, :method => :get do %>
   <%= "Type a location to find toilets" if params[:location] == "" %>
+  <label for="location">Location:</label>
   <%= text_field_tag :location %>
   <%= submit_tag "Search" %>
 <% end %>
+
+<%= @toilets.to_yaml %>
