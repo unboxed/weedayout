@@ -11,11 +11,6 @@
 
 ActiveRecord::Schema.define(:version => 20090620133405) do
 
-  create_table "add_test_datas", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "toilets", :force => true do |t|
     t.string   "name"
     t.string   "address"
