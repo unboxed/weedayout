@@ -1,5 +1,9 @@
 class ToiletsController < ApplicationController
   
+  def index
+
+  end
+  
   def new
     @toilet = Toilet.new
   end
