@@ -2,9 +2,6 @@
 
 <% form_for(@toilet) do |f| %>
     <%= f.error_messages %>
-
-    <div id="map" style="width: 400px; height: 400px; border: solid; float: left; margin-right: 1em"></div>
-
     <p>
       <%= f.label :name %><br/>
       <%= f.text_field :name %>
@@ -13,8 +10,6 @@
       <%= f.label :address %><br/>
       <%= f.text_field :address %>
     </p>
-      <%= f.hidden_field :long %>
-      <%= f.hidden_field :lat %>
     <p>
       <%= f.label :venuetype %><br/>
       <%= f.text_field :venuetype %>
@@ -39,29 +34,175 @@
       <%= f.label :whocanuse %><br/>
       <%= f.text_field :whocanuse %>
     </p>
+    
+    <table>
+      <tr>
+        <td>
+          <div class="location_selector">
+            <div><label for="Address">Map location</label></div>
+            <input name="Address" id="Address" value="" size="50" />
+            <input type="button" value="Find Address" onclick="showLocation()" />
+            <div id="map" style="height: 500px; width: 500px"></div>
+          </div><!-- location_selector -->
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table>
+            <tr>
+              <td class="label"><%= f.label :lat, "Latitude" %></td>
+              <td class="field"><%= f.text_field :lat %></td>
+            </tr>
+            <tr>
+              <td class="label"><%= f.label :long, "Longitude" %></td>
+              <td class="field">
+                <%= f.text_field :long %>
+                <input type="button" value="Update map" onclick="recenterMarker()" />
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    
     <p>
       <%= f.submit "Create" %>
     </p>
-<% end %>
 
 <%= link_to 'Back', toilets_path %>
 
+<% 
+  @lat = !f.object.lat.blank? ? f.object.lat : 51.5008889524
+  @long = !f.object.long.blank? ? f.object.long : -0.1220512390
+%>
+<% end %>
 
-<script type="text/javascript">
-    var map = new GMap2(document.getElementById("map"));
-    map.setCenter(new GLatLng(55.864524,-4.251709), 14 );
-    map.addControl(new GMapTypeControl(1));
-    map.addControl(new GLargeMapControl());
-    map.enableContinuousZoom();
-    map.enableDoubleClickZoom();
+<!-- R-rated code ahead, parental advisory -->
+<script type="text/javascript" charset="utf-8">
+  /* <![CDATA[ */
+  var marker;
+	var map;
+	function LEFT(str, n){
+		if (n <= 0)
+		    return "";
+		else if (n > String(str).length)
+		    return str;
+		else
+		    return String(str).substring(0,n);
+	}
+	function RIGHT(str, n){
+	    if (n <= 0)
+	       return "";
+	    else if (n > String(str).length)
+	       return str;
+	    else {
+	       var iLen = String(str).length;
+	       return String(str).substring(iLen, iLen - n);
+	   	}
+	}
+    function load() {
+      if (GBrowserIsCompatible()) {
+       	map = new GMap2(document.getElementById("map"));
+        map.setCenter(new GLatLng(<%= @lat %>, <%= @long %>), 12);
+        map.addControl(new GMapTypeControl());
+        map.addControl(new GLargeMapControl()); 
+        map.enableDoubleClickZoom();
+        map.enableScrollWheelZoom();
+        geocoder = new GClientGeocoder();
+		
+			/// prevent page scroll
+			function wheelevent(e)
+			{
+				if (!e)
+					e = window.event
+				if (e.preventDefault)
+					e.preventDefault()
+					
+				e.returnValue = false;
+			}
+			GEvent.addDomListener(map.getContainer(), "DOMMouseScroll", wheelevent);
+			map.getContainer().onmousewheel = wheelevent; 
 
-    var point = new GLatLng(55.864524,-4.251709);
-    var markerD2 = new GMarker(point, {icon:G_DEFAULT_ICON, draggable: true});
-    map.addOverlay(markerD2);
-    markerD2.enableDragging();
-    GEvent.addListener(markerD2, "drag", function() {
-        document.getElementById("toilet_long").value = markerD2.getLatLng().lng();
-        document.getElementById("toilet_lat").value = markerD2.getLatLng().lat();
-    });
+		// Creates a marker whose info window displays the given number
+		function createMarker(point, number,thisHTML,TitleText,FormattedPoint) {
+		  var marker = new GMarker(point, {draggable:true});
+		
+			
+		  // Show this marker's index in the info window when it is clicked
+		   GEvent.addListener(marker, "click", function() {
+		    //marker.openInfoWindowHtml("<h4>" + thisHTML + "</h4><br />" + FormattedPoint);
+		  });
+		
+		  return marker;
+		}
+		
+			var point = new GPoint(parseFloat(<%= @long %>), parseFloat(<%= @lat %>));
+			marker = createMarker(point, 1,"WhereToLive","WhereToLive");
 
+			GEvent.addListener(marker, "dragstart", function() {
+				map.closeInfoWindow();
+			});
+			
+			GEvent.addListener(marker, "dragend", function() {
+			  document.getElementById('toilet_lat').value = marker.getPoint().lat();
+			  document.getElementById('toilet_long').value = marker.getPoint().lng();
+			  //document.getElementById('ddhhcombo').value = 'N' + LEFT(marker.getPoint().lat(),8) + ', ' + 'W' + LEFT(marker.getPoint().lng(),9);*/
+			});
+					
+			map.addOverlay(marker);
+			
+			//request.send(null);
+		}
+    }
+
+	function addAddressToMap(response) {
+		map.clearOverlays();
+		if (!response || response.Status.code != 200) {
+			alert("Sorry, we were unable to geocode that address");
+		} else {
+			place = response.Placemark[0];
+			document.getElementById('toilet_lat').value = place.Point.coordinates[1]
+			document.getElementById('toilet_long').value = place.Point.coordinates[0]
+			point = new GLatLng(place.Point.coordinates[1],
+				place.Point.coordinates[0]);
+			marker = new GMarker(point, {draggable:true});
+			map.addOverlay(marker);
+			map.setCenter(new GLatLng(document.getElementById('toilet_lat').value, document.getElementById('toilet_long').value), 15);
+			marker.openInfoWindowHtml(place.address + '<br />' + 
+			place.Point.coordinates[1] + ', ' + place.Point.coordinates[0] + '<br />' +
+			'<b>Country code:</b> ' + place.AddressDetails.Country.CountryNameCode);
+ 
+			GEvent.addListener(marker, "dragstart", function() {
+				map.closeInfoWindow();
+			});
+			
+			GEvent.addListener(marker, "dragend", function() {
+			  document.getElementById('toilet_lat').value = marker.getPoint().lat();
+			  document.getElementById('toilet_long').value = marker.getPoint().lng();
+			});
+     		}
+    	}
+
+  // A function to create the marker and set up the event window
+  // function centerMarker() {
+  //  marker.setPoint(new GLatLng(map.getCenter().lat(), map.getCenter().lng()))
+  //  document.getElementById('toilet_lat').value = marker.getPoint().lat();
+  //  document.getElementById('toilet_long').value = marker.getPoint().lng();
+  // }
+	
+  // A function to create the marker and set up the event window
+  function recenterMarker() {
+   marker.setPoint(new GLatLng(document.getElementById('toilet_lat').value, document.getElementById('toilet_long').value))
+   map.setCenter(new GLatLng(document.getElementById('toilet_lat').value, document.getElementById('toilet_long').value));
+  }
+
+	function showLocation(address) {
+		address = document.getElementById('Address').value;
+		geocoder.getLocations(address, addAddressToMap);
+	}
+	
+	jQuery(function($) {
+	 load();
+  });
+  /* ]]> */
 </script>
