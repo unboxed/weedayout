@@ -2,7 +2,7 @@ class ToiletsController < ApplicationController
   
   def index
     unless params[:location].blank?
-      @toilets = Toilet.find(:all, :origin => params[:location]+" GB", :limit => 5, :order => "distance ASC")
+      @toilets = Toilet.find(:all, :origin => params[:location]+" GB", :limit => 5, :order => "distance ASC", :conditions => filter_conditions)
     end
   end
   
@@ -18,5 +18,20 @@ class ToiletsController < ApplicationController
     else
       render :action => "new"
     end
+  end
+  
+  private
+  
+  def filter_conditions
+    conditions = params[:hoist] ? ["hoist = ?", params[:hoist]] : [""]
+    if params[:changingbench]
+      if params[:hoist]
+        conditions[0] += " AND changingbench = ?"
+      else
+        conditions[0] += "changingbench = ?"
+      end
+      conditions << params[:changingbench]
+    end
+    conditions
   end
 end

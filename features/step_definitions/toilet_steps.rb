@@ -9,10 +9,19 @@ Given /^the toilet "([^\"]*)" is located at (\d+\.\d+), (\d+\.\d+)$/ do |name, l
   toilet.save!
 end
 
+Given /^the toilet "([^\"]*)" has a hoist$/ do |name|
+  find_or_create(Toilet, :name => name).update_attribute(:hoist, true)
+end
+
+Given /^the toilet "([^\"]*)" has a changing bench$/ do |name|
+  find_or_create(Toilet, :name => name).update_attribute(:changingbench, true)
+end
+
+
 Given /^geokit will return (\d+\.\d+), (\d+\.\d+) when passed "([^\"]*)"$/ do |lat, long, search|
   geoloc = Geokit::GeoLoc.new
   geoloc.stub!(:lat).and_return(lat)
   geoloc.stub!(:lng).and_return(long)
   geoloc.stub!(:success).and_return(true)
-  Geokit::Geocoders::MultiGeocoder.should_receive(:geocode).and_return(geoloc)
+  Geokit::Geocoders::MultiGeocoder.stub!(:geocode).and_return(geoloc)
 end
