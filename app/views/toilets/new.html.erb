@@ -47,7 +47,7 @@
           <div class="location_selector">
             <div><label for="MapAddressSearch">Map location</label></div>
             <input name="MapAddressSearch" id="MapAddressSearch" value="" size="50" />
-            <input type="button" value="Find Address" onclick="showLocation()" />
+            <input type="button" value="Locate on Map" onclick="showLocation()" />
             <div id="map" style="height: 500px; width: 500px"></div>
           </div><!-- location_selector -->
         </td>
@@ -121,6 +121,7 @@
         map.enableDoubleClickZoom();
         map.enableScrollWheelZoom();
         geocoder = new GClientGeocoder();
+        geocoder.setBaseCountryCode("GB");
 		
 			/// prevent page scroll
 			function wheelevent(e)
