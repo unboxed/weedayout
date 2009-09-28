@@ -12,4 +12,84 @@
   <%= submit_tag "Search" %>
 <% end %>
 
-<%= @toilets.to_yaml %>
+<%= link_to "Add a Toilet", { :controller => "toilets", :action => "new" }, :id => "new.toilet" %>
+
+<div id="map" style="height: 500px; width: 500px"></div>
+
+<% if @toilets then %>
+<table class="toilets.search.result">
+    <tr>
+      <th>name</th>
+      <th>address</th>
+      <th>venue type</th>
+      <th>toilet location</th>
+      <th>who can use</th>
+      <th>how to access</th>
+      <th>changing bench</th>
+      <th>hoist</th>
+      <th>distance</th>
+      <th>description</th>
+    </tr>
+
+  <% @toilets.each_with_index do |toilet, index| %>
+    <tr>
+      <td class="name"><%=toilet.name%></td>
+      <td class="address"><%= toilet.address %></td>
+      <td class="venuetype"><%= toilet.venuetype %></td>
+      <td class="toiletlocation"><%= toilet.toiletlocation %></td>
+      <td class="whocanuse"><%= toilet.whocanuse %></td>
+      <td class="howtoaccess"><%= toilet.howtoaccess %></td>
+      <td class="changingbench"><%= toilet.changingbench ? "has changing bench" : "does not have changing bench" %></td>
+      <td class="hoist"><%= toilet.hoist ? "has hoist" : "does not have hoist" %></td>
+      <td class="distance"><%= ("%0.2f" % toilet.distance.to_f ) %> km</td>
+      <td class="description"><%= toilet.description %></td>
+    </tr>
+<% end %>
+</table>
+<% end %>
+
+<% if params[:location] then %>
+<script type="text/javascript" charset="utf-8">
+    map = new GMap2(document.getElementById("map"));
+  
+    function createMarker(point,thisHTML) {
+        var marker = new GMarker(point, {draggable:false});
+
+        // Show this marker's index in the info window when it is clicked
+        GEvent.addListener(marker, "click", function() {
+            marker.openInfoWindowHtml(thisHTML);
+        });
+
+        return marker;
+    }
+
+
+
+    if (GBrowserIsCompatible()) {
+
+        geocoder = new GClientGeocoder();
+        geocoder.setBaseCountryCode("GB");
+
+        geocoder.getLatLng(
+              "<%= params[:location] %>",
+              function(point) {
+                  if (!point) {
+                      alert("location not found");
+                  } else {
+                      map.setCenter(point, 12);
+                  }
+              }
+              );
+
+        map.addControl(new GMapTypeControl());
+        map.addControl(new GLargeMapControl());
+        map.enableDoubleClickZoom();
+
+        <% @toilets.each do |toilet| %>
+            point = new GPoint(parseFloat(<%= toilet.long %>), parseFloat(<%= toilet.lat %>));
+            marker = createMarker(point,  "<h4 class='name'><%= toilet.name %></h4><p class='address'><%= toilet.address %></p>");
+            map.addOverlay(marker);
+        <% end if @toilets %>
+    }
+</script>
+<% end %>
