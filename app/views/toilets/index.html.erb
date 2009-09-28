@@ -52,7 +52,10 @@
 <script type="text/javascript" charset="utf-8">
     map = new GMap2(document.getElementById("map"));
   
-    function createMarker(point,thisHTML) {
+    function addMarker(longStr, latStr, name, address) {
+        point = new GPoint(parseFloat(longStr), parseFloat(latStr));
+        thisHTML = "<h4 class='name'>" + name + "</h4><p class='address'>" + address + "</p>";
+
         var marker = new GMarker(point, {draggable:false});
 
         // Show this marker's index in the info window when it is clicked
@@ -60,10 +63,8 @@
             marker.openInfoWindowHtml(thisHTML);
         });
 
-        return marker;
+        map.addOverlay(marker);
     }
-
-
 
     if (GBrowserIsCompatible()) {
 
@@ -86,9 +87,7 @@
         map.enableDoubleClickZoom();
 
         <% @toilets.each do |toilet| %>
-            point = new GPoint(parseFloat(<%= toilet.long %>), parseFloat(<%= toilet.lat %>));
-            marker = createMarker(point,  "<h4 class='name'><%= toilet.name %></h4><p class='address'><%= toilet.address %></p>");
-            map.addOverlay(marker);
+        addMarker("<%= toilet.long %>", "<%= toilet.lat %>", "<%= toilet.name %>", "<%= toilet.address %>"); // todo: escape '"'?
         <% end if @toilets %>
     }
 </script>
