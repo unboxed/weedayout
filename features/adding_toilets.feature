@@ -26,7 +26,9 @@ Feature: Adding toilets
     And I pass the spam test
     And I press "Create"
     Then I should see "4 errors"
-  
+    Then I should see "Address can't be blank"
+    Then I should see "Name can't be blank"
+
   Scenario: Adding toilets as a spammer
     When I go to add toilet page
     And I press "Create"
