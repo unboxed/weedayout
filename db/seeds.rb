@@ -133,7 +133,7 @@ Toilet.create(
         :howtoaccess =>'',
         :description => "",
         :toiletlocation =>'',
-        :whocanuse =>'Who can use the toilet:',
+        :whocanuse =>'',
         :long => '-1.6955028',
         :lat => '54.3768687',
         :hoist => true,
@@ -164,7 +164,7 @@ Toilet.create(
         :howtoaccess =>'',
         :description => "",
         :toiletlocation =>'',
-        :whocanuse =>'<strong>Who can use the toilet:</strong> Anyone in the area who would like to use it',
+        :whocanuse =>'Anyone in the area who would like to use it',
         :long => '-1.0465918',
         :lat => '53.9536874',
         :hoist => true,
@@ -260,29 +260,9 @@ Toilet.create(
         # :phone =>'02890 825434',
         :venuetype =>'',
         :howtoaccess =>'',
-        :description => "",
-        :toiletlocation =>'',
-        :whocanuse =>'<font face="Arial">â€“</font><font face="Arial"> Sun: 12.00 </font><font face="Arial">â€“</font><font face="Arial"> 4.00</font><font face="Arial">â€“</font><font face="Arial"> 4.00</font><b><font face="Arial">
-
-<p>Changing Bench:</p>
-
-<b>
-
-<p>Hoist:</p>
-
-<b>
-
-<p>Toilet:</p>
-
-<b>
-
-<p>Who can use the toilet:</p>
-
-</b>Anyone in the area who would like to use it. </b> Centrally placed toilet with room either side for the carers</b> Ceiling track hoist - Likorall R2R max200kg</font>
-
-<p>&#160;</p>
-
-</b> Height adjustable, adult sized, free standing',
+        :description => "Ceiling track hoist - Likorall R2R max200kg. Height adjustable, adult sized, free standing",
+        :toiletlocation =>'Centrally placed toilet with room either side for the carers.',
+        :whocanuse =>'Anyone in the area who would like to use it',
         :long => '-6.0393120',
         :lat => '54.5976120',
         :hoist => true,
@@ -427,21 +407,9 @@ Toilet.create(
         # :phone =>'0151 489 6000',
         :venuetype =>'',
         :howtoaccess =>'',
-        :description => "",
-        :toiletlocation =>'',
-        :whocanuse =>'<font face="Arial">â€“</font><font face="Arial"> 5.00</font><font face="Arial">â€“</font><font face="Arial"> 12.30</font><b><font face="Arial">
-
-<p>Hoist:</p>
-
-<b>
-
-<p>Toilet:</p>
-
-<b>
-
-<p>Who can use the toilet:</p>
-
-</b>Anyone in the area who would like to use it. </b>Corner toilet</font><font face="Arial">â€“</font><font face="Arial"> BHM V4 200kgs</font></b> Ceiling track hoist',
+        :description => "BHM V4 200kgs ceiling track hoist",
+        :toiletlocation =>'Corner toilet',
+        :whocanuse =>'>Anyone in the area who would like to use it.',
         :long => '-2.8273964',
         :lat => '53.3589563',
         :hoist => true,
@@ -456,10 +424,11 @@ Toilet.create(
         # :phone =>'',
         :venuetype =>' Public swimming pool and leisure centre',
         :howtoaccess =>'Not locked',
-        :description => "changing bench:  From October to Easter the venue closes at 4.30pm on Saturday and Sunday
- hoist:  Height adjustable, wall mounted, adult sized",
-        :toiletlocation =>' Ceiling track â€“ Guldmann 250 Kg max (550lbs)',
-        :whocanuse =>'Centrally placed toilet with room either side for the carers',
+        :description => "From October to Easter the venue closes at 4.30pm on Saturday and Sunday.
+changing bench:  Height adjustable, wall mounted, adult sized.
+Ceiling track: Guldmann 250 Kg max (550lbs)",
+        :toiletlocation =>'Centrally placed toilet with room either side for the carers',
+        :whocanuse =>'',
         :long => '-2.7184665',
         :lat => '52.0510983',
         :hoist => true,
@@ -470,7 +439,7 @@ Toilet.create(
 # http://www.changing-places.org/find_a_toilet/location_search_results/details/mid/649/lid/241/ctl.aspx
 Toilet.create(
         :name =>'Hull - Goodwin Centre, The Hooper Building',
-        :address =>'Guildhall Road,,Hull, HU1 1HL',
+        :address =>'Guildhall Road, Hull, HU1 1HL',
         # :phone =>'',
         :venuetype =>' Health and Social Care community centre',
         :howtoaccess =>'toilet is unlocked during opening hours',
@@ -868,7 +837,7 @@ Toilet.create(
         :description => "changing bench:  Height adjustable, wall-mounted
  hoist:  Guldmann ceiling track hoist.",
         :toiletlocation =>' Peninsular toilet',
-        :whocanuse =>'<strong>Who can use the toilet:</strong> Anyone in the area who would like to use it',
+        :whocanuse =>'Anyone in the area who would like to use it',
         :long => '-0.0631444',
         :lat => '51.4971232',
         :hoist => true,
@@ -897,10 +866,11 @@ Toilet.create(
         # :phone =>'',
         :venuetype =>'',
         :howtoaccess =>' Civic Centre',
-        :description => "changing bench:  The toilet is available during venue opening hours:
- ",
-        :toiletlocation =>' Height adjustable, wall mounted',
-        :whocanuse =>'<strong>Hoist:</strong> Viking Aluminium Hoist (capacity 205kg) manufactured by Liko',
+        :description => "changing bench: Height adjustable, wall mounted.
+hoist: Viking Aluminium Hoist (capacity 205kg) manufactured by Liko.
+The toilet is available during venue opening hours:",
+        :toiletlocation =>'',
+        :whocanuse =>'',
         :long => '-3.9506007',
         :lat => '51.6143510',
         :hoist => true,
@@ -913,9 +883,10 @@ Toilet.create(
         # :phone =>'',
         :venuetype =>' Art Gallery',
         :howtoaccess =>'Key is available from the cloakroom next to the toilet. The toilet has an attendant',
-        :description => " hoist:  Height adjustable, free standing, adult sized",
-        :toiletlocation =>' Ceiling track (ARJO MAXI)',
-        :whocanuse =>'Centrally placed toilet with room either side for the carers',
+        :description => "changing bench: Height adjustable, free standing, adult sized.
+hoist: Ceiling track (ARJO MAXI)",
+        :toiletlocation =>'Centrally placed toilet with room either side for the carers',
+        :whocanuse =>'',
         :long => '-0.0903247',
         :lat => '51.4910088',
         :hoist => true,
@@ -926,12 +897,13 @@ Toilet.create(
         :name =>'Teams and Children\'s Centre',
         :address =>'Rose Street,,Gateshead, NE8 2PN',
         # :phone =>'0191 433 3000',
-        :venuetype =>'',
-        :howtoaccess =>'Childrenâ€™s Centre',
-        :description => "changing bench: Monday to Friday: 9.00am to 5.00pm
- hoist:  Height adjustable, free standing, adult sized",
-        :toiletlocation =>' Ceiling track hoist - Chiltern Invadex Wispa 300 XY Hoist',
-        :whocanuse =>'Centrally placed toilet with room either side for the carers',
+        :venuetype =>'Children\'s Centre',
+        :howtoaccess =>'',
+        :description => "Monday to Friday: 9.00am to 5.00pm.
+changing bench:  Height adjustable, free standing, adult sized.
+Ceiling track hoist - Chiltern Invadex Wispa 300 XY Hoist",
+        :toiletlocation =>'Centrally placed toilet with room either side for the carers',
+        :whocanuse =>'',
         :long => '-1.6229670',
         :lat => '54.9582200',
         :hoist => true,
@@ -944,9 +916,9 @@ Toilet.create(
         # :phone =>'01580 762558',
         :venuetype =>'',
         :howtoaccess =>'',
-        :description => "",
+        :description => "Saturday: 9.00am",
         :toiletlocation =>'',
-        :whocanuse =>'Saturday: 9.00am',
+        :whocanuse =>'',
         :long => '0.6859589',
         :lat => '51.0678222',
         :hoist => true,
@@ -975,9 +947,10 @@ Toilet.create(
         # :phone =>'',
         :venuetype =>' Resource centre',
         :howtoaccess =>' Ask at reception',
-        :description => " hoist:  Height adjustable, free standing, adult sized",
-        :toiletlocation =>' Ceiling track',
-        :whocanuse =>'Corner toilet',
+        :description => "changing bench:  Height adjustable, free standing, adult sized
+hoist: Ceiling track",
+        :toiletlocation =>'Corner toilet',
+        :whocanuse =>'',
         :long => '-0.2544874',
         :lat => '51.4001028',
         :hoist => true,
@@ -1020,9 +993,10 @@ Toilet.create(
         # :phone =>'',
         :venuetype =>'During the day it is a day centre for people with learning disabilities. In the evening and at weekends rooms can be hired out for activities or functions, for example community keep fit classes or weddings',
         :howtoaccess =>'It is unlocked. The Changing Places toilet is on the ground floor and you can ask at reception for directions',
-        :description => "",
-        :toiletlocation =>'Free standing, height adjustable and adult sized',
-        :whocanuse =>'<strong>Hoist:</strong>Ceiling track',
+        :description => "changing bench: Free standing, height adjustable and adult sized.
+Hoist: Ceiling track",
+        :toiletlocation =>'',
+        :whocanuse =>'',
         :long => '-4.2405472',
         :lat => '55.7459575',
         :hoist => true,
@@ -1050,9 +1024,9 @@ Toilet.create(
         # :phone =>'',
         :venuetype =>' Arts Centre',
         :howtoaccess =>'Not locked',
-        :description => "changing bench:  Height adjustable, wall mounted
- ",
-        :toiletlocation =>' Ceiling track',
+        :description => "changing bench:  Height adjustable, wall mounted.
+hoist: Ceiling track",
+        :toiletlocation =>'',
         :whocanuse =>'Centrally placed toilet with room either side for the carers',
         :long => '-1.6072685',
         :lat => '54.9574688',
@@ -1082,8 +1056,9 @@ Toilet.create(
         # :phone =>'',
         :venuetype =>' Sports and Fitness Centre',
         :howtoaccess =>'Key available at Reception',
-        :description => " hoist:  Height adjustable, free standing, adult sized",
-        :toiletlocation =>' Ceiling track (Westholme Transactive)',
+        :description => "changing bench:  Height adjustable, free standing, adult sized
+hoist:  Ceiling track (Westholme Transactive)",
+        :toiletlocation =>'',
         :whocanuse =>'Centrally placed toilet with room either side for the carers',
         :long => '-1.8145707',
         :lat => '53.7921035',
@@ -1132,8 +1107,8 @@ Toilet.create(
         # :phone =>'',
         :venuetype =>' Park with spacious lawns, picnic areas, play area, children\'s zoo, heritage centre and outdoor games',
         :howtoaccess =>'The toilet is situated in the main changing area called â€˜the changing villageâ€™. It is locked and the key is available from reception',
-        :description => "changing bench:  Height adjustable, free standing, adult sized
- hoist:  Ceiling track",
+        :description => "changing bench:  Height adjustable, free standing, adult sized.
+ hoist:  Ceiling track.",
         :toiletlocation =>'Corner',
         :whocanuse =>'Anyone in the area who needs to',
         :long => '-2.5994250',
@@ -1150,7 +1125,7 @@ Toilet.create(
         :howtoaccess =>' The toilet is kept locked and can be accessed with a radar key (see <a href="http://www.radar.org.uk/" target="_blank">www.radar.org.uk</a> if you need to get a key)',
         :description => "changing bench:  Height adjustable, adult sized, wall mounted
  hoist:  Ceiling track",
-        :toiletlocation =>' Corner toilet',
+        :toiletlocation =>'Corner toilet',
         :whocanuse =>'Anyone in the area who needs to',
         :long => '-2.5934717',
         :lat => '53.3897632',
