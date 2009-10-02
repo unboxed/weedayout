@@ -15,34 +15,6 @@ Given /the following toilets exist:/ do |toilets_table|
   end
 end
 
-Then /^I should see the following text on the page:$/ do |text_table|
-  text_table.hashes.each do |hash|
-    response.should contain(hash[:text])
-  end
-end
-
-Then /^I should see the following elements with content:$/ do |element_table|
-  element_table.hashes.each do |hash|
-    within(hash["element"]) do |content|
-      content.should contain(hash["content"])
-    end
-  end
-end
-
-Then /^my url should end with "(.*)"$/ do |expected_suffix|
-  len = expected_suffix.length
-  url = URI.parse(current_url).path
-  actual_suffix = url[url.length - len, url.length - 1]
-  actual_suffix.should == expected_suffix
-end
-
-
-Given /^the toilet "([^\"]*)" has access instructions of "(.+)"$/ do |name, howtoaccess|
-  toilet = find_or_create(Toilet, :name => name)
-  toilet.howtoaccess = howtoaccess
-  toilet.save!
-end
-
 Given /^the toilet "([^\"]*)" has a hoist$/ do |name|
   find_or_create(Toilet, :name => name).update_attribute(:hoist, true)
 end

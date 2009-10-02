@@ -29,13 +29,13 @@ Feature: Searching Toilets
     When I go to the homepage
     And I fill in "Location" with "E11 1PB"
     And I press "Search"
-    Given a valid toilet called "Westminster Bridge"
-    Then I should see "Lambeth Bridge"
+    Then I should not see "Jubilee Bridge"
+    And I should see "Lambeth Bridge"
+    And I should see "Westminster Bridge"
     And I should see "London Bridge"
     And I should see "Tower Bridge"
     And I should see "Waterloo Bridge"
-    And I should not see "Jubilee Bridge"
-  
+
   Scenario: Finding the 5 nearest toilets that have a hoist
     Given the toilet "Jubilee Bridge" has a hoist
     When I go to the homepage

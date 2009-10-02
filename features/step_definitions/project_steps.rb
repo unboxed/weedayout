@@ -1,4 +1,4 @@
-Then /^I should see the following text on the page:$/ do |text_table|
+Then /^I should see the following text:$/ do |text_table|
   text_table.hashes.each do |hash|
     response.should contain(hash[:text])
   end
@@ -18,4 +18,3 @@ Then /^my url should end with "(.*)"$/ do |expected_suffix|
   actual_suffix = url[url.length - len, url.length - 1]
   actual_suffix.should == expected_suffix
 end
-
