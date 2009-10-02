@@ -25,8 +25,10 @@
       <th>hoist</th>
     </tr>
 
+  <% char_index = 'A' %>
   <% @toilets.each_with_index do |toilet, index| %>
     <tr id="row_<%=index+1%>">
+      <td><%= char_index %></td>
       <td class="name"><%=toilet.name%></td>
       <td class="address"><%= toilet.address %></td>
 
@@ -34,7 +36,8 @@
       <td class="hoist"><%= toilet.hoist ? "has hoist" : "does not have hoist" %></td>
       <td class="details"><%= link_to "details", {:controller => 'toilets', :action => 'view', :permalink => toilet.permalink}, :id => "details_link_#{index+1}"%></td>
     </tr>
-<% end %>
+    <% char_index = char_index.next %>
+  <% end %>
 </table>
 <% end %>
 
@@ -43,9 +46,16 @@
     map = new GMap2(document.getElementById("map"));
 
     function addMarker(index, lng, lat, name, address) {
+
+        // use a custom icon with letter A - Z
+        var letter = String.fromCharCode("A".charCodeAt(0) + (index - 1));
+        var myIcon = new GIcon(G_DEFAULT_ICON, "http://www.google.com/mapfiles/marker" + letter + ".png");
+        myIcon.printImage = "http://maps.google.com/mapfiles/marker"+letter+"ie.gif"
+        myIcon.mozPrintImage = "http://maps.google.com/mapfiles/marker"+letter+"ff.gif"
+
         var point = new GPoint(lng, lat);
         var thisHTML = "<h4 class='name'>" + name + "</h4><p class='address'>" + address + "</p>";
-        var marker = new GMarker(point, {draggable:false});
+        var marker = new GMarker(point, {draggable:false, icon:myIcon});
         var infoFunction = function() {
             marker.openInfoWindowHtml(thisHTML);
         };
