@@ -20,7 +20,12 @@ class ToiletsController < ApplicationController
       render :action => "new"
     end
   end
-  
+
+  def show
+    #@toilet = Toilet.find_by_permalink(params[:permalink])
+    @toilet = Toilet.find_by_permalink(params[:id])
+  end
+
   private
   
   def filter_conditions
