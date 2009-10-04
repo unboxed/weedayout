@@ -63,7 +63,7 @@
 
         GEvent.addListener(marker, "click", infoFunction);
         map.addOverlay(marker);
-        $('#row_' + index).find('td').click(infoFunction);
+        $('#row_' + index).find('td').not('.details').click(infoFunction);
     }
 
     if (GBrowserIsCompatible()) {
