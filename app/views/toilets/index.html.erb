@@ -35,7 +35,9 @@
 
       <td class="changingbench"><%= toilet.changingbench ? "has changing bench" : "does not have changing bench" %></td>
       <td class="hoist"><%= toilet.hoist ? "has hoist" : "does not have hoist" %></td>
-      <td class="details"><%= link_to "details", {:controller => 'toilets', :action => 'show', :permalink => toilet.permalink}, :id => "details_link_#{index+1}"%></td>
+      <td class="details">
+        <%= link_to "details", {:controller => 'toilets', :action => 'show', :permalink => toilet.permalink}, :id => "details_link_#{index+1}"%>
+      </td>
     </tr>
     <% char_index = char_index.next %>
   <% end %>
@@ -63,7 +65,7 @@
 
         GEvent.addListener(marker, "click", infoFunction);
         map.addOverlay(marker);
-        $('#row_' + index).find('td').not('.details').click(infoFunction);
+        $('#row_' + index).find('td[class!=details]').click(infoFunction);
     }
 
     if (GBrowserIsCompatible()) {
