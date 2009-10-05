@@ -51,7 +51,7 @@
 <script type="text/javascript" charset="utf-8">
     map = new GMap2(document.getElementById("map"));
 
-    function addMarker(index, lng, lat, name, address) {
+    function addMarker(index, lng, lat, name, address, link) {
 
         // use a custom icon with letter A - Z
         var letter = String.fromCharCode("A".charCodeAt(0) + (index - 1));
@@ -60,7 +60,7 @@
         myIcon.mozPrintImage = "http://maps.google.com/mapfiles/marker"+letter+"ff.gif"
 
         var point = new GPoint(lng, lat);
-        var thisHTML = "<h4 class='name'>" + name + "</h4><p class='address'>" + address + "</p>";
+        var thisHTML = "<h4 class='name'>" + name + "</h4><p class='address'>" + address + "</p><p><a href='" + link + "'>details</a></p>";
         var marker = new GMarker(point, {draggable:false, icon:myIcon});
         var infoFunction = function() {
             marker.openInfoWindowHtml(thisHTML);
@@ -94,7 +94,8 @@
         markers = new Array();
 
         <% @toilets.each_with_index do |toilet, index| %>
-           addMarker(<%=index+1%>, <%= "%0.2f" % toilet.long %>, <%= "%0.2f" % toilet.lat %>, "<%= toilet.name %>", "<%= toilet.address %>"); // todo: escape '"'?
+           addMarker(<%=index+1%>, <%= "%0.2f" % toilet.long %>, <%= "%0.2f" % toilet.lat %>, "<%= toilet.name %>", "<%= toilet.address %>",
+                   "<%= url_for :controller => 'toilets', :action => 'show', :permalink => toilet.permalink %>" ); // todo: escape '"'?
         <% end if @toilets %>
     }
 </script>
