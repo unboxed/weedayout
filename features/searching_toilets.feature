@@ -5,13 +5,13 @@ Feature: Searching Toilets
 
   Background:
     Given the following toilets exist:
-    | name               | address   | long  | lat  |
-    | Westminster Bridge | close     | 51.58 | 0.02 |
-    | Jubilee Bridge     | far away  | 56.58 | 0.02 |
-    | Lambeth Bridge     | address 2 | 52.58 | 0.02 |
-    | London Bridge      | address 3 | 53.58 | 0.02 |
-    | Tower Bridge       | address 4 | 54.58 | 0.02 |
-    | Waterloo Bridge    | address 5 | 55.58 | 0.02 |
+    | name               | address        | long  | lat  |
+    | Westminster Bridge | close          | 51.58 | 0.02 |
+    | Jubilee Bridge     | 5 degrees away | 56.58 | 0.02 |
+    | Lambeth Bridge     | 1 degree  away | 52.58 | 0.02 |
+    | London Bridge      | 2 degrees away | 53.58 | 0.02 |
+    | Tower Bridge       | 3 degrees away | 54.58 | 0.02 |
+    | Waterloo Bridge    | 4 degrees away | 55.58 | 0.02 |
     And geokit will return 51.5754841, 0.0088174 when passed "E11 1PB"
   
   Scenario: Empty search
