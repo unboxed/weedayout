@@ -18,3 +18,7 @@ Then /^my url should end with "(.*)"$/ do |expected_suffix|
   actual_suffix = url[url.length - len, url.length - 1]
   actual_suffix.should == expected_suffix
 end
+
+Given /^I am logged in$/ do
+  basic_auth('admin', 'bunny')
+end
