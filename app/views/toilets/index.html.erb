@@ -24,6 +24,8 @@
       <th>address</th>
       <th>changing bench</th>
       <th>hoist</th>
+      <th>distance</th>
+      <th></th>
     </tr>
 
   <% char_index = 'A' %>
@@ -35,6 +37,7 @@
 
       <td class="changingbench"><%= toilet.changingbench ? "has changing bench" : "does not have changing bench" %></td>
       <td class="hoist"><%= toilet.hoist ? "has hoist" : "does not have hoist" %></td>
+      <td class="distance"><%= "%0.2f" % toilet.distance %> km</td>
       <td class="details">
         <%= link_to "details", {:controller => 'toilets', :action => 'show', :permalink => toilet.permalink}, :id => "details_link_#{index+1}"%>
       </td>
