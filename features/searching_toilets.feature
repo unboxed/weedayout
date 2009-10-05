@@ -4,18 +4,14 @@ Feature: Searching Toilets
   So that I can find disabled toilets
 
   Background:
-    Given a valid toilet called "Westminster Bridge"
-    And the toilet "Westminster Bridge" is located at 51.58, 0.02
-    And a valid toilet called "Jubilee Bridge"
-    And the toilet "Jubilee Bridge" is located at 56.58, 0.02
-    And a valid toilet called "Lambeth Bridge"
-    And the toilet "Lambeth Bridge" is located at 52.58, 0.02
-    And a valid toilet called "London Bridge"
-    And the toilet "London Bridge" is located at 53.58, 0.02
-    And a valid toilet called "Tower Bridge"
-    And the toilet "Tower Bridge" is located at 54.58, 0.02
-    And a valid toilet called "Waterloo Bridge"
-    And the toilet "Waterloo Bridge" is located at 55.58, 0.02
+    Given the following toilets exist:
+    | name               | address   | long  | lat  |
+    | Westminster Bridge | close     | 51.58 | 0.02 |
+    | Jubilee Bridge     | far away  | 56.58 | 0.02 |
+    | Lambeth Bridge     | address 2 | 52.58 | 0.02 |
+    | London Bridge      | address 3 | 53.58 | 0.02 |
+    | Tower Bridge       | address 4 | 54.58 | 0.02 |
+    | Waterloo Bridge    | address 5 | 55.58 | 0.02 |
     And geokit will return 51.5754841, 0.0088174 when passed "E11 1PB"
   
   Scenario: Empty search
@@ -25,16 +21,19 @@ Feature: Searching Toilets
     And I press "Search"
     Then I should see "Type a location to find toilets"
 
-  Scenario: Finding the 5 nearest toilets to a location
+  Scenario: Finding the 5 nearest toilets to a location in distance order
     When I go to the homepage
     And I fill in "Location" with "E11 1PB"
     And I press "Search"
     Then I should not see "Jubilee Bridge"
-    And I should see "Lambeth Bridge"
-    And I should see "Westminster Bridge"
-    And I should see "London Bridge"
-    And I should see "Tower Bridge"
-    And I should see "Waterloo Bridge"
+    And I should see the following elements with content:
+    | element | content             |
+    | #row_1  | Westminster Bridge  |
+    | #row_2  | Lambeth Bridge      |
+    | #row_3  | London Bridge       |
+    | #row_4  | Tower Bridge        |
+    | #row_5  | Waterloo Bridge     |
+
 
   Scenario: Finding the 5 nearest toilets that have a hoist
     Given the toilet "Jubilee Bridge" has a hoist
