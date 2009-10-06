@@ -1,6 +1,8 @@
 Then /^I should see the following text:$/ do |text_table|
   text_table.hashes.each do |hash|
-    response.should contain(hash[:text])
+    hash.each do |k,v|
+      response.should contain(hash[:text])
+    end
   end
 end
 
@@ -10,6 +12,10 @@ Then /^I should see the following elements with content:$/ do |element_table|
       content.should contain(hash["content"])
     end
   end
+end
+
+Then /^I should see the "(.*)" table like this:$/ do |selector, table|
+  table.diff!(table_at(selector).to_a)
 end
 
 Then /^my url should end with "(.*)"$/ do |expected_suffix|
