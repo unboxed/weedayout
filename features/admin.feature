@@ -13,7 +13,7 @@ Feature: Administering toilets
 
   Scenario: View the admin page, toilets should be sorted by name and all data should be present
     Given I am logged in
-    When I go to the admin page
+    When I visit "/admin"
     Then I should see the "#results" table like this:
     | name      | address   | venue type | toilet location | who can use | how to access | changing bench | hoist | description | longitude  | latitude  |
     | toilet 01 | address 1 | venue 1    | location 1      | use 1       | access 1      | true           | true  | desc 1      | 51.00      | 0.01      |
@@ -32,7 +32,7 @@ Feature: Administering toilets
     | toilet 10 | address 10 | 60.00 | 0.10 |
     | toilet 11 | address 11 | 61.00 | 0.11 |
     And I am logged in
-    When I go to the admin page
+    When I visit "/admin"
     Then I should see the following text:
     | text      |
     | toilet 01 |

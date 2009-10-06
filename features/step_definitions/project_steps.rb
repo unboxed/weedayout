@@ -28,3 +28,7 @@ end
 Given /^I am logged in$/ do
   basic_auth('admin', 'bunny')
 end
+
+When /^I visit "(.+)"$/ do |path|
+  visit path
+end

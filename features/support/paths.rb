@@ -12,8 +12,7 @@ module NavigationHelpers
       '/'
     when /add toilet page/
       new_toilet_path
-    when /the admin page/
-        "/admin"
+
     # Add more mappings here.
     # Here is a more fancy example:
     #
