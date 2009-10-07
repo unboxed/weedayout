@@ -33,7 +33,7 @@ Feature: Administering toilets
     | toilet 11 | address 11 | 61.00 | 0.11 |
     And I am logged in
     When I visit "/admin"
-    Then I should see the following text:
+    Then I should see the following text in order:
     | toilet 01 |
     | toilet 02 |
     | toilet 03 |

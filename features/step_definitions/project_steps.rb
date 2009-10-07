@@ -1,6 +1,26 @@
 Then /^I should see the following text:$/ do |text_table|
   text_table.raw.flatten.each do |text|
-    response.should contain(text)  
+    response.should contain(text)
+  end
+end
+
+Then /^I should see the following text in order:$/ do |text_table|
+  prev = nil
+  text_table.raw.flatten.each do |text|
+    response.should contain(text)
+    if (prev) then
+      if Webrat.configuration.parse_with_nokogiri?
+        document = Webrat.nokogiri_document(response.body)
+      else
+        document = Webrat.hpricot_document(response.body)
+      end
+
+      element = Webrat::XML.inner_text(document)
+
+      error_message = "could not find '#{prev}' before '#{text}' in:\n#{element.gsub(/^\s*$/, "").squeeze("\n")}"
+      (element.index(prev) < element.index(text)).should(be_true, error_message)
+    end
+    prev = text
   end
 end
 
