@@ -1,8 +1,6 @@
 Then /^I should see the following text:$/ do |text_table|
-  text_table.hashes.each do |hash|
-    hash.each do |k,v|
-      response.should contain(hash[:text])
-    end
+  text_table.raw.flatten.each do |text|
+    response.should contain(text)  
   end
 end
 
@@ -17,6 +15,21 @@ end
 Then /^I should see the "(.*)" table like this:$/ do |selector, table|
   table.diff!(table_at(selector).to_a)
 end
+
+
+Then /^I should see the form filled in like this:$/ do |element_table|
+  element_table.rows_hash.each do |field, value|
+    # assume "true" and "false" are check boxes
+    if value == "true" then
+      field_labeled(field).should be_checked
+    elsif value == "false" then
+      field_labeled(field).should_not be_checked
+    else
+      field_labeled(field).value.should == value
+    end
+  end
+end
+
 
 Then /^my url should end with "(.*)"$/ do |expected_suffix|
   len = expected_suffix.length

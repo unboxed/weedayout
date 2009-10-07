@@ -34,7 +34,6 @@ Feature: Administering toilets
     And I am logged in
     When I visit "/admin"
     Then I should see the following text:
-    | text      |
     | toilet 01 |
     | toilet 02 |
     | toilet 03 |
@@ -49,3 +48,45 @@ Feature: Administering toilets
     When I follow "Next »"
     Then I should see "toilet 11"
     And I should not see "toilet 2"
+
+  Scenario: Visit the edit page
+    Given I am logged in
+    When I visit "/admin"
+    When I follow "edit_link_1"
+    Then I should see the form filled in like this:
+    | name            | toilet 01           |
+    | address         | address 1           |
+    | venue type      | venue 1             |
+    | toilet location | location 1          |
+    | who can use     | use 1               |
+    | how to access   | access 1            |
+    | changing bench  | true                |
+    | hoist           | true                |
+    | description     | desc 1              |
+    | longitude       | 51.00               |
+    | latitude        | 0.01                |
+    When I fill in the following:
+    | name            | toilet A            |
+    | address         | address A           |
+    | venue type      | venue A             |
+    | toilet location | location A          |
+    | who can use     | use A               |
+    | how to access   | access A            |
+    | changing bench  | false               |
+    | hoist           | true                |
+    | description     | desc A              |
+    | longitude       | 41.00               |
+    | latitude        | 4.01                |
+    And I press "Submit"
+    Then I should see the form filled in like this:
+    | name            | toilet A            |
+    | address         | address A           |
+    | venue type      | venue A             |
+    | toilet location | location A          |
+    | who can use     | use A               |
+    | how to access   | access A            |
+    | changing bench  | false               |
+    | hoist           | true                |
+    | description     | desc A              |
+    | longitude       | 41.00               |
+    | latitude        | 4.01                |

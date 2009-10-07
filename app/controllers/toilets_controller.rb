@@ -22,7 +22,6 @@ class ToiletsController < ApplicationController
   end
 
   def show
-    #@toilet = Toilet.find_by_permalink(params[:permalink])
     @toilet = Toilet.find_by_permalink(params[:id])
   end
 

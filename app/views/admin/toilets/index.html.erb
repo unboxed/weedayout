@@ -15,8 +15,9 @@
     <th>description</th>
     <th>longitude</th>
     <th>latitude</th>
+    <th></th>
   </tr>
-  <% @toilets.each do |toilet| %>
+  <% @toilets.each_with_index do |toilet, index| %>
       <tr>
         <td class="name"><%= toilet.name %></td>
         <td class="address"><%= toilet.address %></td>
@@ -29,6 +30,7 @@
         <td class="description"><%= toilet.description %></td>
         <td class="longitude"><%= toilet.long %></td>
         <td class="latitude"><%= toilet.lat %></td>
+        <td class="edit"><%= link_to "edit", {:controller => 'toilets', :action => 'show', :id => toilet}, :id => "edit_link_#{index+1}" %></td>
       </tr>
   <% end %>
 </table>
