@@ -16,7 +16,6 @@ Feature: Viewing Toilets
     Then I should see "toilet 1"
     When I follow "details_link_1"
     Then I should see the following elements with content:
-    | element         | content             |
     | #name           | toilet 1            |
     | #address        | address 1           |
     | #venuetype      | venue 1             |

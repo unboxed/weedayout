@@ -5,9 +5,9 @@ Then /^I should see the following text:$/ do |text_table|
 end
 
 Then /^I should see the following elements with content:$/ do |element_table|
-  element_table.hashes.each do |hash|
-    within(hash["element"]) do |content|
-      content.should contain(hash["content"])
+  element_table.rows_hash.each do |element, expected_text|
+    within(element) do |actual_content|
+      actual_content.should contain(expected_text)
     end
   end
 end

@@ -27,7 +27,6 @@ Feature: Searching Toilets
     And I press "Search"
     Then I should not see "Jubilee Bridge"
     And I should see the following elements with content:
-    | element | content             |
     | #row_1  | Westminster Bridge  |
     | #row_2  | Lambeth Bridge      |
     | #row_3  | London Bridge       |
