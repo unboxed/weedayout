@@ -32,6 +32,7 @@ Feature: Searching Toilets
     | #row_3  | London Bridge       |
     | #row_4  | Tower Bridge        |
     | #row_5  | Waterloo Bridge     |
+    And the "Location" field should contain "E11 1PB"
 
 
   Scenario: Finding the 5 nearest toilets that have a hoist

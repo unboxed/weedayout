@@ -3,7 +3,7 @@
 <% form_tag toilets_path, :method => :get do %>
   <%= "Type a location to find toilets" if params[:location] == "" %>
   <label for="location">Location:</label>
-  <%= text_field_tag :location %>
+  <%= text_field_tag :location, params[:location] %>
   <label for="hoist">Has a hoist:</label>
   <%= check_box_tag :hoist %>
   <label for="changingbench">Changing Bench:</label>
