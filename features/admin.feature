@@ -49,7 +49,7 @@ Feature: Administering toilets
     Then I should see "toilet 11"
     And I should not see "toilet 2"
 
-  Scenario: Visit the edit page
+  Scenario: Visit the edit page starting from the admin page
     Given I am logged in
     When I visit "/admin"
     When I follow "edit_link_1"
@@ -92,3 +92,16 @@ Feature: Administering toilets
     | latitude        | 4.01                |
     When I visit "/admin"
     Then I should see "toilet A"
+
+  Scenario: Edit with failure
+    Given I am logged in
+    When I visit "/admin/toilets/toilet-01/edit"
+    And I fill in the following:
+    | name            |                     |
+    | address         |                     |
+    And I press "Submit"
+    Then I should see "2 errors"
+    Then I should see "Address can't be blank"
+    Then I should see "Name can't be blank"
+
+

@@ -30,7 +30,7 @@
         <td class="description"><%= toilet.description %></td>
         <td class="longitude"><%= toilet.long %></td>
         <td class="latitude"><%= toilet.lat %></td>
-        <td class="edit"><%= link_to "edit", {:controller => 'toilets', :action => 'show', :id => toilet}, :id => "edit_link_#{index+1}" %></td>
-      </tr>
+        <td class="edit"><%= link_to "edit", {:controller => "toilets", :action => "edit", :id => toilet}, :id => "edit_link_#{index+1}" %></td>
+     </tr>
   <% end %>
 </table>

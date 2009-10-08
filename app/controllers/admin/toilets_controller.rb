@@ -5,24 +5,26 @@ class Admin::ToiletsController < ApplicationController
     @toilets = Toilet.paginate :page => params[:page], :per_page => 10, :order => 'name ASC'
   end
 
-  def show
+  def edit
     @toilet = Toilet.find_by_permalink(params[:id])
   end
 
   def update
     @toilet = Toilet.find_by_permalink(params[:id])
+
     if @toilet.update_attributes(params[:toilet])
       flash[:notice] = "Toilet updated"
+      redirect_to :action=>"edit"
     else
-      flash[:notice] = "Well, something went wrong" #TODO
+      render :action => "edit"
     end
-    redirect_to :action => 'show', :id => @toilet
   end
 
   private
-   def authenticate
-      authenticate_or_request_with_http_basic do |id, password|
-          id == "admin" && password == "bunny"
-      end
-   end
+
+  def authenticate
+    authenticate_or_request_with_http_basic do |id, password|
+      id == "admin" && password == "bunny"
+    end
+  end
 end
