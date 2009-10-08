@@ -90,3 +90,5 @@ Feature: Administering toilets
     | description     | desc A              |
     | longitude       | 41.00               |
     | latitude        | 4.01                |
+    When I visit "/admin"
+    Then I should see "toilet A"
