@@ -21,21 +21,21 @@ Feature: Searching Toilets
     And I press "Search"
     Then I should see "Type a location to find toilets"
 
-  Scenario: Finding the 5 nearest toilets to a location in distance order
+  Scenario: Finding the 3 nearest toilets to a location in distance order
     When I go to the homepage
     And I fill in "Location" with "E11 1PB"
     And I press "Search"
     Then I should not see "Jubilee Bridge"
+    And I should not see "Tower Bridge"
+    And I should not see "Waterloo Bridge"
     And I should see the following elements with content:
     | #row_1  | Westminster Bridge  |
     | #row_2  | Lambeth Bridge      |
     | #row_3  | London Bridge       |
-    | #row_4  | Tower Bridge        |
-    | #row_5  | Waterloo Bridge     |
     And the "Location" field should contain "E11 1PB"
 
 
-  Scenario: Finding the 5 nearest toilets that have a hoist
+  Scenario: Finding the 3 nearest toilets that have a hoist
     Given the toilet "Jubilee Bridge" has a hoist
     When I go to the homepage
     And I fill in "Location" with "E11 1PB"
@@ -47,7 +47,7 @@ Feature: Searching Toilets
     And I should not see "Waterloo Bridge"
     And I should see "Jubilee Bridge"
 
-  Scenario: Finding the 5 nearest toilets that have a changing bench
+  Scenario: Finding the 3 nearest toilets that have a changing bench
     Given the toilet "Jubilee Bridge" has a changing bench
     When I go to the homepage
     And I fill in "Location" with "E11 1PB"
@@ -59,7 +59,7 @@ Feature: Searching Toilets
     And I should not see "Waterloo Bridge"
     And I should see "Jubilee Bridge"
 
-  Scenario: Finding the 5 nearest toilets that have a changing bench and a hoist
+  Scenario: Finding the 3 nearest toilets that have a changing bench and a hoist
     Given the toilet "Jubilee Bridge" has a hoist
     Given the toilet "Jubilee Bridge" has a changing bench
     Given the toilet "Westminster Bridge" has a hoist

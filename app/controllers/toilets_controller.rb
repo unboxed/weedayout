@@ -2,7 +2,7 @@ class ToiletsController < ApplicationController
   
   def index
     unless params[:location].blank?
-      @toilets = Toilet.find(:all, :origin => params[:location]+" GB", :limit => 5, :order => "distance ASC", :conditions => filter_conditions)
+      @toilets = Toilet.find(:all, :origin => params[:location]+" GB", :limit => 3, :order => "distance ASC", :conditions => filter_conditions)
     end
   end
   
