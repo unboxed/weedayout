@@ -46,7 +46,7 @@
         <td>
           <div class="location_selector" style="display:none;">
             <div><label for="MapAddressSearch">Map location</label></div>
-            <input name="MapAddressSearch" id="MapAddressSearch" value="" size="50" />
+            <input name="MapAddressSearch" id="MapAddressSearch" value="<%= params[:search_location]%>" size="50" />
             <input type="button" value="Locate on Map" onclick="showLocation()" />
             <div id="map" style="height: 500px; width: 500px"></div>
           </div><!-- location_selector -->
@@ -83,141 +83,109 @@
 
 <%= link_to 'Back', toilets_path %>
 
-<% 
-  @lat = !f.object.lat.blank? ? f.object.lat : 51.5008889524
-  @long = !f.object.long.blank? ? f.object.long : -0.1220512390
+<%
+  @lat = !f.object.lat.blank? ? f.object.lat : "null"
+  @long = !f.object.long.blank? ? f.object.long : "null"
 %>
 <% end %>
 
 <!-- R-rated code ahead, parental advisory -->
 <script type="text/javascript" charset="utf-8">
+
 $(".location_selector").show();
 $(".updatemap").show();
-  /* <![CDATA[ */
-  var marker;
-	var map;
-	function LEFT(str, n){
-		if (n <= 0)
-		    return "";
-		else if (n > String(str).length)
-		    return str;
-		else
-		    return String(str).substring(0,n);
-	}
-	function RIGHT(str, n){
-	    if (n <= 0)
-	       return "";
-	    else if (n > String(str).length)
-	       return str;
-	    else {
-	       var iLen = String(str).length;
-	       return String(str).substring(iLen, iLen - n);
-	   	}
-	}
-    function load() {
-      if (GBrowserIsCompatible()) {
-       	map = new GMap2(document.getElementById("map"));
-        map.setCenter(new GLatLng(<%= @lat %>, <%= @long %>), 12);
+
+var marker;
+var map;
+
+var default_zoom = 15;
+
+function load() {
+    if (GBrowserIsCompatible()) {
+
+        start_lat = <%= @lat %>;
+        start_lng = <%= @long%>;
+        search_location = "<%= params[:search_location] %>";
+
+        map = new GMap2(document.getElementById("map"));
         map.addControl(new GMapTypeControl());
-        map.addControl(new GLargeMapControl()); 
+        map.addControl(new GLargeMapControl());
         map.enableDoubleClickZoom();
-        map.enableScrollWheelZoom();
         geocoder = new GClientGeocoder();
         geocoder.setBaseCountryCode("GB");
-		
-			/// prevent page scroll
-			function wheelevent(e)
-			{
-				if (!e)
-					e = window.event
-				if (e.preventDefault)
-					e.preventDefault()
-					
-				e.returnValue = false;
-			}
-			GEvent.addDomListener(map.getContainer(), "DOMMouseScroll", wheelevent);
-			map.getContainer().onmousewheel = wheelevent; 
 
-		// Creates a marker whose info window displays the given number
-		function createMarker(point, number,thisHTML,TitleText,FormattedPoint) {
-		  var marker = new GMarker(point, {draggable:true});
-		
-			
-		  // Show this marker's index in the info window when it is clicked
-		   GEvent.addListener(marker, "click", function() {
-		    //marker.openInfoWindowHtml("<h4>" + thisHTML + "</h4><br />" + FormattedPoint);
-		  });
-		
-		  return marker;
-		}
-		
-			var point = new GPoint(parseFloat(<%= @long %>), parseFloat(<%= @lat %>));
-			marker = createMarker(point, 1,"WhereToLive","WhereToLive");
+        if (start_lat != null && start_lng != null) {
+            start_point = new GLatLng(start_lat, start_lng);
+            setupMap(start_point);
+        } else if (search_location) {
+            geocoder.getLatLng(search_location, function(latlng) {
+                setupMap(latlng);
+            });
+        } else {
+            start_point = new GLatLng(51.5009, -0.1221);
+            setupMap(start_point);
+        }
 
-			GEvent.addListener(marker, "dragstart", function() {
-				map.closeInfoWindow();
-			});
-			
-			GEvent.addListener(marker, "dragend", function() {
-			  document.getElementById('toilet_lat').value = marker.getPoint().lat();
-			  document.getElementById('toilet_long').value = marker.getPoint().lng();
-			  //document.getElementById('ddhhcombo').value = 'N' + LEFT(marker.getPoint().lat(),8) + ', ' + 'W' + LEFT(marker.getPoint().lng(),9);*/
-			});
-					
-			map.addOverlay(marker);
-			
-			//request.send(null);
-		}
     }
+}
 
-	function addAddressToMap(response) {
-		map.clearOverlays();
-		if (!response || response.Status.code != 200) {
-			alert("Sorry, we were unable to geocode that address");
-		} else {
-			place = response.Placemark[0];
-			document.getElementById('toilet_lat').value = place.Point.coordinates[1]
-			document.getElementById('toilet_long').value = place.Point.coordinates[0]
-			point = new GLatLng(place.Point.coordinates[1],
-				place.Point.coordinates[0]);
-			marker = new GMarker(point, {draggable:true});
-			map.addOverlay(marker);
-			map.setCenter(new GLatLng(document.getElementById('toilet_lat').value, document.getElementById('toilet_long').value), 15);
-			marker.openInfoWindowHtml(place.address + '<br />' + 
-			place.Point.coordinates[1] + ', ' + place.Point.coordinates[0] + '<br />' +
-			'<b>Country code:</b> ' + place.AddressDetails.Country.CountryNameCode);
- 
-			GEvent.addListener(marker, "dragstart", function() {
-				map.closeInfoWindow();
-			});
-			
-			GEvent.addListener(marker, "dragend", function() {
-			  document.getElementById('toilet_lat').value = marker.getPoint().lat();
-			  document.getElementById('toilet_long').value = marker.getPoint().lng();
-			});
-     		}
-    	}
+function setupMap(start_point) {
+    map.setCenter(start_point, default_zoom);
+    document.getElementById('toilet_lat').value = start_point.lat();
+    document.getElementById('toilet_long').value = start_point.lng();
 
-  // A function to create the marker and set up the event window
-  // function centerMarker() {
-  //  marker.setPoint(new GLatLng(map.getCenter().lat(), map.getCenter().lng()))
-  //  document.getElementById('toilet_lat').value = marker.getPoint().lat();
-  //  document.getElementById('toilet_long').value = marker.getPoint().lng();
-  // }
-	
-  // A function to create the marker and set up the event window
-  function recenterMarker() {
-   marker.setPoint(new GLatLng(document.getElementById('toilet_lat').value, document.getElementById('toilet_long').value))
-   map.setCenter(new GLatLng(document.getElementById('toilet_lat').value, document.getElementById('toilet_long').value));
-  }
+    marker = new GMarker(start_point, {draggable:true});
 
-	function showLocation(address) {
-		address = document.getElementById('MapAddressSearch').value;
-		geocoder.getLocations(address, addAddressToMap);
-	}
-	
-	jQuery(function($) {
-	 load();
-  });
-  /* ]]> */
+    GEvent.addListener(marker, "dragstart", function() {
+        map.closeInfoWindow();
+    });
+
+    GEvent.addListener(marker, "dragend", function() {
+        document.getElementById('toilet_lat').value = marker.getPoint().lat();
+        document.getElementById('toilet_long').value = marker.getPoint().lng();
+    });
+
+    map.addOverlay(marker);
+}
+
+function addAddressToMap(response) {
+    map.clearOverlays();
+    if (!response || response.Status.code != 200) {
+        alert("Sorry, we were unable to geocode that address");
+    } else {
+        place = response.Placemark[0];
+        document.getElementById('toilet_lat').value = place.Point.coordinates[1];
+        document.getElementById('toilet_long').value = place.Point.coordinates[0];
+        point = new GLatLng(place.Point.coordinates[1], place.Point.coordinates[0]);
+        marker = new GMarker(point, {draggable:true});
+        map.addOverlay(marker);
+        map.setCenter(new GLatLng(document.getElementById('toilet_lat').value, document.getElementById('toilet_long').value), default_zoom);
+        marker.openInfoWindowHtml(place.address);
+
+        GEvent.addListener(marker, "dragstart", function() {
+            map.closeInfoWindow();
+        });
+
+        GEvent.addListener(marker, "dragend", function() {
+            document.getElementById('toilet_lat').value = marker.getPoint().lat();
+            document.getElementById('toilet_long').value = marker.getPoint().lng();
+        });
+    }
+}
+
+// A function to create the marker and set up the event window
+function recenterMarker() {
+    marker.setPoint(new GLatLng(document.getElementById('toilet_lat').value, document.getElementById('toilet_long').value));
+    map.setCenter(new GLatLng(document.getElementById('toilet_lat').value, document.getElementById('toilet_long').value));
+}
+
+function showLocation(address) {
+    address = document.getElementById('MapAddressSearch').value;
+    geocoder.getLocations(address, addAddressToMap);
+}
+
+$(document).ready(function(){
+    load();
+});
+
 </script>

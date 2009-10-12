@@ -74,3 +74,24 @@ Feature: Searching Toilets
     And I should not see "Tower Bridge"
     And I should not see "Waterloo Bridge"
     And I should see "Jubilee Bridge"
+
+  Scenario: Search results should have a "know of anything closer" link
+    When I go to the homepage
+    And I fill in "Location" with "E11 1PB"
+    And I press "Search"
+    And I follow "Know of anything closer?"
+    Then I should see "New toilet"
+    And the "Map location" field should contain "E11 1PB"
+
+  Scenario: Search results should have a "Add a Toilet" link
+    When I go to the homepage
+    And I fill in "Location" with "E11 1PB"
+    And I press "Search"
+    And I follow "Add a Toilet"
+    Then I should see "New toilet"
+    And the "Map location" field should contain "E11 1PB"
+
+  Scenario: Homepage should have a "Add a Toilet" link
+    When I go to the homepage
+    And I follow "Add a Toilet"
+    Then I should see "New toilet"

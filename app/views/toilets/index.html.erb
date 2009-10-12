@@ -12,7 +12,7 @@
   <%= submit_tag "Search" %>
 <% end %>
 
-<%= link_to "Add a Toilet", { :controller => "toilets", :action => "new" }, :id => "new.toilet" %>
+<%= link_to "Add a Toilet", { :controller => "toilets", :action => "new" , :search_location=> params[:location]} %>
 
 <div id="map" style="height: 500px; width: 500px"></div>
 
@@ -45,6 +45,9 @@
     <% char_index = char_index.next %>
   <% end %>
 </table>
+
+<%= link_to "Know of anything closer? Add a new toilet here." , { :controller => "toilets", :action => "new", :search_location=> params[:location]}%>
+
 <% end %>
 
 <% if params[:location] and !params[:location].blank? then %>
