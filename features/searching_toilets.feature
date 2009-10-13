@@ -12,7 +12,8 @@ Feature: Searching Toilets
     | London Bridge      | 2 degrees away | 53.58 | 0.02 |
     | Tower Bridge       | 3 degrees away | 54.58 | 0.02 |
     | Waterloo Bridge    | 4 degrees away | 55.58 | 0.02 |
-    And geokit will return 51.5754841, 0.0088174 when passed "E11 1PB"
+    And geokit will return 51.5754841, 0.0088174
+   
   
   Scenario: Empty search
     Given a valid toilet called "Westminster Bridge"
@@ -97,7 +98,7 @@ Feature: Searching Toilets
     Then I should see "New toilet"
 
   Scenario: Search should show a nice error message when geokit fails on search
-    Given geokit will error when passed "EC1"
+    Given geokit will error
     When I go to the homepage
     And I fill in "Location" with "EC1"
     And I press "Search"

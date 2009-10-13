@@ -24,7 +24,7 @@ Given /^the toilet "([^\"]*)" has a changing bench$/ do |name|
 end
 
 
-Given /^geokit will return (\d+\.\d+), (\d+\.\d+) when passed "([^\"]*)"$/ do |lat, long, search|
+Given /^geokit will return (\d+\.\d+), (\d+\.\d+)$/ do |lat, long|
   geoloc = Geokit::GeoLoc.new
   geoloc.stub!(:lat).and_return(lat)
   geoloc.stub!(:lng).and_return(long)
@@ -32,7 +32,7 @@ Given /^geokit will return (\d+\.\d+), (\d+\.\d+) when passed "([^\"]*)"$/ do |l
   Geokit::Geocoders::MultiGeocoder.stub!(:geocode).and_return(geoloc)
 end
 
-Given /^geokit will error when passed "([^\"]*)"$/ do |search|
+Given /^geokit will error$/ do
   Geokit::Geocoders::MultiGeocoder.stub!(:geocode).and_raise(Geokit::Geocoders::GeocodeError)
 end
 
