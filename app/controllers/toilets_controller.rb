@@ -4,7 +4,7 @@ class ToiletsController < ApplicationController
     unless params[:location].blank?
       begin
         @toilets = Toilet.find(:all, :origin => params[:location]+" GB", :limit => 3, :order => "distance ASC", :conditions => filter_conditions)
-      rescue Geokit::Geocoders::GeocodeError => error
+      rescue Geokit::Geocoders::GeocodeError
         flash[:notice] = "An error occurred when we looked up '#{params[:location]}'"
         redirect_to toilets_path
       end
