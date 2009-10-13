@@ -95,3 +95,11 @@ Feature: Searching Toilets
     When I go to the homepage
     And I follow "Add a Toilet"
     Then I should see "New toilet"
+
+  Scenario: Search should show a nice error message when geokit fails on search
+    Given geokit will error when passed "EC1"
+    When I go to the homepage
+    And I fill in "Location" with "EC1"
+    And I press "Search"
+    Then I should see "An error occurred when we looked up 'EC1'"
+    
