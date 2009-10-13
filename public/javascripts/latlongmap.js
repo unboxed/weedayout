@@ -39,7 +39,7 @@ function LatLongMap(start_point, map_element, lat_element, long_element) {
         var that = this;
         this.geocoder.getLocations(address, function(response) {
             if (!response || response.Status.code != 200) {
-                alert("Sorry, we were unable to find that address");
+                alert("Sorry, we were unable to find '" + address + "' as an address");
             } else {
                 var place = response.Placemark[0];
                 that.lat_element.value = place.Point.coordinates[1];

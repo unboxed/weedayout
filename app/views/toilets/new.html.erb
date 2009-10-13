@@ -108,7 +108,11 @@ function load() {
             var geocoder = new GClientGeocoder();
             geocoder.setBaseCountryCode("GB");
             geocoder.getLatLng(search_location, function(latlng) {
-                setup(latlng);
+                if (latlng) {
+                    setup(latlng);
+                } else {
+                    alert("Sorry, we were unable to find '" + search_location + "' as an address")
+                }
             });
         } else {
             setup(new GLatLng(51.4987, -0.1097));
