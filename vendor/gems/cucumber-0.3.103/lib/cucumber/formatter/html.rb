@@ -313,8 +313,8 @@ module Cucumber
       end
       
       def inline_css
-        builder.style(:type => 'text/css') do
-          builder.text!(File.read(File.dirname(__FILE__) + '/cucumber.css'))
+        builder.style(:type => 'text/stylesheets') do
+          builder.text!(File.read(File.dirname(__FILE__) + '/cucumber.stylesheets'))
         end
       end
       

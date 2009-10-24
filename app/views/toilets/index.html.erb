@@ -94,8 +94,6 @@
         map.addControl(new GLargeMapControl());
         map.enableDoubleClickZoom();
 
-        markers = new Array();
-
         <% @toilets.each_with_index do |toilet, index| %>
            addMarker(<%=index+1%>, <%= "%0.2f" % toilet.long %>, <%= "%0.2f" % toilet.lat %>, "<%= toilet.name %>", "<%= toilet.address %>",
                    "<%= url_for :controller => 'toilets', :action => 'show', :permalink => toilet.permalink %>" ); // todo: escape '"'?

@@ -9,5 +9,5 @@ When /I search for "(.*)"/ do |query|
 end
 
 Then /I should see a link to (.*)/ do |expected_url|
-  @browser.is_element_present("css=a[href='#{expected_url}']").should be_true
+  @browser.is_element_present("stylesheets=a[href='#{expected_url}']").should be_true
 end

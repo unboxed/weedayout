@@ -3,122 +3,117 @@
 <% form_for @toilet, :url => {:action => "update"} do |f| %>
     <%= f.error_messages %>
     <%= flash[:notice] %>
-    <p>
-      <%= f.label :name %><br/>
-      <%= f.text_field :name %>
-    </p>
-    <p>
-      <%= f.label :address %><br/>
-      <%= f.text_field :address %>
-    </p>
-    <p>
-      <%= f.label :venuetype, "Venue Type" %><br/>
-      <%= f.text_field :venuetype %>
-    </p>
-    <p>
-      <%= f.label :howtoaccess, "How to access" %><br/>
-      <%= f.text_field :howtoaccess %>
-    </p>
-    <p>
-      <%= f.label :changingbench, "Changing Bench?" %><br/>
-      <%= f.check_box :changingbench %>
-    </p>
-    <p>
-      <%= f.label :hoist, "Hoist?" %><br/>
-      <%= f.check_box :hoist %>
-    </p>
-    <p>
-      <%= f.label :toiletlocation, "Toilet Location" %><br/>
-      <%= f.text_field :toiletlocation %>
-    </p>
-    <p>
-      <%= f.label :whocanuse, "Who can use" %><br/>
-      <%= f.text_field :whocanuse %>
-    </p>
-    <p>
-      <%= f.label :description, "Description" %><br/>
-      <%= f.text_area :description %>
-    </p>
-    
-    
-    <table>
-      <tr>
-        <td>
-          <div class="location_selector" style="display:none;">
-            <div><label for="MapAddressSearch">Map location</label></div>
-            <input name="MapAddressSearch" id="MapAddressSearch" value="" size="50" />
-            <input type="button" value="Locate on Map" id="locate_on_map"/>
-            <div id="map" style="height: 500px; width: 500px"></div>
-          </div><!-- location_selector -->
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <table>
-            <tr>
-              <td class="label"><%= f.label :lat, "Latitude" %></td>
-              <td class="field"><%= f.text_field :lat %></td>
-            </tr>
-            <tr>
-              <td class="label"><%= f.label :long, "Longitude" %></td>
-              <td class="field">
-                <%= f.text_field :long %>
-                <input type="button" value="Update map" id="update_map" class="updatemap" style="display:none" />
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
+    <div class="main_fields">
+      <p>
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+      </p>
 
-    
+      <p>
+        <%= f.label :address %>
+        <%= f.text_field :address %>
+      </p>
+
+      <p>
+        <%= f.label :venuetype, "Venue Type" %>
+        <%= f.text_field :venuetype %>
+      </p>
+
+      <p>
+        <%= f.label :howtoaccess, "How to access" %>
+        <%= f.text_field :howtoaccess %>
+      </p>
+
+      <p>
+        <%= f.label :changingbench, "Changing Bench?" %>
+        <%= f.check_box :changingbench %>
+      </p>
+
+      <p>
+        <%= f.label :hoist, "Hoist?" %>
+        <%= f.check_box :hoist %>
+      </p>
+
+      <p>
+        <%= f.label :toiletlocation, "Toilet Location" %>
+        <%= f.text_field :toiletlocation %>
+      </p>
+
+      <p>
+        <%= f.label :whocanuse, "Who can use" %>
+        <%= f.text_field :whocanuse %>
+      </p>
+
+      <div>
+        <%= f.label :description, "Description" %>
+        <%= f.text_area :description %>
+      </div>
+    </div>
+
+    <div class="location_selector" style="display:none;">
+      <div><label for="MapAddressSearch">Map location</label>
+        <input name="MapAddressSearch" id="MapAddressSearch" value="" size="40"/>
+        <input type="button" value="Locate on Map" id="locate_on_map"/>
+      </div>
+      <div id="map" style="height: 500px; width: 500px"></div>
+      <div class="field">
+        <%= f.label :lat, "Latitude" %>
+        <%= f.text_field :lat %>
+      </div>
+      <div class="field">
+        <%= f.label :long, "Longitude" %>
+        <%= f.text_field :long %>
+      </div>
+      <input type="button" value="Update map" id="update_map" class="updatemap" style="display:none"/>
+    </div><!-- location_selector -->
+
     <p>
       <%= f.submit "Submit" %>
     </p>
 
-<% 
-  @lat = !f.object.lat.blank? ? f.object.lat : 51.5008889524
-  @long = !f.object.long.blank? ? f.object.long : -0.1220512390
-%>
+    <%
+       @lat = !f.object.lat.blank? ? f.object.lat : 51.5008889524
+       @long = !f.object.long.blank? ? f.object.long : -0.1220512390
+    %>
 <% end %>
 
 <!-- R-rated code ahead, parental advisory -->
 <script type="text/javascript" charset="utf-8">
-$(".location_selector").show();
-$(".updatemap").show();
+    $(".location_selector").show();
+    $(".updatemap").show();
 
-function load() {
-    if (GBrowserIsCompatible()) {
+    function load() {
+        if (GBrowserIsCompatible()) {
 
-        var start_lat = <%= @lat %>;
-        var start_lng = <%= @long%>;
-        var search_location = "<%= params[:search_location] %>";
+            var start_lat = <%= @lat %>;
+            var start_lng = <%= @long%>;
+            var search_location = "<%= params[:search_location] %>";
 
-        if (start_lat != null && start_lng != null) {
-            setup(new GLatLng(start_lat, start_lng));
-        } else {
-            setup(new GLatLng(51.4987, -0.1097));
+            if (start_lat != null && start_lng != null) {
+                setup(new GLatLng(start_lat, start_lng));
+            } else {
+                setup(new GLatLng(51.4987, -0.1097));
+            }
         }
     }
-}
 
-function setup(start_point) {
-    var llmap = new LatLongMap(
-            start_point,
-            document.getElementById("map"),
-            document.getElementById('toilet_lat'),
-            document.getElementById('toilet_long'));
+    function setup(start_point) {
+        var llmap = new LatLongMap(
+                start_point,
+                document.getElementById("map"),
+                document.getElementById('toilet_lat'),
+                document.getElementById('toilet_long'));
 
-    $("#locate_on_map").bind("click", function() {
-        var address = document.getElementById('MapAddressSearch').value;
-        llmap.showLocation(address);
+        $("#locate_on_map").bind("click", function() {
+            var address = document.getElementById('MapAddressSearch').value;
+            llmap.showLocation(address);
+        });
+        $("#update_map").bind("click", function() {
+            llmap.recenterMarker();
+        });
+    }
+
+    $(document).ready(function() {
+        load();
     });
-    $("#update_map").bind("click", function() {
-        llmap.recenterMarker();
-    });
-}
-
-$(document).ready(function(){
-    load();
-});
 </script>

@@ -1,0 +1,56 @@
+body {
+    width: 960px;
+}
+
+.main_fields {
+    width: 400px;
+    background-color: #ddf;
+    float:left;
+}
+
+.main_fields label {
+    float: left;
+    width: 140px;
+}
+
+.main_fields input {
+    float: left;
+}
+
+
+.main_fields p {
+    display:block;
+    width:400px;
+    height:20px;
+    margin:5px;
+}
+
+.main_fields div {
+    margin:5px;
+}
+
+.location_selector {
+    width: 500px;
+    float:left;
+    margin:5px;
+}
+
+.location_selector label {
+    float: left;
+    width: 90px;
+}
+
+.location_selector input[type="text"] {
+    float: left;
+    width: 100px;
+}
+
+.location_selector input[type="button"] {
+    float: right;
+}
+
+.location_selector div.field {
+    width:200px;
+    height:25px;
+    float:left;
+}
