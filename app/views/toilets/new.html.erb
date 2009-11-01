@@ -84,8 +84,8 @@
 <%= link_to 'Back', toilets_path %>
 
 <%
-  @lat = !f.object.lat.blank? ? "%04f" % f.object.lat : "null"
-  @long = !f.object.long.blank? ? "%04f" % f.object.long : "null"
+  @lat = !f.object.lat.blank? ? "%f" % f.object.lat : "null"
+  @long = !f.object.long.blank? ? "%f" % f.object.long : "null"
 %>
 <% end %>
 

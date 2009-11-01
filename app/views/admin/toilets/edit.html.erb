@@ -72,8 +72,8 @@
     </p>
 
     <%
-       @lat = !f.object.lat.blank? ? f.object.lat : 51.5008889524
-       @long = !f.object.long.blank? ? f.object.long : -0.1220512390
+       @lat = !f.object.lat.blank? ? "%f" % f.object.lat : 51.5008889524
+       @long = !f.object.long.blank? ? "%f" % f.object.long : -0.1220512390
     %>
 <% end %>
 
