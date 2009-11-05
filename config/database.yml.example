@@ -1,0 +1,18 @@
+
+defaults : &defaults
+  adapter: mysql
+  encoding: utf8
+  username: weedayout
+  password:
+
+development:
+  <<: *defaults
+  database: weedayout_development
+
+test:
+  <<: *defaults
+  database: weedayout_test
+
+production:
+  <<: *defaults
+  database: weedayout_production
