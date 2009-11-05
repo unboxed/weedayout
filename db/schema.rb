@@ -9,7 +9,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090930204752) do
+ActiveRecord::Schema.define(:version => 20091103233528) do
+
+  create_table "content_blocks", :force => true do |t|
+    t.string   "key"
+    t.text     "text_content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "toilets", :force => true do |t|
     t.string   "name"

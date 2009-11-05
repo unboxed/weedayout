@@ -1,3 +1,8 @@
+ContentBlock.create(
+        :key => "homepage blurb",
+        :text_content => "Weedayout.com is pinpointing accessible toilets across Scotland so you can enjoy a fun day out without getting caught short. We know there are more facilities out there we just don't know where they are that's why you, the people who know, can add them."
+        )
+
 # http://www.changing-places.org/find_a_toilet/location_search_results/details/mid/649/lid/280/ctl.aspx
 # Skipping
 # http://www.changing-places.org/find_a_toilet/location_search_results/details/mid/649/lid/243/ctl.aspx

@@ -1,0 +1,20 @@
+<h1>Admin::ContentBlocks#new</h1>
+<% form_for([:admin, @content_block]) do |f| %>
+    <%= f.error_messages %>
+    <%= flash[:notice] %>
+    <div class="main_fields">
+      <p>
+        <%= f.label :key %>
+        <%= f.text_field :key %>
+      </p>
+
+      <p>
+        <%= f.label :text_content %>
+        <%= f.text_area :text_content %>
+      </p>
+
+      <p>
+        <%= f.submit "Create" %>
+      </p>
+    </div>
+<% end %>

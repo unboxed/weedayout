@@ -65,3 +65,7 @@ end
 When /^I visit "(.+)"$/ do |path|
   visit path
 end
+
+Then /^I should see a page title of: "([^"]+)"$/ do |title|
+  response.should have_tag("title", title)
+end

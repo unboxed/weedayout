@@ -1,0 +1,16 @@
+<h1>Admin::ContentBlocks#index</h1>
+<%= will_paginate @content_blocks %>
+
+<table id="results">
+  <tr>
+    <th>key</th>
+    <th>text</th>
+  </tr>
+  <% @content_blocks.each_with_index do |content_block, index| %>
+      <tr id="row_<%= index +  1%>" >
+        <td class="key"><%= content_block.key %></td>
+        <td class="text"><%= content_block.text_content %></td>
+        <td class="link"><%= link_to "Edit", edit_admin_content_block_path(content_block) %></td>
+     </tr>
+  <% end %>
+</table>

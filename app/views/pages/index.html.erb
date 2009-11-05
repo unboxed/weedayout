@@ -1,0 +1,17 @@
+<h1>Pages#index</h1>
+<p><%= @content_block ? @content_block.text_content : "Hi there"%></p>
+
+
+<% form_tag toilets_path, :method => :get do %>
+  <%= "Type a location to find toilets" if params[:location] == "" %>
+  <label for="location">Location:</label>
+  <%= text_field_tag :location, params[:location] %>
+  <label for="hoist">Has a hoist:</label>
+  <%= check_box_tag :hoist %>
+  <label for="changingbench">Changing Bench:</label>
+  <%= check_box_tag :changingbench %>
+
+  <%= submit_tag "Search" %>
+<% end %>
+
+<%= link_to "Add a Toilet", { :controller => "toilets", :action => "new" , :search_location=> params[:location]} %>

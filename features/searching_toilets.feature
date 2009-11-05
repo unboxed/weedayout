@@ -23,7 +23,7 @@ Feature: Searching Toilets
     Then I should see "Type a location to find toilets"
 
   Scenario: Finding the 3 nearest toilets to a location in distance order
-    When I go to the homepage
+    When I visit "/toilets"
     And I fill in "Location" with "E11 1PB"
     And I press "Search"
     Then I should not see "Jubilee Bridge"
@@ -50,7 +50,7 @@ Feature: Searching Toilets
 
   Scenario: Finding the 3 nearest toilets that have a changing bench
     Given the toilet "Jubilee Bridge" has a changing bench
-    When I go to the homepage
+    When I visit "/toilets"
     And I fill in "Location" with "E11 1PB"
     And I check "Changing Bench"
     And I press "Search"
@@ -77,7 +77,7 @@ Feature: Searching Toilets
     And I should see "Jubilee Bridge"
 
   Scenario: Search results should have a "know of anything closer" link
-    When I go to the homepage
+    When I visit "/toilets"
     And I fill in "Location" with "E11 1PB"
     And I press "Search"
     And I follow "Know of anything closer?"
@@ -85,17 +85,12 @@ Feature: Searching Toilets
     And the "Map location" field should contain "E11 1PB"
 
   Scenario: Search results should have a "Add a Toilet" link
-    When I go to the homepage
+    When I visit "/toilets"
     And I fill in "Location" with "E11 1PB"
     And I press "Search"
     And I follow "Add a Toilet"
     Then I should see "New toilet"
     And the "Map location" field should contain "E11 1PB"
-
-  Scenario: Homepage should have a "Add a Toilet" link
-    When I go to the homepage
-    And I follow "Add a Toilet"
-    Then I should see "New toilet"
 
   Scenario: Search should show a nice error message when geokit fails on search
     Given geokit will error
