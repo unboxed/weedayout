@@ -20,7 +20,7 @@ Rails::Initializer.run do |config|
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
   config.gem "geokit"
-  config.gem "cucumber", :lib => false, :version => ">= 0.3.103"
+  config.gem "cucumber", :lib => false, :version => ">= 0.6.1"
   config.gem 'mislav-will_paginate', :version => '~> 2.3.11', :lib => 'will_paginate',  :source => 'http://gems.github.com'
 
   # Only load the plugins named here, in the order given (default is alphabetical).
