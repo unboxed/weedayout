@@ -1,50 +1,54 @@
 <h1>New toilet</h1>
 
 <% form_for(@toilet) do |f| %>
-    <%= f.error_messages %>
-    <%= flash[:notice] %>
+
+  <%= f.error_messages %>
+  <%= flash[:notice] %>
+
+  <div class="left">
+    <h2>1. Enter the facility’s details below...</h2>
     <p>
-      <%= f.label :name %><br/>
+      <%= f.label :name, 'Location Name:' %><br/>
       <%= f.text_field :name %>
     </p>
     <p>
-      <%= f.label :address %><br/>
+      <%= f.label :address, "Address:" %><br/>
       <%= f.text_field :address %>
     </p>
     <p>
-      <%= f.label :venuetype, "Venue Type" %><br/>
+      <%= f.label :venuetype, 'Venue Type:' %><br/>
       <%= f.text_field :venuetype %>
     </p>
     <p>
-      <%= f.label :howtoaccess, "How to access" %><br/>
+      <%= f.label :howtoaccess, 'How to Access:' %><br/>
       <%= f.text_field :howtoaccess %>
     </p>
     <p>
-      <%= f.label :changingbench, "Changing Bench?" %><br/>
+      <%= f.label :changingbench, "Changing Bench:" %><br/>
       <%= f.check_box :changingbench %>
     </p>
     <p>
-      <%= f.label :hoist, "Hoist?" %><br/>
+      <%= f.label :hoist, "Hoist:" %><br/>
       <%= f.check_box :hoist %>
     </p>
     <p>
-      <%= f.label :toiletlocation, "Toilet Location" %><br/>
+      <%= f.label :toiletlocation, "Toilet Location:" %><br/>
       <%= f.text_field :toiletlocation %>
     </p>
     <p>
-      <%= f.label :whocanuse, "Who can use" %><br/>
+      <%= f.label :whocanuse, "Who can use:" %><br/>
       <%= f.text_field :whocanuse %>
     </p>
-    <p>
-      <%= f.label :description, "Description" %><br/>
-      <%= f.text_area :description %>
-    </p>
     
-    
+  </div><!-- /.left -->
+  
+  <div class="right">
+
+    <h2>2. Drag the marker to refine the  location on the map...</h2>
     <table>
       <tr>
         <td>
-          <div class="location_selector" style="display:none;">
+          <div class="location_selector" style="display:none !important;">
             <div><label for="MapAddressSearch">Map location</label></div>
             <input name="MapAddressSearch" id="MapAddressSearch" value="<%= params[:search_location]%>" size="50" />
             <input type="button" value="Locate on Map" id="locate_on_map" />
@@ -83,14 +87,18 @@
 
 <%= link_to 'Back', toilets_path %>
 
-<%
+<%-
   @lat = !f.object.lat.blank? ? "%f" % f.object.lat : "null"
   @long = !f.object.long.blank? ? "%f" % f.object.long : "null"
-%>
+-%>
+
+</div><!-- /.right -->
+
 <% end %>
 
 <!-- R-rated code ahead, parental advisory -->
-<script type="text/javascript" charset="utf-8">
+
+<% javascript_tag do %>
 
 $(".location_selector").show();
 $(".updatemap").show();
@@ -140,4 +148,4 @@ $(document).ready(function(){
     load();
 });
 
-</script>
+<% end %>
