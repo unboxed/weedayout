@@ -13,11 +13,9 @@ body {
   width: 100%;
 }
 .inner_wrapper {
-  margin-top: 20px;
+  margin: 20px auto 0 auto;
   width: 960px;
   height: 850px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 
@@ -39,5 +37,12 @@ body {
 .main_nav ul li.add_facility_active { background-image: url(/images/main_nav/add_facility_active.png); }
 .main_nav ul li.add_gap_active { background-image: url(/images/main_nav/add_a_gap_active.png); }
 
-
 .main   { width: 960px; height: 570px; background-image: url(/images/backgrounds/main_bg.jpg); }
+
+.inner_wrapper .left,
+.inner_wrapper .right {
+  width: 360px;
+  float: left;
+  padding: 0 65px 0 55px;
+  text-align: left;
+}
