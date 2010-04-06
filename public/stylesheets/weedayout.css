@@ -105,3 +105,8 @@ p.with_checkboxes input {
   width: auto !important;
   margin: 10px 0 0;
 }
+
+
+.main_inner h2 {
+  color: #1C75BC;
+}

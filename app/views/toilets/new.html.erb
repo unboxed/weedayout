@@ -42,35 +42,11 @@
   
     <div class="right">
       <h2>2. Drag the marker to refine the  location on the map...</h2>
-      <table>
-        <tr>
-          <td>
-            <div class="location_selector" style="display:none !important;">
-              <div><label for="MapAddressSearch">Map location</label></div>
-              <input name="MapAddressSearch" id="MapAddressSearch" value="<%= params[:search_location]%>" size="50" />
-              <input type="button" value="Locate on Map" id="locate_on_map" />
-              <div id="map" style="height: 350px; width: 350px"></div>
-            </div><!-- location_selector -->
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <table>
-              <tr>
-                <td class="label"><%= f.label :lat, "Latitude" %></td>
-                <td class="field"><%= f.text_field :lat %></td>
-              </tr>
-              <tr>
-                <td class="label"><%= f.label :long, "Longitude" %></td>
-                <td class="field">
-                  <%= f.text_field :long %>
-                  <input type="button" value="Update map" class="updatemap" style="display:none" id="update_map" />
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-      </table>
+      <div id="map" style="height: 350px; width: 350px"></div>
+      <div style="display: none">
+        <%= f.text_field :lat %>
+        <%= f.text_field :long %>
+      </div>
     
       <fieldset class="spamcheck_fields">
         <label for="spamcheck">To prove you're not a spam bot, please put 'rabbit' into this field</label>
