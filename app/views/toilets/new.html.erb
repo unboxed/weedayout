@@ -1,149 +1,150 @@
-<% form_for(@toilet) do |f| %>
+<div class="main_inner">
 
-  <%= f.error_messages %>
-  <%= flash[:notice] %>
+  <% form_for(@toilet) do |f| %>
+    <%= f.error_messages %>
+    <%= flash[:notice] %>
 
-  <div class="left">
-    <h2>1. Enter the facility’s details below...</h2>
-    <p>
-      <%= f.label :name, 'Location Name:' %><br/>
-      <%= f.text_field :name %>
-    </p>
-    <p>
-      <%= f.label :address, "Address:" %><br/>
-      <%= f.text_field :address %>
-    </p>
-    <p>
-      <%= f.label :venuetype, 'Venue Type:' %><br/>
-      <%= f.text_field :venuetype %>
-    </p>
-    <p>
-      <%= f.label :howtoaccess, 'How to Access:' %><br/>
-      <%= f.text_field :howtoaccess %>
-    </p>
-    <p>
-      <%= f.label :changingbench, "Changing Bench:" %><br/>
-      <%= f.check_box :changingbench %>
-    </p>
-    <p>
-      <%= f.label :hoist, "Hoist:" %><br/>
-      <%= f.check_box :hoist %>
-    </p>
-    <p>
-      <%= f.label :toiletlocation, "Toilet Location:" %><br/>
-      <%= f.text_field :toiletlocation %>
-    </p>
-    <p>
-      <%= f.label :whocanuse, "Who can use:" %><br/>
-      <%= f.text_field :whocanuse %>
-    </p>
-    
-  </div><!-- /.left -->
+    <div class="left">
+      <h2>1. Enter the facility’s details below...</h2>
+      <p>
+        <%= f.label :name, 'Location Name:' %>
+        <%= f.text_field :name %>
+      </p>
+      <p>
+        <%= f.label :address, "Address:" %>
+        <%= f.text_field :address %>
+      </p>
+      <p>
+        <%= f.label :venuetype, 'Venue Type:' %>
+        <%= f.text_field :venuetype %>
+      </p>
+      <p>
+        <%= f.label :howtoaccess, 'How to Access:' %>
+        <%= f.text_field :howtoaccess %>
+      </p>
+      <p class="with_checkboxes clearfix">
+        <%= f.label :changingbench, "Changing Bench:" %>
+        <%= f.check_box :changingbench %>
+      </p>
+      <p class="with_checkboxes clearfix">
+        <%= f.label :hoist, "Hoist:" %>
+        <%= f.check_box :hoist %>
+      </p>
+      <p>
+        <%= f.label :toiletlocation, "Toilet Location:" %>
+        <%= f.text_field :toiletlocation %>
+      </p>
+      <p>
+        <%= f.label :whocanuse, "Who can use:" %>
+        <%= f.text_field :whocanuse %>
+      </p>
+    </div><!-- /.left -->
   
-  <div class="right">
-
-    <h2>2. Drag the marker to refine the  location on the map...</h2>
-    <table>
-      <tr>
-        <td>
-          <div class="location_selector" style="display:none !important;">
-            <div><label for="MapAddressSearch">Map location</label></div>
-            <input name="MapAddressSearch" id="MapAddressSearch" value="<%= params[:search_location]%>" size="50" />
-            <input type="button" value="Locate on Map" id="locate_on_map" />
-            <div id="map" style="height: 500px; width: 500px"></div>
-          </div><!-- location_selector -->
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <table>
-            <tr>
-              <td class="label"><%= f.label :lat, "Latitude" %></td>
-              <td class="field"><%= f.text_field :lat %></td>
-            </tr>
-            <tr>
-              <td class="label"><%= f.label :long, "Longitude" %></td>
-              <td class="field">
-                <%= f.text_field :long %>
-                <input type="button" value="Update map" class="updatemap" style="display:none" id="update_map" />
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
+    <div class="right">
+      <h2>2. Drag the marker to refine the  location on the map...</h2>
+      <table>
+        <tr>
+          <td>
+            <div class="location_selector" style="display:none !important;">
+              <div><label for="MapAddressSearch">Map location</label></div>
+              <input name="MapAddressSearch" id="MapAddressSearch" value="<%= params[:search_location]%>" size="50" />
+              <input type="button" value="Locate on Map" id="locate_on_map" />
+              <div id="map" style="height: 350px; width: 350px"></div>
+            </div><!-- location_selector -->
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <table>
+              <tr>
+                <td class="label"><%= f.label :lat, "Latitude" %></td>
+                <td class="field"><%= f.text_field :lat %></td>
+              </tr>
+              <tr>
+                <td class="label"><%= f.label :long, "Longitude" %></td>
+                <td class="field">
+                  <%= f.text_field :long %>
+                  <input type="button" value="Update map" class="updatemap" style="display:none" id="update_map" />
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
     
-    <fieldset class="spamcheck_fields">
-      <label for="spamcheck">To prove you're not a spam bot, please put 'rabbit' into this field</label>
-      <%= text_field_tag :spamcheck %>
-    </fieldset>
+      <fieldset class="spamcheck_fields">
+        <label for="spamcheck">To prove you're not a spam bot, please put 'rabbit' into this field</label>
+        <%= text_field_tag :spamcheck %>
+      </fieldset>
     
     
-    <p>
-      <%= f.submit "Create" %>
-    </p>
+      <p>
+        <%= f.submit "Create" %>
+      </p>
 
-<%= link_to 'Back', toilets_path %>
+  <%= link_to 'Back', toilets_path %>
 
-<%-
-  @lat = !f.object.lat.blank? ? "%f" % f.object.lat : "null"
-  @long = !f.object.long.blank? ? "%f" % f.object.long : "null"
--%>
+  <%-
+    @lat = !f.object.lat.blank? ? "%f" % f.object.lat : "null"
+    @long = !f.object.long.blank? ? "%f" % f.object.long : "null"
+  -%>
 
-</div><!-- /.right -->
+  </div><!-- /.right -->
 
-<% end %>
+  <% end %>
 
-<!-- R-rated code ahead, parental advisory -->
+  <!-- R-rated code ahead, parental advisory -->
 
-<% javascript_tag do %>
+  <% javascript_tag do %>
 
-$(".location_selector").show();
-$(".updatemap").show();
+  $(".location_selector").show();
+  $(".updatemap").show();
 
-function load() {
-    if (GBrowserIsCompatible()) {
+  function load() {
+      if (GBrowserIsCompatible()) {
 
-        var start_lat = <%= @lat %>;
-        var start_lng = <%= @long%>;
-        var search_location = "<%= params[:search_location] %>";
+          var start_lat = <%= @lat %>;
+          var start_lng = <%= @long%>;
+          var search_location = "<%= params[:search_location] %>";
 
-        if (start_lat != null && start_lng != null) {
-            setup(new GLatLng(start_lat, start_lng));
-        } else if (search_location) {
-            var geocoder = new GClientGeocoder();
-            geocoder.setBaseCountryCode("GB");
-            geocoder.getLatLng(search_location, function(latlng) {
-                if (latlng) {
-                    setup(latlng);
-                } else {
-                    alert("Sorry, we were unable to find '" + search_location + "' as an address")
-                }
-            });
-        } else {
-            setup(new GLatLng(51.4987, -0.1097));
-        }
-    }
-}
+          if (start_lat != null && start_lng != null) {
+              setup(new GLatLng(start_lat, start_lng));
+          } else if (search_location) {
+              var geocoder = new GClientGeocoder();
+              geocoder.setBaseCountryCode("GB");
+              geocoder.getLatLng(search_location, function(latlng) {
+                  if (latlng) {
+                      setup(latlng);
+                  } else {
+                      alert("Sorry, we were unable to find '" + search_location + "' as an address")
+                  }
+              });
+          } else {
+              setup(new GLatLng(51.4987, -0.1097));
+          }
+      }
+  }
 
-function setup(start_point) {
-    var llmap = new LatLongMap(
-            start_point,
-            document.getElementById("map"),
-            document.getElementById('toilet_lat'),
-            document.getElementById('toilet_long'));
+  function setup(start_point) {
+      var llmap = new LatLongMap(
+              start_point,
+              document.getElementById("map"),
+              document.getElementById('toilet_lat'),
+              document.getElementById('toilet_long'));
 
-    $("#locate_on_map").bind("click", function() {
-        var address = document.getElementById('MapAddressSearch').value;
-        llmap.showLocation(address);
-    });
-    $("#update_map").bind("click", function() {
-        llmap.recenterMarker();
-    });
-}
+      $("#locate_on_map").bind("click", function() {
+          var address = document.getElementById('MapAddressSearch').value;
+          llmap.showLocation(address);
+      });
+      $("#update_map").bind("click", function() {
+          llmap.recenterMarker();
+      });
+  }
 
-$(document).ready(function(){
-    load();
-});
+  $(document).ready(function(){
+      load();
+  });
 
-<% end %>
+  <% end %>
+
+</div>

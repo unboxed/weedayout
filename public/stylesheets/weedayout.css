@@ -3,6 +3,25 @@
     padding: 0px;
     voice-family: female; 
 }
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+.clearfix {
+  display: inline-block;
+}
+html[xmlns] .clearfix {
+  display: block;
+}
+* html .clearfix {
+  height: 1%;
+}
+
 body {
     font-family: Trebuchet, arial;
     font-size: 62.5%;
@@ -17,8 +36,6 @@ body {
   width: 960px;
   height: 850px;
 }
-
-
 
 .header { width: 960px; height: 235px; background-image: url(/images/backgrounds/header_bg.jpg); position: relative; }
 .header .logo_link { position: absolute; top: 26px; left: 30px; width: 0px; padding-left: 199px; height: 146px; overflow: hidden; }
@@ -41,8 +58,50 @@ body {
 
 .inner_wrapper .left,
 .inner_wrapper .right {
-  width: 360px;
+  width: 310px;
   float: left;
-  padding: 0 65px 0 55px;
   text-align: left;
+}
+
+.inner_wrapper .left {
+  padding: 0 65px 0 55px;
+}
+
+form {
+  color: #58595B;
+}
+
+form label {
+  font-size: 1.3em;
+  display: inline-block;
+  margin: 10px 0 0 0;
+}
+
+.inner_wrapper .left input,
+.inner_wrapper .left textarea {
+  width: 100%;
+}
+
+input, textarea {
+  border: 2px solid #D1D2D4;
+  padding: 5px;
+}
+
+.main_inner {
+  width: 845px;
+  height: 507px;
+  margin: 0 auto;
+  background: url('/images/backgrounds/main_inner.png');
+  padding-top: 50px;
+}
+
+
+p.with_checkboxes label {
+  float: left;
+  width: 120px;
+}
+
+p.with_checkboxes input {
+  width: auto !important;
+  margin: 10px 0 0;
 }
