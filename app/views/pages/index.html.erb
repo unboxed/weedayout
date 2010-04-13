@@ -1,5 +1,17 @@
+
 <h1>Pages#index</h1>
 <p><%= @content_block ? @content_block.text_content : "Hi there"%></p>
+
+<div id="intro">
+  <p>
+    Pinpoint accessible toilets across 
+    the UK so you can enjoy a fun day 
+    out without getting caught short.
+  </p>
+  <p>
+    We don’t yet know where all the facilities are. It’s up to you to let us know by adding them to the map or telling us where there’s a gap.
+  </p>
+</div>
 
 
 <% form_tag toilets_path, :method => :get do %>

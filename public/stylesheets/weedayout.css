@@ -54,7 +54,7 @@ body {
 .main_nav ul li.add_facility_active { background-image: url(/images/main_nav/add_facility_active.png); }
 .main_nav ul li.add_gap_active { background-image: url(/images/main_nav/add_a_gap_active.png); }
 
-.main   { width: 960px; height: 570px; background-image: url(/images/backgrounds/main_bg.jpg); }
+.main   { width: 960px; height: 570px; background-image: url(/images/backgrounds/main_bg.jpg); position: relative; }
 
 .inner_wrapper .left,
 .inner_wrapper .right {
@@ -138,4 +138,21 @@ a {
   color: #00AEEF;
   text-decoration: none;
   font-size: 1.2em;
+}
+
+#intro {
+  position: absolute;
+  top: -40px;
+  background: url('/images/backgrounds/home_clouds.png');
+  width: 250px;
+  height: 261px;
+  padding: 100px 153px 0 50px;
+}
+
+#intro p {
+  font-family: "Trebuchet MS";
+  color: #58595B;
+  font-size: 1.5em;
+  text-align: left;
+  margin-bottom: 25px;
 }
