@@ -1,6 +1,29 @@
+<div class="find_a_facility_box">
+  <h1 class="text_replacement">Find a facility:</h1>
+  
+  <% form_tag toilets_path, :method => :get do %>
+    <%= text_field_tag :location, params[:location], :value => 'Enter your town or postcode...', :class => 'search_input' %>
+    <span style="display: none">
+      <label for="hoist">Has a hoist:</label>
+      <%= check_box_tag :hoist %>
+      <label for="changingbench">Changing Bench:</label>
+      <%= check_box_tag :changingbench %>
+    </span>
+    <span class="search_container">
+      <%= submit_tag "Search", :class => 'button search_button' %>
+    </span>
+  <% end %>
+</div>
 
-<h1>Pages#index</h1>
-<p><%= @content_block ? @content_block.text_content : "Hi there"%></p>
+<div class="find_new_places_box">
+  <p>
+    Find new places to visit that have 
+    the facities you need:
+  </p>
+  <span class="where_can_i_go_container">
+    <%= link_to 'Where can I go?', toilets_path, :class => 'button where_can_i_go_button' %>
+  </span>
+</div>
 
 <div id="intro">
   <p>
@@ -13,17 +36,4 @@
   </p>
 </div>
 
-
-<% form_tag toilets_path, :method => :get do %>
-  <%= "Type a location to find toilets" if params[:location] == "" %>
-  <label for="location">Location:</label>
-  <%= text_field_tag :location, params[:location] %>
-  <label for="hoist">Has a hoist:</label>
-  <%= check_box_tag :hoist %>
-  <label for="changingbench">Changing Bench:</label>
-  <%= check_box_tag :changingbench %>
-
-  <%= submit_tag "Search" %>
-<% end %>
-
-<%= link_to "Add a Toilet", { :controller => "toilets", :action => "new" , :search_location=> params[:location]} %>
+<%#= link_to "Add a Toilet", { :controller => "toilets", :action => "new" , :search_location=> params[:location]} %>

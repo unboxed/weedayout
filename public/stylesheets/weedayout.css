@@ -156,3 +156,47 @@ a {
   text-align: left;
   margin-bottom: 25px;
 }
+
+.find_a_facility_box {
+  position: absolute;
+  right: 15px;
+  top: 25px;
+  text-align: left;
+  background: url('/images/backgrounds/box_find_a_facility.png');
+  padding: 25px 42px 0 26px;
+  width: 248px;
+  height: 172px;
+}
+
+.find_new_places_box {
+  position: absolute;
+  right: 15px;
+  top: 215px;
+  text-align: left;
+  background: url('/images/backgrounds/box_find_new_places.png');
+  padding: 25px 42px 0 26px;
+  width: 248px;
+  height: 135px;
+}
+
+.text_replacement {
+  text-indent: -999px;
+  overflow: hidden;
+}
+
+.find_a_facility_box h1 {
+  width: 148px;
+  height: 21px;
+  background: url('/images/text_replacement/find_a_facility.gif');
+  margin-bottom: 10px;
+}
+
+.search_input {
+  width: 235px;
+}
+
+.find_new_places_box p {
+  font-family: "Trebuchet MS";
+  font-size: 1.3em;
+  color: #58595B;
+}

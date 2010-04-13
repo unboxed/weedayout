@@ -1,11 +1,16 @@
 input.button {
   border: 0;
 }
+a.button {
+  display: block;
+}
 
 .button {
   text-indent: -9999px;
   overflow: hidden;
 }
+
+/* Submit */
 
 .submit_button {
   background: url('/images/buttons/submit.gif');
@@ -20,4 +25,50 @@ input.button {
   width: 120px;
   height: 46px;
   float: right;
+}
+
+/* Search */
+
+.search_button {
+  background: url('/images/buttons/search.gif');
+  width: 158px;
+  height: 54px;
+}
+
+.search_container {
+  display: block;
+  background: url('/images/buttons/search_button_container.gif');
+  padding: 4px 0 0 4px;
+  width: 177px;
+  height: 73px;
+  float: right;
+  position: relative;
+  right: -19px;
+  margin-top: 8px;
+}
+
+.search_button {
+  background: url('/images/buttons/search.gif');
+  width: 158px;
+  height: 54px;
+}
+
+/* Where can I go? */
+
+.where_can_i_go_container {
+  display: block;
+  background: url('/images/buttons/where_can_i_go_container.gif');
+  padding: 7px 0 0 7px;
+  width: 245px;
+  height: 66px;
+  float: right;
+  position: relative;
+  right: -19px;
+  margin-top: 3px;
+}
+
+.where_can_i_go_button {
+  background: url('/images/buttons/where_can_i_go.gif');
+  width: 219px;
+  height: 54px;
 }
