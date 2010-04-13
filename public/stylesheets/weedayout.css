@@ -58,9 +58,16 @@ body {
 
 .inner_wrapper .left,
 .inner_wrapper .right {
-  width: 310px;
   float: left;
   text-align: left;
+}
+
+.inner_wrapper .left {
+  width: 310px;
+}
+
+.inner_wrapper .right {
+  width: 360px;
 }
 
 .inner_wrapper .left {
@@ -106,7 +113,29 @@ p.with_checkboxes input {
   margin: 10px 0 0;
 }
 
-
 .main_inner h2 {
   color: #1C75BC;
+  min-height: 55px;
+}
+
+
+.right p.navig {
+  margin-top: 20px;
+}
+
+.right p.navig a {
+  border-bottom: 2px solid #00AEEF;
+  padding-bottom: 2px;
+  float: right;
+  margin: 20px 10px 0 0;
+}
+
+label.first {
+  margin: -1.3em 0 5px 0;
+}
+
+a {
+  color: #00AEEF;
+  text-decoration: none;
+  font-size: 1.2em;
 }

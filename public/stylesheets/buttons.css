@@ -1,0 +1,23 @@
+input.button {
+  border: 0;
+}
+
+.button {
+  text-indent: -9999px;
+  overflow: hidden;
+}
+
+.submit_button {
+  background: url('/images/buttons/submit.gif');
+  width: 112px;
+  height: 34px;
+}
+
+.submit_container {
+  display: block;
+  background: url('/images/buttons/submit_button_container.gif');
+  padding: 3px 0 0 3px;
+  width: 120px;
+  height: 46px;
+  float: right;
+}

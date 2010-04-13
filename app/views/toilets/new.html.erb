@@ -7,7 +7,7 @@
     <div class="left">
       <h2>1. Enter the facility’s details below...</h2>
       <p>
-        <%= f.label :name, 'Location Name:' %>
+        <%= f.label :name, 'Location Name:', :class => 'first' %>
         <%= f.text_field :name %>
       </p>
       <p>
@@ -54,11 +54,12 @@
       </fieldset>
     
     
-      <p>
-        <%= f.submit "Create" %>
+      <p class="navig">
+        <span class="submit_container">
+        <%= f.submit "Submit", :class => 'button submit_button' %>
+        </span>
+        <%= link_to 'Back Home', root_path %>
       </p>
-
-  <%= link_to 'Back', toilets_path %>
 
   <%-
     @lat = !f.object.lat.blank? ? "%f" % f.object.lat : "null"
