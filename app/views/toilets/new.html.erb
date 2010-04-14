@@ -5,7 +5,7 @@
     <%= flash[:notice] %>
 
     <div class="left">
-      <h2>1. Enter the facility’s details below...</h2>
+      <h2 class="tall">1. Enter the facility’s details below...</h2>
       <p>
         <%= f.label :name, 'Location Name:', :class => 'first' %>
         <%= f.text_field :name %>
@@ -41,7 +41,7 @@
     </div><!-- /.left -->
   
     <div class="right">
-      <h2>2. Drag the marker to refine the  location on the map...</h2>
+      <h2 class="tall">2. Drag the marker to refine the  location on the map...</h2>
       <div id="map" style="height: 350px; width: 350px"></div>
       <div style="display: none">
         <%= f.text_field :lat %>

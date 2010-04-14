@@ -3,21 +3,25 @@
 <div class="main_inner">
   
   <div class="left">
-    <h1>Search Results</h1>
+    <h1 class="text_replacement search_results">Search Results</h1>
     <div id="map" style="height: 350px; width: 350px"></div>
   </div><!-- /.left -->
   
   <div class="right">
 
-    <% form_tag toilets_path, :method => :get do %>
+    <% form_tag toilets_path, :method => :get, :class => 'refine_search clearfix' do %>
       <%= "Type a location to find toilets" if params[:location] == "" %>
+      <div class="location_param clearfix">
       <label for="location">Location:</label>
       <%= text_field_tag :location, params[:location] %>
-      <label for="hoist">Has a hoist:</label>
-      <%= check_box_tag :hoist %>
-      <label for="changingbench">Changing Bench:</label>
-      <%= check_box_tag :changingbench %>
-      <%= submit_tag "Refine Search" %>
+      </div>
+      <span class="refine_search_container"><%= submit_tag "Refine Search", :class => 'button refine_search_button' %></span>
+      <div class="attributes">
+        <%= check_box_tag :hoist %>
+        <label for="hoist">Hoist</label><br />
+        <%= check_box_tag :changingbench %>
+        <label for="changingbench">Changing Bench</label>
+      </div><!-- /.attributes -->
     <% end %>
     
     <% if @toilets %>

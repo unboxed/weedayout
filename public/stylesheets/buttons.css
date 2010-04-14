@@ -72,3 +72,23 @@ a.button {
   width: 219px;
   height: 54px;
 }
+
+/* Refine Search */
+
+.refine_search_container {
+  display: block;
+  background: url('/images/buttons/refine_search_container.gif');
+  padding: 5px 0 0 5px;
+  width: 154px;
+  height: 48px;
+  float: right;
+  position: relative;
+  right: -13px;
+  margin-top: 3px;
+}
+
+.refine_search_button {
+  background: url('/images/buttons/refine_search.gif');
+  width: 139px;
+  height: 34px;
+}

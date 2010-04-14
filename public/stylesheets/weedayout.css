@@ -115,7 +115,11 @@ p.with_checkboxes input {
 
 .main_inner h2 {
   color: #1C75BC;
-  min-height: 55px;
+  margin-bottom: 5px;
+}
+
+.main_inner h2.tall {
+  min-height: 50px;
 }
 
 
@@ -182,6 +186,13 @@ a {
 .text_replacement {
   text-indent: -999px;
   overflow: hidden;
+}
+
+h1.search_results {
+  width: 166px;
+  height: 16px;
+  background: url('/images/text_replacement/search_results.gif');
+  margin-bottom: 20px;
 }
 
 .find_a_facility_box h1 {
@@ -262,4 +273,27 @@ span.checked {
 
 span.cross {
   background-image: url('/images/cross.gif');
+}
+
+form.refine_search div.attributes {
+  float: right;
+  width: 130px;
+  padding-top: 4px;
+}
+
+form.refine_search div.attributes label {
+  margin-top: 2px;
+}
+
+form.refine_search div.location_param {
+  float: right;
+}
+
+form.refine_search div.location_param input {
+  width: 210px;
+  margin-left: 10px;
+}
+
+form.refine_search {
+  margin-bottom: 20px;
 }
