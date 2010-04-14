@@ -23,6 +23,17 @@ Rails::Initializer.run do |config|
   config.gem "cucumber", :lib => false, :version => ">= 0.6.1"
   config.gem 'mislav-will_paginate', :version => '~> 2.3.11', :lib => 'will_paginate',  :source => 'http://gems.github.com'
 
+  if %w(development test cucumber).include?(RAILS_ENV)
+    config.gem 'rspec', :lib => false
+    config.gem 'rspec-rails', :lib => false
+    # config.gem 'be_valid_asset', :lib => false
+    config.gem 'factory_girl', :lib => false
+    
+    config.gem 'cucumber', :lib => false
+    config.gem 'cucumber-rails', :lib => false
+    config.gem 'webrat', :lib => false
+  end
+
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
   # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
