@@ -200,3 +200,66 @@ a {
   font-size: 1.3em;
   color: #58595B;
 }
+
+.search_results {
+  width: 100%;
+  font-size: 1.3em;
+  line-height: 1.3em;
+  color: #58595B;
+}
+
+.search_results .marker {
+  width: 60px;
+  vertical-align: top;
+  text-align: center;
+}
+
+.search_results .address {
+  text-align: left;
+}
+
+.search_results .details {
+  vertical-align: bottom;
+  font-size: 0.85em;
+}
+
+.search_results td {
+  padding: 7px 0;
+}
+
+.search_results hr {
+  border: 0;
+  background: #A4A5A3;
+  height: 2px;
+}
+
+tr.separator td {
+  padding: 0;
+}
+
+span.pin {
+  display: block;
+  width: 31px;
+  height: 36px;
+  padding-top: 6px;
+  margin: 0 auto;
+  color: black;
+  background: url('/images/pin.gif');
+  cursor: pointer;
+}
+
+span.checked,
+span.cross {
+  padding-left: 20px;
+  display: block;
+  background-position: left center;
+  background-repeat: no-repeat;
+}
+
+span.checked {
+  background-image: url('/images/checked.gif');
+}
+
+span.cross {
+  background-image: url('/images/cross.gif');
+}
