@@ -20,7 +20,6 @@ Rails::Initializer.run do |config|
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
   config.gem "geokit"
-  config.gem "cucumber", :lib => false, :version => ">= 0.6.1"
   config.gem 'mislav-will_paginate', :version => '~> 2.3.11', :lib => 'will_paginate',  :source => 'http://gems.github.com'
 
   if %w(development test cucumber).include?(RAILS_ENV)
@@ -29,7 +28,7 @@ Rails::Initializer.run do |config|
     # config.gem 'be_valid_asset', :lib => false
     config.gem 'factory_girl', :lib => false
     
-    config.gem 'cucumber', :lib => false
+    config.gem "cucumber", :lib => false, :version => ">= 0.6.1"
     config.gem 'cucumber-rails', :lib => false
     config.gem 'webrat', :lib => false
   end
