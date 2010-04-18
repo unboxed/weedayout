@@ -1,9 +1,6 @@
 <div class="main_inner">
 
   <% form_for(@toilet) do |f| %>
-    <%= f.error_messages %>
-    <%= flash[:notice] %>
-
     <div class="left">
       <h2 class="tall">1. Enter the facility’s details below...</h2>
       <p>
@@ -38,6 +35,9 @@
         <%= f.label :whocanuse, "Who can use:" %>
         <%= f.text_field :whocanuse %>
       </p>
+      
+      <%= f.error_messages %>
+      <%= flash[:notice] %>
     </div><!-- /.left -->
   
     <div class="right">
