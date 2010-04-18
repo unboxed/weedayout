@@ -297,3 +297,7 @@ form.refine_search div.location_param input {
 form.refine_search {
   margin-bottom: 20px;
 }
+
+.fieldWithErrors input {
+  border-color: red;
+}
