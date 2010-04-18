@@ -11,4 +11,8 @@ module ApplicationHelper
     end
     return match ? text : nil
   end
+  
+  def get_gmaps_api_key
+    GOOGLE_MAPS_API_KEYS[request.domain]
+  end
 end
