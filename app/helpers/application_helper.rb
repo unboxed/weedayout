@@ -13,6 +13,6 @@ module ApplicationHelper
   end
   
   def get_gmaps_api_key
-    GOOGLE_MAPS_API_KEYS[request.domain]
+    GOOGLE_MAPS_API_KEYS[request.domain(5)]
   end
 end
