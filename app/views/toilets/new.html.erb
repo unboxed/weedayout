@@ -3,41 +3,41 @@
   <% form_for(@toilet) do |f| %>
     <div class="left">
       <h2 class="tall">1. Enter the facility’s details below...</h2>
-      <p>
-        <%= f.label :name, 'Location Name:', :class => 'first' %>
+	  <p class="note">Required fields marked with a <span style='color:#FF0000'>*</span></p>
+		<%= f.error_messages %>
+		<%= flash[:notice] %>
+      <div class="form_entry">
+        <%= f.label :name, "Location Name: <span style='color:#FF0000'>*</span>", :class => 'first' %>
         <%= f.text_field :name %>
-      </p>
-      <p>
-        <%= f.label :address, "Address:" %>
+      </div>
+      <div class="form_entry">
+        <%= f.label :address, "Address: <span style='color:#FF0000'>*</span>" %>
         <%= f.text_field :address %>
-      </p>
-      <p>
+      </div>
+      <div class="form_entry">
         <%= f.label :venuetype, 'Venue Type:' %>
         <%= f.text_field :venuetype %>
-      </p>
-      <p>
+      </div>
+      <div class="form_entry">
         <%= f.label :howtoaccess, 'How to Access:' %>
         <%= f.text_field :howtoaccess %>
-      </p>
-      <p class="with_checkboxes clearfix">
+      </div>
+      <div class="with_checkboxes clearfix">
         <%= f.label :changingbench, "Changing Bench:" %>
         <%= f.check_box :changingbench %>
-      </p>
-      <p class="with_checkboxes clearfix">
+      </div>
+      <div class="with_checkboxes clearfix">
         <%= f.label :hoist, "Hoist:" %>
         <%= f.check_box :hoist %>
-      </p>
-      <p>
+      </div class="form_entry">
+      <div>
         <%= f.label :toiletlocation, "Toilet Location:" %>
         <%= f.text_field :toiletlocation %>
-      </p>
-      <p>
+      </div>
+      <div class="form_entry">
         <%= f.label :whocanuse, "Who can use:" %>
         <%= f.text_field :whocanuse %>
-      </p>
-      
-      <%= f.error_messages %>
-      <%= flash[:notice] %>
+      </div>
     </div><!-- /.left -->
   
     <div class="right">
