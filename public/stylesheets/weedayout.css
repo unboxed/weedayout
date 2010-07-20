@@ -320,3 +320,14 @@ form.refine_search {
 	font-size:1.2em;
 	margin-bottom:5px;
 }
+
+table {
+	margin:auto;
+	text-align:right/left;
+	font-size:1.5em;
+}
+
+table td {
+	padding-left:5px;
+	padding-right:5px;
+}
