@@ -13,7 +13,7 @@ Feature: Viewing Toilets
 
   Scenario: Search for a toilet and see all it's details
     When I go to the homepage
-    And I fill in "Location" with "some place"
+    And I fill in "location" with "some place"
     And I press "Search"
     Then I should see "toilet 1"
     When I follow "details_link_1"
@@ -32,7 +32,7 @@ Feature: Viewing Toilets
 
   Scenario: Check that toilet details pages have seo urls
     When I go to the homepage
-    And I fill in "Location" with "some place"
+    And I fill in "location" with "some place"
     And I press "Search"
     When I follow "details_link_2"
     Then my url should end with "toilet-2"

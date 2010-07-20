@@ -24,8 +24,8 @@ Feature: Searching Toilets
 
   Scenario: Finding the 3 nearest toilets to a location in distance order
     When I visit "/toilets"
-    And I fill in "Location" with "E11 1PB"
-    And I press "Search"
+    And I fill in "location" with "E11 1PB"
+    And I press "Refine Search"
     Then I should not see "Jubilee Bridge"
     And I should not see "Tower Bridge"
     And I should not see "Waterloo Bridge"
@@ -39,7 +39,7 @@ Feature: Searching Toilets
   Scenario: Finding the 3 nearest toilets that have a hoist
     Given the toilet "Jubilee Bridge" has a hoist
     When I go to the homepage
-    And I fill in "Location" with "E11 1PB"
+    And I fill in "location" with "E11 1PB"
     And I check "Has a hoist"
     And I press "Search"
     Then I should not see "Lambeth Bridge"
@@ -53,7 +53,7 @@ Feature: Searching Toilets
     When I visit "/toilets"
     And I fill in "Location" with "E11 1PB"
     And I check "Changing Bench"
-    And I press "Search"
+    And I press "Refine Search"
     Then I should not see "Lambeth Bridge"
     And I should not see "London Bridge"
     And I should not see "Tower Bridge"
@@ -66,7 +66,7 @@ Feature: Searching Toilets
     Given the toilet "Westminster Bridge" has a hoist
     Given the toilet "Waterloo Bridge" has a changing bench
     When I go to the homepage
-    And I fill in "Location" with "E11 1PB"
+    And I fill in "location" with "E11 1PB"
     And I check "Changing Bench"
     And I check "Has a hoist"
     And I press "Search"
@@ -79,7 +79,7 @@ Feature: Searching Toilets
   Scenario: Search results should have a "know of anything closer" link
     When I visit "/toilets"
     And I fill in "Location" with "E11 1PB"
-    And I press "Search"
+    And I press "Refine Search"
     And I follow "Know of anything closer?"
     Then I should see "New toilet"
     And the "Map location" field should contain "E11 1PB"
@@ -87,15 +87,15 @@ Feature: Searching Toilets
   Scenario: Search results should have a "Add a Toilet" link
     When I visit "/toilets"
     And I fill in "Location" with "E11 1PB"
-    And I press "Search"
-    And I follow "Add a Toilet"
-    Then I should see "New toilet"
+    And I press "Refine Search"
+    And I follow "Add a new toilet here"
+    Then I should see "/toilets/new"
     And the "Map location" field should contain "E11 1PB"
 
   Scenario: Search should show a nice error message when geokit fails on search
     Given geokit will error
     When I go to the homepage
-    And I fill in "Location" with "EC1"
+    And I fill in "location" with "EC1"
     And I press "Search"
     Then I should see "An error occurred when we looked up 'EC1'"
     

@@ -3,7 +3,7 @@
   <% form_for(@toilet) do |f| %>
     <div class="left">
       <h2 class="tall">1. Enter the facility’s details below...</h2>
-	  <p class="note">Required fields marked with a <span style='color:#FF0000'>*</span></p>
+	  
 		<%= f.error_messages %>
 		<%= flash[:notice] %>
       <div class="form_entry">
@@ -23,11 +23,11 @@
         <%= f.text_field :howtoaccess %>
       </div>
       <div class="with_checkboxes clearfix">
-        <%= f.label :changingbench, "Changing Bench:" %>
+        <%= f.label :changingbench, "Changing Bench?" %>
         <%= f.check_box :changingbench %>
       </div>
       <div class="with_checkboxes clearfix">
-        <%= f.label :hoist, "Hoist:" %>
+        <%= f.label :hoist, "Hoist?" %>
         <%= f.check_box :hoist %>
       </div class="form_entry">
       <div>
@@ -38,6 +38,7 @@
         <%= f.label :whocanuse, "Who can use:" %>
         <%= f.text_field :whocanuse %>
       </div>
+	<p class="note"><span style='color:#FF0000'>*</span>Required field</p>
     </div><!-- /.left -->
   
     <div class="right">

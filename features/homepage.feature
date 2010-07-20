@@ -16,7 +16,7 @@ Feature: Homepage
 
   Scenario: Finding the 3 nearest toilets to a location in distance order
     When I go to the homepage
-    And I fill in "Location" with "E11 1PB"
+    And I fill in "location" with "E11 1PB"
     And I press "Search"
     Then I should not see "Jubilee Bridge"
     And I should not see "Tower Bridge"
@@ -29,5 +29,5 @@ Feature: Homepage
 
   Scenario: Homepage should have a "Add a Toilet" link
     When I go to the homepage
-    And I follow "Add a Toilet"
-    Then I should see "New toilet"
+    And I follow "Add a Facility"
+    Then I should be on "/toilets/new"

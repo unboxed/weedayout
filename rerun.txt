@@ -1,1 +1,1 @@
-features/adding_toilets.feature:7:24:32 features/admin_content.feature:11 features/admin_toilets.feature:14 features/homepage.feature:17:30 features/searching_toilets.feature:18:25:39:51:63:79:87:95 features/viewing_toilet.feature:14:33
+features/adding_toilets.feature:7:33 features/admin_content.feature:11 features/admin_toilets.feature:14:107 features/homepage.feature:30 features/searching_toilets.feature:18:79:87

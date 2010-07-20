@@ -104,4 +104,10 @@ Feature: Administering toilets
     Then I should see "Address can't be blank"
     Then I should see "Name can't be blank"
 
+  Scenario: Delete toilets
+	Given I am logged in
+	When I visit "/admin/toilets"
+	And I press "delete"
+	Then I should see "Toilet deleted successfully"
+
 
