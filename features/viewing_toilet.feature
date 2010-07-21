@@ -17,18 +17,15 @@ Feature: Viewing Toilets
     And I press "Search"
     Then I should see "toilet 1"
     When I follow "details_link_1"
-    Then I should see the following table "toilet_details":
-    | Name:            | toilet 1            |
-    | Address:         | address 1           |
-    | Venue type:      | venue 1             |
-    | Toilet Location: | location 1          |
-    | Who can use:     | use 1               |
-    | How to access:   | access 1            |
-    | Changing bench:  | has changing bench  |
-    | Hoist:           | does not have hoist |
-    | Description:     | desc 1              |
-    | Longitude:       | 51.00               |
-    | Latitude:        | 0.01                |
+    Then I should see the following elements with content:
+    | #name           | toilet 1            |
+    | #address        | address 1           |
+    | #venuetype      | venue 1             |
+    | #toiletlocation | location 1          |
+    | #whocanuse      | use 1               |
+    | #howtoaccess    | access 1            |
+    | #changingbench  | has changing bench  |
+    | #hoist          | does not have hoist |
 
   Scenario: Check that toilet details pages have seo urls
     When I go to the homepage

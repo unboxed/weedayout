@@ -1,46 +1,17 @@
-<table id="toilet_details" border="0">    
-	  <tr>
-		<td align="right" width="50%">Name:</td>
-		<td align="left" width="50%"><%= @toilet.name %></td>
-	  </tr> 
-      <tr>
-		<td align="right" width="50%">Address:</td>
-		<td align="left" width="50%"><%= @toilet.address %></td>
-	  </tr>
-      <tr>
-		<td align="right">Venue type:</td>
-		<td align="left"><%= @toilet.venuetype %></td>
-	  </tr>
-	  <tr>
-		<td align="right">Toilet Location:</td>
-		<td align="left"><%= @toilet.toiletlocation %></td>
-	  </tr>
-	  <tr>
-		<td align="right">Who can use:</td>
-		<td align="left"><%= @toilet.whocanuse %></td>
-	  </tr>
-	  <tr>
-		<td align="right">How to access:</td>
-		<td align="left"><%= @toilet.howtoaccess %></td>
-	  </tr>
-	  <tr>
-		<td align="right">Changing bench:</td>
-		<td align="left"><%= @toilet.changingbench ? "has changing bench" : "does not have changing bench" %></td>
-	  </tr>
-      <tr>
-		<td align="right">Hoist:</td>
-		<td align="left"><%= @toilet.hoist ? "has hoist" : "does not have hoist" %></td>
-	  </tr>
-      <tr>
-		<td align="right">Description:</td>
-		<td align="left"><%= @toilet.description %></td>
-	  </tr>
-      <tr>
-		<td align="right">Longitude:</td>
-		<td align="left"><%= @toilet.long %></td>
-	  </tr>
-      <tr>
-		<td align="right">Latitude:</td>
-		<td align="left"><%= @toilet.lat %></td>
-	  </tr>
-</table>
+<div class="main_inner">
+  	<div class="left">
+	map in here
+	</div>
+	<div class="right">
+		<div class="details">
+			<h2 id="name"><%= @toilet.name %></h2> 
+			<p id="address">Address: <%= @toilet.address %></p>
+			<p id="venuetype">Venue Type:<%= @toilet.venuetype %></p>
+			<p id="howtoaccess">How to Access: <%= @toilet.howtoaccess %></p>
+			<p id="changingbench">Changing bench:<%= @toilet.changingbench ? "has changing bench" : "does not have changing bench" %></p>
+			<p id="hoist">Hoist: <%= @toilet.hoist ? "has hoist" : "does not have hoist" %></p>
+			<p id="toiletlocation">Toilet Location:<%= @toilet.toiletlocation %></p>
+			<p id="whocanuse">Who can use: <%= @toilet.whocanuse %></p>
+		</div>
+	</div>
+</div>
