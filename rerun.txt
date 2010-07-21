@@ -1,1 +1,1 @@
-features/adding_toilets.feature:7 features/searching_toilets.feature:80:88 features/viewing_toilet.feature:14
+features/searching_toilets.feature:80
