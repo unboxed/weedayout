@@ -1,4 +1,8 @@
-<%= flash[:notice] %>
+<script type="text/javascript">
+if ("<%= flash[:notice] %>" != "") {
+	alert("<%= flash[:notice] %>");
+}
+</script>
 
 <div class="main_inner">
   
