@@ -8,6 +8,16 @@ class Admin::ToiletsController < ApplicationController
   def edit
     @toilet = Toilet.find_by_permalink(params[:id])
   end
+  
+  def destroy
+    @toilet = Toilet.find_by_permalink(params[:id])
+    if @toilet.destroy
+      flash[:notice] = "Toilet deleted successfully"
+      redirect_to :action=>"index"
+    else
+      flash[:notice] = "Deletion was unsuccessful"
+    end
+  end
 
   def update
     @toilet = Toilet.find_by_permalink(params[:id])

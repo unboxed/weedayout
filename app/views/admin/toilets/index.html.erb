@@ -1,3 +1,5 @@
+<%= flash[:notice]%>
+
 <h1>Admin</h1>
 
 <%= will_paginate @toilets %>
@@ -31,6 +33,7 @@
         <td class="longitude"><%= toilet.long %></td>
         <td class="latitude"><%= toilet.lat %></td>
         <td class="edit"><%= link_to "edit", {:controller => "toilets", :action => "edit", :id => toilet}, :id => "edit_link_#{index+1}" %></td>
+		<td class="delete"><%= link_to "delete", {:controller => "toilets", :action => "destroy", :id => toilet}, :method => :delete%></td>
      </tr>
   <% end %>
 </table>

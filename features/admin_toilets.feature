@@ -107,7 +107,7 @@ Feature: Administering toilets
   Scenario: Delete toilets
 	Given I am logged in
 	When I visit "/admin/toilets"
-	And I press "delete"
+	And I follow "delete"
 	Then I should see "Toilet deleted successfully"
 
 
