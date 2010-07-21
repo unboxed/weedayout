@@ -14,7 +14,7 @@ Feature: Administering toilets
   Scenario: View the admin page, toilets should be sorted by name and all data should be present
     Given I am logged in
     When I visit "/admin/toilets"
-    Then I should see the "#results" table like this:
+    Then I should see the following table "results":
     | name      | address   | venue type | toilet location | who can use | how to access | changing bench | hoist | description | longitude  | latitude  |
     | toilet 01 | address 1 | venue 1    | location 1      | use 1       | access 1      | true           | true  | desc 1      | 51.00      | 0.01      |
     | toilet 02 | address 2 | venue 2    | location 2      | use 2       | access 2      | true           | false | desc 2      | 52.00      | 0.02      |

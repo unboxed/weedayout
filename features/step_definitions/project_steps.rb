@@ -20,8 +20,8 @@ Then /^I should see the following elements with content:$/ do |element_table|
   end
 end
 
-Then /^I should see the "(.*)" table like this:$/ do |selector, table|
-  table.diff!(table_at(selector).to_a)
+Then /^I should see the following table "(.*)":$/ do |table, expected_table|
+  expected_table.diff!(tableish("table##{table} tr", 'td,th'))
 end
 
 

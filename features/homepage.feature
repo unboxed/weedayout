@@ -30,4 +30,4 @@ Feature: Homepage
   Scenario: Homepage should have a "Add a Toilet" link
     When I go to the homepage
     And I follow "Add a Facility"
-    Then I should be on "/toilets/new"
+    Then I should be on add toilet page

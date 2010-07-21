@@ -16,9 +16,10 @@ Feature: Searching Toilets
    
   
   Scenario: Empty search
-    Given a valid toilet called "Westminster Bridge"
-    And a valid toilet called "Lambeth Bridge"
-    When I go to the homepage
+    Given I am on the homepage 
+	And a valid toilet called "Westminster Bridge"
+    And a valid toilet called "Lambeth Bridge" 
+	When I fill in "location" with ""
     And I press "Search"
     Then I should see "Type a location to find toilets"
 

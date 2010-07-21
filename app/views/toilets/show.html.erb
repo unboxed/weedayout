@@ -1,13 +1,43 @@
-<ul class="NoBullet">      
-<li id="name"><%= @toilet.name %></li>
-      <li id="address"><%= @toilet.address %></li>
-      <li id="venuetype"><%= @toilet.venuetype %></li>
-      <li id="toiletlocation"><%= @toilet.toiletlocation %></li>
-      <li id="whocanuse"><%= @toilet.whocanuse %></li>
-      <li id="howtoaccess"><%= @toilet.howtoaccess %></li>
-      <li id="changingbench"><%= @toilet.changingbench ? "has changing bench" : "does not have changing bench" %></li>
-      <li id="hoist"><%= @toilet.hoist ? "has hoist" : "does not have hoist" %></li>
-      <li id="description"><%= @toilet.description %></li>
-      <li id="longitude"><%= @toilet.long %></li>
-      <li id="latitude"><%= @toilet.lat %></li>
-      </ul>
+<h1><%= @toilet.name %></h1>
+<table border="0">     
+      <tr>
+		<td align="right" width="50%">Address:</td>
+		<td align="left" width="50%"><%= @toilet.address %></td>
+	  </tr>
+      <tr>
+		<td align="right">Venue type:</td>
+		<td align="left"><%= @toilet.venuetype %></td>
+	  </tr>
+	  <tr>
+		<td align="right">Toilet Location:</td>
+		<td align="left"><%= @toilet.toiletlocation %></td>
+	  </tr>
+	  <tr>
+		<td align="right">Who can use:</td>
+		<td align="left"><%= @toilet.whocanuse %></td>
+	  </tr>
+	  <tr>
+		<td align="right">How to access:</td>
+		<td align="left"><%= @toilet.howtoaccess %></td>
+	  </tr>
+	  <tr>
+		<td align="right">Changing bench:</td>
+		<td align="left"><%= @toilet.changingbench ? "has changing bench" : "does not have changing bench" %></td>
+	  </tr>
+      <tr>
+		<td align="right">Hoist:</td>
+		<td align="left"><%= @toilet.hoist ? "has hoist" : "does not have hoist" %></td>
+	  </tr>
+      <tr>
+		<td align="right">Description:</td>
+		<td align="left"><%= @toilet.description %></td>
+	  </tr>
+      <tr>
+		<td align="right">Longitude:</td>
+		<td align="left"><%= @toilet.long %></td>
+	  </tr>
+      <tr>
+		<td align="right">Latitude:</td>
+		<td align="left"><%= @toilet.lat %></td>
+	  </tr>
+</table>

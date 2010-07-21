@@ -12,6 +12,8 @@ module NavigationHelpers
       '/'
     when /add toilet page/
       new_toilet_path
+    when /toilet home page/
+      toilets_path
 
     # Add more mappings here.
     # Here is a more fancy example:

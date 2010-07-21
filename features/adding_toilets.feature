@@ -19,7 +19,7 @@ Feature: Adding toilets
     #And I fill in "Longitude" with "52.9376"
     And I pass the spam test
     And I press "Submit"
-    Then I visit "/toilets"
+    Then I should be on toilet home page
  	And I should see "Toilet created"
   
   Scenario: Submitting a blank form

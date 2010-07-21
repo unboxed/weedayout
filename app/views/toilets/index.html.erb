@@ -56,7 +56,8 @@
           <% char_index = char_index.next %>
         <% end %>
       </table>
-      <%= link_to "Know of anything closer? Add a new toilet here." , { :controller => "toilets", :action => "new", :search_location => params[:location]} %>
+      <%= link_to "Know of anything closer?" , { :controller => "toilets", :action => "new", :search_location => params[:location]} %>
+      <%= link_to "Add a new toilet here." , { :controller => "toilets", :action => "new", :search_location => params[:location]} %>
     <% end %>
     
   </div><!-- /.right -->
