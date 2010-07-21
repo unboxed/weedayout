@@ -13,10 +13,10 @@ class Admin::ToiletsController < ApplicationController
     @toilet = Toilet.find_by_permalink(params[:id])
     if @toilet.destroy
       flash[:notice] = "Toilet deleted successfully"
+      redirect_to :action=>"index"
     else
       flash[:notice] = "Deletion was unsuccessful"
     end
-    redirect_to :action=>"index"
   end
 
   def update

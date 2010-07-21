@@ -108,7 +108,6 @@ Feature: Administering toilets
 	Given I am logged in
 	When I visit "/admin/toilets"
 	And I follow "delete"
-	#Then I should be on admin toilet page
-	#And I should see "Toilet deleted successfully"
+	Then I should see "Toilet deleted successfully"
 
 
