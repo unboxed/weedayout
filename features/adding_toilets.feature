@@ -14,20 +14,15 @@ Feature: Adding toilets
     And I check "Hoist?"
     And I fill in "Toilet Location" with "Left hand rail"
     And I fill in "Who can use" with "Members of Parliament"
-    #And I fill in "Description" with "It's a bridge"
-    #And I fill in "Latitude" with "0.0003"
-    #And I fill in "Longitude" with "52.9376"
     And I pass the spam test
     And I press "Submit"
-    Then I visit "/toilets"
-	And show me the page
  	And I should see "Toilet created"
   
   Scenario: Submitting a blank form
     When I go to add toilet page
     And I pass the spam test
     And I press "Submit"
-    Then I should see "4 errors"
+    Then I should see "2 errors"
     Then I should see "Address can't be blank"
     Then I should see "Name can't be blank"
 

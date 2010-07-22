@@ -82,16 +82,16 @@ Feature: Searching Toilets
     And I fill in "Location" with "E11 1PB"
     And I press "Refine Search"
     And I follow "Know of anything closer?"
-    Then I should see "New toilet"
-    And the "Map location" field should contain "E11 1PB"
+    Then I should see "Enter the facility’s details below..."
+    And the URL should contain "E11 1PB"
 
   Scenario: Search results should have a "Add a Toilet" link
     When I visit "/toilets"
     And I fill in "Location" with "E11 1PB"
     And I press "Refine Search"
     And I follow "Add a new toilet here"
-    Then I should see "/toilets/new"
-    And the "Map location" field should contain "E11 1PB"
+    Then I should see "Enter the facility’s details below..."
+    And the URL should contain "E11 1PB"
 
   Scenario: Search should show a nice error message when geokit fails on search
     Given geokit will error
