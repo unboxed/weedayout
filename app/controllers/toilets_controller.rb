@@ -30,6 +30,20 @@ class ToiletsController < ApplicationController
     @toilet = Toilet.find_by_permalink(params[:id])
   end
 
+  def edit
+    @toilet = Toilet.find_by_permalink(params[:id])
+  end
+  
+  def update
+    @toilet = Toilet.find_by_permalink(params[:id])
+    if @toilet.update_attributes(params[:toilet])
+      flash[:notice] = "Toilet Updated"
+      redirect_to :action=>"edit"
+    else 
+      render :action => "edit"
+    end
+  end
+
   private
 
   def filter_conditions

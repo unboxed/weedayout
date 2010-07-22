@@ -33,3 +33,4 @@ Feature: Viewing Toilets
     And I press "Search"
     When I follow "details_link_2"
     Then my url should end with "toilet-2"
+    

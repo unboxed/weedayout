@@ -322,12 +322,28 @@ form.refine_search {
 	margin-bottom:5px;
 }
 
-.details h2 {
+.facility_details .facility_images {
+	height:150px;
+}
+
+.facility_details .facility_links {
+	margin-top:20px;
+}
+
+.facility_details h1 {
+  width: 166px;
+  height: 16px;
+  background: url('/images/text_replacement/facility_details.gif');
+  margin-bottom: 20px;
+}
+
+.facility_details h2 {
 	font-size:1.5em;
 	color: #58595B;
 }
-.details p {
+
+.facility_details p {
+	line-height:1.8em;
 	font-size:1.3em;
 	color: #58595B;
 }
-
