@@ -24,6 +24,18 @@ Then /^I should see the following table "(.*)":$/ do |table, expected_table|
   expected_table.diff!(tableish("table##{table} tr", 'td,th'))
 end
 
+Then /^I should be redirected to "(.*)"$/ do |url|   
+  response.should redirect_to(url) 
+end 
+
+
+
+Then /^the URL should contain "([^"]*)"$/ do |arg1|
+  response.should contain(arg1)
+end
+
+
+
 
 Then /^I should see the form filled in like this:$/ do |element_table|
   element_table.rows_hash.each do |field, value|

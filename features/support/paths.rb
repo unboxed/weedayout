@@ -17,6 +17,7 @@ module NavigationHelpers
     when /show toilet page/
       toilet_path(@toilet)
 
+
     # Add more mappings here.
     # Here is a more fancy example:
     #
