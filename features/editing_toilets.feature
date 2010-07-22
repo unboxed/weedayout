@@ -14,7 +14,6 @@ Feature: Editing toilets
   
     Scenario: Visit the edit page
       Given I visit "/toilets/toilet-01/edit"
-      Then show me the page
       Then I should see the form filled in like this:
       | name            | toilet 01           |
       | address         | address 1           |
@@ -34,13 +33,14 @@ Feature: Editing toilets
       | changing bench  | false               |
       | hoist           | true                |
       And I press "Submit"
-      Then I should see the following elements with content:
-      | #name           | toilet A            |
-      | #address        | address A           |
-      | #venuetype      | venue A             |
-      | #toiletlocation | location A          |
-      | #whocanuse      | use A               |
-      | #howtoaccess    | access A            |
-      | #changingbench  | does not have changing bench  |
-      | #hoist          | has hoist           |
+      Then I should see the form filled in like this:
+      | name            | toilet A            |
+      | address         | address A           |
+      | venue type      | venue A             |
+      | toilet location | location A          |
+      | who can use     | use A               |
+      | how to access   | access A            |
+      | changing bench  | false               |
+      | hoist           | true                |
       And I should see "Toilet Updated"
+      
