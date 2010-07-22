@@ -28,6 +28,7 @@ class ToiletsController < ApplicationController
 
   def show
     @toilet = Toilet.find_by_permalink(params[:id])
+    @display_index = (params[:index_value] || "0").to_i + 1
   end
 
   def edit

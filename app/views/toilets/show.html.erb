@@ -1,5 +1,5 @@
 <div class="main_inner">
-	
+
   	<div class="left">
 	    <h1 class="text_replacement facility_details">Facility Details</h1>
 	    <div id="map" style="height: 350px; width: 350px"></div>
@@ -20,4 +20,33 @@
 			<div class="facility_links"<%= link_to "Edit these details" , { :controller => "toilets", :action => "edit", :search_location => params[:location]} %>
 		</div>
 	</div>
+	
+	<!-- Google maps-->
+	<script type="text/javascript"
+		src="http://www.google.com/jsapi?key=ABQIAAAAlyeJljQH98VMTkAORPPxhxRi_j0U6kJrkFvY4-OX2XYmEAa76BR1dkIiZ5uJBrN49TH92bIh5AJW7w">
+	</script>
+	<script type="text/javascript">
+		google.load("maps", "2");
+		
+	function initialize() {
+		var map = new google.maps.Map2(document.getElementById("map"));
+		
+		var point = new GLatLng(<%= @toilet.lat%>, <%=@toilet.long%>);
+		map.setCenter(point, 15);
+		
+		var index = <%= @display_index %>;
+		var letter = String.fromCharCode("A".charCodeAt(0) + (index - 1));
+		var myIcon = new GIcon(G_DEFAULT_ICON, "http://www.google.com/mapfiles/marker" + letter + ".png");
+		
+		var marker = new GMarker(point, {draggable:false, icon:myIcon});
+		marker.setImage();
+		map.addOverlay(marker);
+		
+	  	var mapControl = new GMapTypeControl();
+	  	map.addControl(mapControl);
+	  	map.addControl(new GLargeMapControl());
+	}
+
+	    google.setOnLoadCallback(initialize);		
+	</script>
 </div>

@@ -42,7 +42,7 @@
               <%= content_tag :span, 'Changing Bench', :class => (toilet.changingbench ? 'checked' : 'cross' ) %>
             </td>
             <td class="details">
-              <%= link_to "View Details", {:controller => 'toilets', :action => 'show', :permalink => toilet.permalink}, :id => "details_link_#{index+1}"%>
+              <%= link_to "View Details", {:controller => 'toilets', :action => 'show', :permalink => toilet.permalink, :index_value => index}, :id => "details_link_#{index+1}"%>
             </td>
           </tr>
           <% unless toilet == @toilets.last %>
