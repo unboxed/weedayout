@@ -1,1 +1,1 @@
-features/viewing_toilet.feature:14
+features/adding_toilets.feature:7
