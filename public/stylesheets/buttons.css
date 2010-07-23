@@ -65,12 +65,6 @@ a.button {
   margin-top: 8px;
 }
 
-.search_button {
-  background: url('/images/buttons/search.gif');
-  width: 158px;
-  height: 54px;
-}
-
 /* Where can I go? */
 
 .where_can_i_go_container {

@@ -321,6 +321,11 @@ form.refine_search {
 	margin-bottom:5px;
 }
 
+.facility_details {
+	background: url('/images/pin.gif') no-repeat;
+	padding-left:40px;
+}
+
 .facility_details .facility_images {
 	height:150px;
 }
@@ -344,7 +349,7 @@ form.refine_search {
 h1.facility_details {
   width:162px;
   height:22px;
-  background: url('/images/text_replacement/facility_details.gif');
+  background: url('/images/text_replacement/facility_details.gif') no-repeat;
   margin-bottom: 20px;
 }
 
@@ -354,7 +359,7 @@ h1.facility_details {
 }
 
 .facility_details p {
-	line-height:1.8em;
+	line-height:2em;
 	font-size:1.3em;
 	color: #58595B;
 }
