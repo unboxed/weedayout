@@ -41,7 +41,7 @@ Feature: Searching Toilets
     Given the toilet "Jubilee Bridge" has a hoist
     When I go to the homepage
     And I fill in "location" with "E11 1PB"
-    And I check "Has a hoist"
+    And I check "Hoist?"
     And I press "Search"
     Then I should not see "Lambeth Bridge"
     And I should not see "London Bridge"
@@ -68,8 +68,8 @@ Feature: Searching Toilets
     Given the toilet "Waterloo Bridge" has a changing bench
     When I go to the homepage
     And I fill in "location" with "E11 1PB"
-    And I check "Changing Bench"
-    And I check "Has a hoist"
+    And I check "Changing Bench?"
+    And I check "Hoist?"
     And I press "Search"
     Then I should not see "Lambeth Bridge"
     And I should not see "London Bridge"
