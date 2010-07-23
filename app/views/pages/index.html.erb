@@ -1,6 +1,6 @@
 <div class="find_a_facility_box">
   <h1 class="text_replacement">Find a facility:</h1>
-  
+
   <% form_tag toilets_path, :method => :get do %>
     <%= text_field_tag :location, params[:location], :value => 'Enter your town or postcode...', :class => 'search_input' %>
     <span class="search_container">
