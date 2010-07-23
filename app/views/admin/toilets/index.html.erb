@@ -4,7 +4,7 @@
 
 <%= will_paginate @toilets %>
 
-<table id="results">
+<table class="results">
   <tr>
     <th>name</th>
     <th>address</th>
@@ -17,7 +17,9 @@
     <th>description</th>
     <th>longitude</th>
     <th>latitude</th>
-    <th></th>
+    <th>edit</th>
+    <th>Delete</th>
+
   </tr>
   <% @toilets.each_with_index do |toilet, index| %>
       <tr>

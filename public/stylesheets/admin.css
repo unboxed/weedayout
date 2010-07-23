@@ -1,5 +1,7 @@
 body {
     width: 960px;
+	margin-left: auto;
+    margin-right: auto;
 }
 
 .main_fields {
@@ -19,11 +21,52 @@ body {
 
 
 .main_fields p {
-    display:block;
     width:400px;
     height:20px;
     margin:5px;
 }
+h1 {
+	font: bold 15px "Trebuchet MS", Verdana, Arial, Helvetica,
+	sans-serif;
+	color: #6D929B;
+	border-bottom: 1px solid #C1DAD7;
+	border-left: 1px solid #C1DAD7;
+	border-right: 1px solid #C1DAD7;
+	border-top: 1px solid #C1DAD7;
+	letter-spacing: 2px;
+	text-transform: capitalize;	
+	text-align: center;	
+	
+	
+}
+
+th {
+	font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica,
+	sans-serif;
+	color: #6D929B;
+	border-right: 1px solid #C1DAD7;
+	border-bottom: 1px solid #C1DAD7;
+	border-top: 1px solid #C1DAD7;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	text-align: center;
+	padding: 6px 6px 6px 6px;
+	background: #CAE8EA	
+}
+
+tr {
+	font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica,
+	sans-serif;
+	color: #6D929B;
+	border-right: 1px solid #C1DAD7;
+	border-bottom: 1px solid #C1DAD7;
+	border-top: 1px solid #C1DAD7;
+	letter-spacing: 2px;
+	text-transform: capitalize;
+	text-align: center;
+	padding: 6px 6px 6px 12px;
+}
+
 
 .main_fields div {
     margin:5px;
@@ -48,6 +91,11 @@ body {
 .location_selector input[type="button"] {
     float: right;
 }
+.results {
+	 margin-left: auto;
+     margin-right: auto;
+}
+
 
 .location_selector div.field {
     width:200px;
