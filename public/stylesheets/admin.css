@@ -87,7 +87,7 @@ tr {
 .location_selector input[type="button"] {
     float: right;
 }
-.results {
+#results {
 	 margin-left: auto;
      margin-right: auto;
 }
