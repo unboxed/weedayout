@@ -15,11 +15,11 @@ Feature: Administering toilets
     Given I am logged in
     When I visit "/admin/toilets"
     Then I should see the following table "results":
-    | name      | address   | venue type | toilet location | who can use | how to access | changing bench | hoist | description | longitude  | latitude  |
-    | toilet 01 | address 1 | venue 1    | location 1      | use 1       | access 1      | true           | true  | desc 1      | 51.00      | 0.01      |
-    | toilet 02 | address 2 | venue 2    | location 2      | use 2       | access 2      | true           | false | desc 2      | 52.00      | 0.02      |
-    | toilet 03 | address 3 | venue 3    | location 3      | use 3       | access 3      | false          | true  | desc 3      | 53.00      | 0.03      |
-    | toilet 04 | address 4 | venue 4    | location 4      | use 4       | access 4      | false          | false | desc 4      | 54.00      | 0.04      |
+    | name      | address   | 
+    | toilet 01 | address 1 | 
+    | toilet 02 | address 2 | 
+    | toilet 03 | address 3 | 
+    | toilet 04 | address 4 | 
 
   Scenario: The admin page should paginate if there are too many toilets
     Given the following toilets exist:
