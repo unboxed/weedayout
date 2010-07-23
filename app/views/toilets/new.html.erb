@@ -69,59 +69,47 @@
 
   </div><!-- /.right -->
 
-  <% end %>
 
-  <!-- R-rated code ahead, parental advisory -->
+ <script type="text/javascript" charset="utf-8">
+    $(".location_selector").show();
+    $(".updatemap").show();
 
-  <% javascript_tag do %>
+    function load() {
+        if (GBrowserIsCompatible()) {
 
-  $(".location_selector").show();
-  $(".updatemap").show();
+            var start_lat = <%= @lat %>;
+            var start_lng = <%= @long%>;
+            var search_location = "<%= params[:search_location] %>";
 
-  function load() {
-      if (GBrowserIsCompatible()) {
+            if (start_lat != null && start_lng != null) {
+                setup(new GLatLng(start_lat, start_lng));
+            } else {
+                setup(new GLatLng(51.4987, -0.1097));
+            }
+        }
+    }
 
-          var start_lat = <%= @lat %>;
-          var start_lng = <%= @long%>;
-          var search_location = "<%= params[:search_location] %>";
+    function setup(start_point) {
+        var llmap = new LatLongMap(
+                start_point,
+                document.getElementById("map"),
+                document.getElementById('toilet_lat'),
+                document.getElementById('toilet_long'));
 
-          if (start_lat != null && start_lng != null) {
-              setup(new GLatLng(start_lat, start_lng));
-          } else if (search_location) {
-              var geocoder = new GClientGeocoder();
-              geocoder.setBaseCountryCode("GB");
-              geocoder.getLatLng(search_location, function(latlng) {
-                  if (latlng) {
-                      setup(latlng);
-                  } else {
-                      alert("Sorry, we were unable to find '" + search_location + "' as an address")
-                  }
-              });
-          } else {
-              setup(new GLatLng(51.4987, -0.1097));
-          }
-      }
-  }
+        $("#locate_on_map").bind("click", function() {
+            var address = document.getElementById('MapAddressSearch').value;
+            llmap.showLocation(address);
+        });
+        $("#update_map").bind("click", function() {
+            llmap.recenterMarker();
+        });
+    }
 
-  function setup(start_point) {
-      var llmap = new LatLongMap(
-              start_point,
-              document.getElementById("map"),
-              document.getElementById('toilet_lat'),
-              document.getElementById('toilet_long'));
+    $(document).ready(function() {
+        load();
+    });
+</script>
 
-      $("#locate_on_map").bind("click", function() {
-          var address = document.getElementById('MapAddressSearch').value;
-          llmap.showLocation(address);
-      });
-      $("#update_map").bind("click", function() {
-          llmap.recenterMarker();
-      });
-  }
-
-  $(document).ready(function(){
-      load();
-  });
 
   <% end %>
 
