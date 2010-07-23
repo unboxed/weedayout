@@ -7,5 +7,5 @@ ActionController::Routing::Routes.draw do |map|
     admin.root :controller => "admin"
   end
 
-  map.connect 'toilets/:permalink', :controller => 'toilets', :action => 'show'
+  map.permalink_to_toilet 'toilets/:permalink', :controller => 'toilets', :action => 'show'
 end
