@@ -3,9 +3,9 @@
   <% form_for(@toilet) do |f| %>
     <div class="left">
       <h2 class="tall">1. Enter the facility’s details below...</h2>
-	  
-		<%= f.error_messages %>
-		<%= flash[:notice] %>
+   
+  	  <%= f.error_messages %>
+  	  <%= flash[:notice] %>
       <div class="form_entry">
         <%= f.label :name, "Location Name: <span style='color:#FF0000'>*</span>", :class => 'first' %>
         <%= f.text_field :name %>
@@ -29,8 +29,8 @@
       <div class="with_checkboxes clearfix">
         <%= f.label :hoist, "Hoist?" %>
         <%= f.check_box :hoist %>
-      </div class="form_entry">
-      <div>
+      </div>
+      <div class="form_entry">
         <%= f.label :toiletlocation, "Toilet Location:" %>
         <%= f.text_field :toiletlocation %>
       </div>
@@ -38,91 +38,59 @@
         <%= f.label :whocanuse, "Who can use:" %>
         <%= f.text_field :whocanuse %>
       </div>
-	<p class="note"><span style='color:#FF0000'>*</span>Required field</p>
+ 	  <p class="note"><span style='color:#FF0000'>*</span>Required field</p>
     </div><!-- /.left -->
   
     <div class="right">
-      <h2 class="tall">2. Drag the marker to refine the  location on the map...</h2>
+      <h2 class="tall"> 2. Drag the marker to refine the  location on the map...</h2>
       <div id="map" style="height: 350px; width: 350px"></div>
       <div style="display: none">
         <%= f.text_field :lat %>
         <%= f.text_field :long %>
       </div>
-    
       <fieldset class="spamcheck_fields">
         <label for="spamcheck">To prove you're not a spam bot, please put 'rabbit' into this field</label>
         <%= text_field_tag :spamcheck %>
       </fieldset>
-    
-    
       <p class="navig">
         <span class="submit_container">
         <%= f.submit "Submit", :class => 'button submit_button', :id => "Submit" %>
         </span>
         <%= link_to 'Back Home', root_path %>
       </p>
+    </div><!-- /.right -->
 
-  <%-
-    @lat = !f.object.lat.blank? ? "%f" % f.object.lat : "null"
-    @long = !f.object.long.blank? ? "%f" % f.object.long : "null"
-  -%>
+ <!-- Google maps-->
+ 	<script type="text/javascript"
+  		src="http://www.google.com/jsapi?key=ABQIAAAAlyeJljQH98VMTkAORPPxhxRi_j0U6kJrkFvY4-OX2XYmEAa76BR1dkIiZ5uJBrN49TH92bIh5AJW7w">
+ 	</script>
+ 	<script type="text/javascript">
+  	google.load("maps", "2");
+  
+ 	function initialize() {
+  		var map = new google.maps.Map2(document.getElementById("map"));
+  
+  		var point = new GLatLng(51.5, -0.121);
+  		map.setCenter(point, 11);
+  
+  		var letter = String.fromCharCode("A".charCodeAt(1));
+  		var myIcon = new GIcon(G_DEFAULT_ICON, "http://www.google.com/mapfiles/marker" + letter + ".png");
+  
+  		var marker = new GMarker(point, {draggable:true, icon:myIcon, title : "Place this marker to your location"});
+  		marker.setImage();
+  		map.addOverlay(marker);
+  
+    	var mapControl = new GMapTypeControl();
+    	map.addControl(mapControl);
+    	map.addControl(new GLargeMapControl());
+		
+		GEvent.addListener(marker, 'dragend', function() {  
+			$('#toilet_lat').val(marker.getLatLng().lat());
+			$('#toilet_long').val(marker.getLatLng().lng()); 
+		});
+ 	}
 
-  </div><!-- /.right -->
-
+     	google.setOnLoadCallback(initialize);  
+ 	</script>
   <% end %>
-
-  <!-- R-rated code ahead, parental advisory -->
-
-  <% javascript_tag do %>
-
-  $(".location_selector").show();
-  $(".updatemap").show();
-
-  function load() {
-      if (GBrowserIsCompatible()) {
-
-          var start_lat = <%= @lat %>;
-          var start_lng = <%= @long%>;
-          var search_location = "<%= params[:search_location] %>";
-
-          if (start_lat != null && start_lng != null) {
-              setup(new GLatLng(start_lat, start_lng));
-          } else if (search_location) {
-              var geocoder = new GClientGeocoder();
-              geocoder.setBaseCountryCode("GB");
-              geocoder.getLatLng(search_location, function(latlng) {
-                  if (latlng) {
-                      setup(latlng);
-                  } else {
-                      alert("Sorry, we were unable to find '" + search_location + "' as an address")
-                  }
-              });
-          } else {
-              setup(new GLatLng(51.4987, -0.1097));
-          }
-      }
-  }
-
-  function setup(start_point) {
-      var llmap = new LatLongMap(
-              start_point,
-              document.getElementById("map"),
-              document.getElementById('toilet_lat'),
-              document.getElementById('toilet_long'));
-
-      $("#locate_on_map").bind("click", function() {
-          var address = document.getElementById('MapAddressSearch').value;
-          llmap.showLocation(address);
-      });
-      $("#update_map").bind("click", function() {
-          llmap.recenterMarker();
-      });
-  }
-
-  $(document).ready(function(){
-      load();
-  });
-
-  <% end %>
-
 </div>

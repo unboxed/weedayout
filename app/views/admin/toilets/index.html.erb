@@ -4,34 +4,18 @@
 
 <%= will_paginate @toilets %>
 
-<table id="results">
+<table class="results">
   <tr>
     <th>name</th>
     <th>address</th>
-    <th>venue type</th>
-    <th>toilet location</th>
-    <th>who can use</th>
-    <th>how to access</th>
-    <th>changing bench</th>
-    <th>hoist</th>
-    <th>description</th>
-    <th>longitude</th>
-    <th>latitude</th>
-    <th></th>
+    <th>edit</th>
+    <th>Delete</th>
+
   </tr>
   <% @toilets.each_with_index do |toilet, index| %>
       <tr>
-        <td class="name"><%= toilet.name %></td>
-        <td class="address"><%= toilet.address %></td>
-        <td class="venuetype"><%= toilet.venuetype %></td>
-        <td class="toiletlocation"><%= toilet.toiletlocation %></td>
-        <td class="whocanuse"><%= toilet.whocanuse %></td>
-        <td class="howtoaccess"><%= toilet.howtoaccess %></td>
-        <td class="changingbench"><%= toilet.changingbench  %></td>
-        <td class="hoist"><%= toilet.hoist  %></td>
-        <td class="description"><%= toilet.description %></td>
-        <td class="longitude"><%= toilet.long %></td>
-        <td class="latitude"><%= toilet.lat %></td>
+        <td class="name"><%= truncate(toilet.name,20,"...") %></td>
+        <td class="address"><%= truncate(toilet.address,20,"...") %></td>
         <td class="edit"><%= link_to "edit", {:controller => "toilets", :action => "edit", :id => toilet}, :id => "edit_link_#{index+1}" %></td>
 		<td class="delete"><%= link_to "delete", {:controller => "toilets", :action => "destroy", :id => toilet}, :method => :delete%></td>
      </tr>

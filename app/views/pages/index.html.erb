@@ -3,12 +3,6 @@
   
   <% form_tag toilets_path, :method => :get do %>
     <%= text_field_tag :location, params[:location], :value => 'Enter your town or postcode...', :class => 'search_input' %>
-    <span style="display: none">
-      <label for="hoist">Has a hoist:</label>
-      <%= check_box_tag :hoist %>
-      <label for="changingbench">Changing Bench:</label>
-      <%= check_box_tag :changingbench %>
-    </span>
     <span class="search_container">
       <%= submit_tag "Search", :class => 'button search_button', :name => "Search"%>
     </span>
@@ -32,8 +26,7 @@
     out without getting caught short.
   </p>
   <p>
-    We don’t yet know where all the facilities are. It’s up to you to let us know by adding them to the map or telling us where there’s a gap.
+    We don’t yet know where all the facilities are. 
+    It’s up to you to let us know by adding them to the map or telling us where there’s a gap.
   </p>
 </div>
-
-<%#= link_to "Add a Toilet", { :controller => "toilets", :action => "new" , :search_location=> params[:location]} %>
