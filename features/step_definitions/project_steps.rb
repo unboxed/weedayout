@@ -31,7 +31,7 @@ end
 
 
 Then /^the URL should contain "([^"]*)"$/ do |arg1|
-  response.should contain(arg1)
+  request.url.should contain(arg1)
 end
 
 
