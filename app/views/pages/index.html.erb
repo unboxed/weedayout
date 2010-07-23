@@ -5,7 +5,7 @@
   <% form_tag toilets_path, :method => :get do %>
     <%= text_field_tag :location, params[:location], :value => 'Enter your town or postcode...', :class => 'search_input' %>
     
-	<span>
+	<span style="display: none">
       <label for="hoist">Hoist?</label>
       <%= check_box_tag :hoist %>
       <label for="changingbench">Changing Bench?</label>
