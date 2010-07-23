@@ -19,7 +19,7 @@ a.button {
 }
 
 .back_container {
-  display: block;
+  display: inline-block;
   background: url('/images/buttons/back_container.gif') no-repeat;
   padding: 4px 0 0 4px;
   margin-left:10px;
