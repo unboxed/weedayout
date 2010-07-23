@@ -10,6 +10,24 @@ a.button {
   overflow: hidden;
 }
 
+/* Back to results */
+
+.back_button {	
+  background: url('/images/buttons/back_to_results.gif');
+  width: 139px;
+  height: 34px;
+}
+
+.back_container {
+  display: block;
+  background: url('/images/buttons/back_container.gif') no-repeat;
+  padding: 4px 0 0 4px;
+  margin-left:10px;
+  width: 158px;
+  height: 52px;
+  float: right;
+}
+
 /* Submit */
 
 .submit_button {

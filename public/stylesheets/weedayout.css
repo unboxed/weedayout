@@ -23,7 +23,7 @@ html[xmlns] .clearfix {
 }
 
 body {
-    font-family: Trebuchet, arial;
+    font-family: "Trebuchet MS";
     font-size: 62.5%;
 }
 
@@ -125,7 +125,6 @@ input, textarea {
 .main_inner h2.tall {
   min-height: 50px;
 }
-
 
 .right p.navig {
   margin-top: 20px;
@@ -326,19 +325,31 @@ form.refine_search {
 	height:150px;
 }
 
-.facility_details .facility_links {
-	margin-top:20px;
+.facility_details .facility_images .image {
+	width:150px;
+	margin-right:20px;
 }
 
-.facility_details h1 {
-  width: 166px;
-  height: 16px;
+.facility_details .facility_links {
+	text-align:right;
+	margin-top:70px;
+	height:52px;
+}
+
+.facility_details .facility_links .link {
+	display:inline-block;
+	margin-top:25px;
+}
+
+h1.facility_details {
+  width:162px;
+  height:22px;
   background: url('/images/text_replacement/facility_details.gif');
   margin-bottom: 20px;
 }
 
 .facility_details h2 {
-	font-size:1.5em;
+	font-size:1.8em;
 	color: #58595B;
 }
 

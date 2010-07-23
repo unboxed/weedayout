@@ -10,14 +10,21 @@
 			<h2 id="name"><%= @toilet.name %></h2> 
 			<p id="address"><%= @toilet.address %></p>
 			<div class="facility_images">
+				<div class="image"></div>
+				<div class="image"></div>
+				<div class="image"></div>
 			</div>
 			<p id="venuetype"><b>Venue Type:</b> <%= @toilet.venuetype %></p>
 			<p id="howtoaccess"><b>How to Access:</b> <%= @toilet.howtoaccess %></p>
-			<p id="changingbench"><b>Changing bench:</b> <%= @toilet.changingbench ? "has changing bench" : "does not have changing bench" %></p>
-			<p id="hoist"><b>Hoist:</b> <%= @toilet.hoist ? "has hoist" : "does not have hoist" %></p>
+			<p id="changingbench"><b>Changing bench:</b> <%= @toilet.changingbench ? "<span style='color:green;'>Yes</span>" : "<span style='color:red;'>No</span>" %></p>
+			<p id="hoist"><b>Hoist:</b> <%= @toilet.hoist ? "<span style='color:green;'>Yes</span>" : "<span style='color:red;'>No</span>" %></p>
 			<p id="toiletlocation"><b>Toilet Location:</b> <%= @toilet.toiletlocation %></p>
-			<p id="whocanuse"><b>Who can use:</b> <%= @toilet.whocanuse %></p>
-			<div class="facility_links"<%= link_to "Edit these details" , { :controller => "toilets", :action => "edit", :search_location => params[:location]} %>
+			<p id="whocanuse"><b>Who can use:</b> <%= @toilet.whocanuse %></p>	
+		
+			<div class="facility_links">
+				<div class="link"><%= link_to "Edit these details" , { :controller => "toilets", :action => "edit", :search_location => params[:location]} %></div>
+				<div class="back_container"><%= link_to 'Back to results', toilets_path, :class => 'button back_button' %></div>
+			</div>
 		</div>
 	</div>
 	
