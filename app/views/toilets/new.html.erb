@@ -4,8 +4,8 @@
     <div class="left">
       <h2 class="tall">1. Enter the facility’s details below...</h2>
    
-  <%= f.error_messages %>
-  <%= flash[:notice] %>
+  	  <%= f.error_messages %>
+  	  <%= flash[:notice] %>
       <div class="form_entry">
         <%= f.label :name, "Location Name: <span style='color:#FF0000'>*</span>", :class => 'first' %>
         <%= f.text_field :name %>
@@ -29,8 +29,8 @@
       <div class="with_checkboxes clearfix">
         <%= f.label :hoist, "Hoist?" %>
         <%= f.check_box :hoist %>
-      </div class="form_entry">
-      <div>
+      </div>
+      <div class="form_entry">
         <%= f.label :toiletlocation, "Toilet Location:" %>
         <%= f.text_field :toiletlocation %>
       </div>
@@ -38,66 +38,59 @@
         <%= f.label :whocanuse, "Who can use:" %>
         <%= f.text_field :whocanuse %>
       </div>
- <p class="note"><span style='color:#FF0000'>*</span>Required field</p>
+ 	  <p class="note"><span style='color:#FF0000'>*</span>Required field</p>
     </div><!-- /.left -->
   
     <div class="right">
-      <h2 class="tall">2. Drag the marker to refine the  location on the map...</h2>
+      <h2 class="tall"> 2. Drag the marker to refine the  location on the map...</h2>
       <div id="map" style="height: 350px; width: 350px"></div>
       <div style="display: none">
         <%= f.text_field :lat %>
         <%= f.text_field :long %>
       </div>
-    
       <fieldset class="spamcheck_fields">
         <label for="spamcheck">To prove you're not a spam bot, please put 'rabbit' into this field</label>
         <%= text_field_tag :spamcheck %>
       </fieldset>
-    
-    
       <p class="navig">
         <span class="submit_container">
         <%= f.submit "Submit", :class => 'button submit_button', :id => "Submit" %>
         </span>
         <%= link_to 'Back Home', root_path %>
       </p>
-
-  <%-
-    @lat = !f.object.lat.blank? ? "%f" % f.object.lat : "null"
-    @long = !f.object.long.blank? ? "%f" % f.object.long : "null"
-  -%>
-
-  </div><!-- /.right -->
+    </div><!-- /.right -->
 
  <!-- Google maps-->
- <script type="text/javascript"
-  src="http://www.google.com/jsapi?key=ABQIAAAAlyeJljQH98VMTkAORPPxhxRi_j0U6kJrkFvY4-OX2XYmEAa76BR1dkIiZ5uJBrN49TH92bIh5AJW7w">
- </script>
- <script type="text/javascript">
-  google.load("maps", "2");
+ 	<script type="text/javascript"
+  		src="http://www.google.com/jsapi?key=ABQIAAAAlyeJljQH98VMTkAORPPxhxRi_j0U6kJrkFvY4-OX2XYmEAa76BR1dkIiZ5uJBrN49TH92bIh5AJW7w">
+ 	</script>
+ 	<script type="text/javascript">
+  	google.load("maps", "2");
   
- function initialize() {
-  var map = new google.maps.Map2(document.getElementById("map"));
+ 	function initialize() {
+  		var map = new google.maps.Map2(document.getElementById("map"));
   
-  var point = new GLatLng(<%= @toilet.lat%>, <%=@toilet.long%>);
-  map.setCenter(point, 15);
+  		var point = new GLatLng(51.5, -0.121);
+  		map.setCenter(point, 11);
   
-  var index = <%= @display_index %>;
-  var letter = String.fromCharCode("A".charCodeAt(0) + (index - 1));
-  var myIcon = new GIcon(G_DEFAULT_ICON, "http://www.google.com/mapfiles/marker" + letter + ".png");
+  		var letter = String.fromCharCode("A".charCodeAt(1));
+  		var myIcon = new GIcon(G_DEFAULT_ICON, "http://www.google.com/mapfiles/marker" + letter + ".png");
   
-  var marker = new GMarker(point, {draggable:false, icon:myIcon});
-  marker.setImage();
-  map.addOverlay(marker);
+  		var marker = new GMarker(point, {draggable:true, icon:myIcon, title : "Place this marker to your location"});
+  		marker.setImage();
+  		map.addOverlay(marker);
   
-    var mapControl = new GMapTypeControl();
-    map.addControl(mapControl);
-    map.addControl(new GLargeMapControl());
- }
+    	var mapControl = new GMapTypeControl();
+    	map.addControl(mapControl);
+    	map.addControl(new GLargeMapControl());
+		
+		GEvent.addListener(marker, 'dragend', function() {  
+			$('#toilet_lat').val(marker.getLatLng().lat());
+			$('#toilet_long').val(marker.getLatLng().lng()); 
+		});
+ 	}
 
-     google.setOnLoadCallback(initialize);  
- </script>
-
+     	google.setOnLoadCallback(initialize);  
+ 	</script>
   <% end %>
-
 </div>
