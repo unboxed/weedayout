@@ -6,7 +6,7 @@ a.button {
 }
 
 .button {
-  text-indent: -9999px;
+  text-indent: -999999px;
   overflow: hidden;
 }
 

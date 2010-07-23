@@ -187,7 +187,7 @@ a {
 }
 
 .text_replacement {
-  text-indent: -999px;
+  text-indent: -9999px;
   overflow: hidden;
 }
 
@@ -336,12 +336,12 @@ form.refine_search {
 }
 
 .facility_details .facility_links {
-	text-align:right;
 	margin-top:70px;
 	height:52px;
 }
 
 .facility_details .facility_links .link {
+	text-align:right;
 	display:inline-block;
 	margin-top:25px;
 }

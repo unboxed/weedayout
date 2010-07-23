@@ -22,7 +22,7 @@
 			<p id="whocanuse"><b>Who can use:</b> <%= @toilet.whocanuse %></p>	
 			<div class="facility_links">
 				<div class="link"><%= link_to "Edit these details" , edit_toilet_path(@toilet) %></div>
-				<span class="back_container"><%= link_to "Back to results", toilets_path(:location => params[:location]), :class => 'button back_button' %></span>
+				<span class="back_container"><%= link_to 'Back to results', toilets_path(:location => params[:location]), :class => 'button back_button' %></span>
 			</div>
 		</div>
 	</div>
