@@ -89,7 +89,7 @@
 			$('#toilet_long').val(marker.getLatLng().lng()); 
 		});
 		
-		$('#toilet_address').bind('focusout', function(){
+		$('#toilet_address').bind('blur', function(){
 			if($(this).val()){
 				geocoder.getLocations($(this).val(), addToMap);
 			}
