@@ -73,9 +73,8 @@
 
   		var point = new GLatLng(51.5, -0.121);
   		map.setCenter(point, 11);
-  
-  		var letter = String.fromCharCode("A".charCodeAt(1));
-  		var myIcon = new GIcon(G_DEFAULT_ICON, "http://www.google.com/mapfiles/marker" + letter + ".png");
+
+  		var myIcon = new GIcon(G_DEFAULT_ICON, "http://www.google.com/mapfiles/marker.png");
   
   		var marker = new GMarker(point, {draggable:true, icon:myIcon, title : "Place this marker to your location"});
   		marker.setImage();
