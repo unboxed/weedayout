@@ -1,12 +1,14 @@
 <%= flash[:notice]%>
-<div class="main_inner">
-  
-  <div class="left">
-    <h1 class="text_replacement search_results">Search Results</h1>
-    <div id="map" style="height: 350px; width: 350px"></div>
-  </div><!-- /.left -->
-  
-  <div class="right">
+<div class="main_inner">  
+	<div class="left">
+		
+		
+		<!-- CHANGE TEXT IMAGE TO "FACILITY"-->
+	    <h1 class="text_replacement search_results">Search Results</h1>
+	    <div id="map" style="height: 350px; width: 350px"></div>
+	  </div><!-- /.left -->  
+
+<div class="right">
 
     <% form_tag toilets_path, :method => :get, :class => 'refine_search clearfix' do %>
       <%= "Type a location to find toilets" if params[:location] == "" %>
@@ -57,6 +59,7 @@
       </table>
       <%= link_to "Know of anything closer?" , { :controller => "toilets", :action => "new", :search_location => params[:location]} %>
       <%= link_to "Add a new toilet here." , { :controller => "toilets", :action => "new", :search_location => params[:location]} %>
+	<%= will_paginate @toilets %>
     <% end %>
     
   </div><!-- /.right -->
@@ -64,56 +67,3 @@
   <%#= link_to "Add a Toilet", { :controller => "toilets", :action => "new" , :search_location=> params[:location]} %>
 
 </div><!-- /.main_inner -->
-
-<% if (params[:location] and params[:location].present?) %>
-  <% javascript_tag do %>
-
-      map = new GMap2(document.getElementById("map"));
-
-      function addMarker(index, lng, lat, name, address, link) {
-
-          // use a custom icon with letter A - Z
-          var letter = String.fromCharCode("A".charCodeAt(0) + (index - 1));
-          var myIcon = new GIcon(G_DEFAULT_ICON, "http://www.google.com/mapfiles/marker" + letter + ".png");
-          myIcon.printImage = "http://maps.google.com/mapfiles/marker"+letter+"ie.gif"
-          myIcon.mozPrintImage = "http://maps.google.com/mapfiles/marker"+letter+"ff.gif"
-
-          var point = new GPoint(lng, lat);
-          var thisHTML = "<h4 class='name'>" + name + "<\/h4><p class='address'>" + address + "<\/p><p><a href='" + link + "'>details<\/a><\/p>";
-          var marker = new GMarker(point, {draggable:false, icon:myIcon});
-          var infoFunction = function() {
-              marker.openInfoWindowHtml(thisHTML);
-          };
-
-          GEvent.addListener(marker, "click", infoFunction);
-          map.addOverlay(marker);
-          $('#row_' + index).find('td[class!=details]').click(infoFunction);
-      }
-      
-      if (GBrowserIsCompatible()) {
-          geocoder = new GClientGeocoder();
-          geocoder.setBaseCountryCode("GB");
-          geocoder.getLatLng(
-            "<%= params[:location] %>",
-            function(point) {
-                if (!point) {
-                    alert("location not found");
-                } else {
-                    map.setCenter(point, 12);
-                }
-            }
-          );
-
-          map.addControl(new GMapTypeControl());
-          map.addControl(new GLargeMapControl());
-          map.enableDoubleClickZoom();
-
-          <% if @toilets %>
-            <% @toilets.each_with_index do |toilet, index| %>
-               addMarker(<%=index+1%>, <%= "%0.2f" % toilet.long %>, <%= "%0.2f" % toilet.lat %>, "<%= toilet.name %>", "<%= toilet.address %>",
-                       "<%= url_for :controller => 'toilets', :action => 'show', :permalink => toilet.permalink %>" ); // todo: escape '"'?
-            <% end %>
-          <% end %>
-      }
-  <% end %>
-<% end %>
