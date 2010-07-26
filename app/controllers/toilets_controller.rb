@@ -2,11 +2,10 @@ class ToiletsController < ApplicationController
 
   def index
     if params[:location].blank?
-      @toilets = Toilet.paginate(:all, :page => params[:page], :per_page => 9, :limit => 26, :order => 'created_at DESC')
+      @toilets = Toilet.find(:all, :limit => 3, :order => 'created_at DESC')
     else
       begin
-        @toilets = Toilet.paginate(:all, :page => params[:page], :per_page => 9, 
-        :origin => params[:location]+ " GB",:limit => 26, :order => "distance ASC", :conditions => filter_conditions)
+        @toilets = Toilet.find(:all,:origin => params[:location]+ " GB",:limit => 3, :order => "distance ASC", :conditions => filter_conditions)
       rescue Geokit::Geocoders::GeocodeError
         flash[:notice] = "An error occurred when we looked up '#{params[:location]}'"
         redirect_to toilets_path
