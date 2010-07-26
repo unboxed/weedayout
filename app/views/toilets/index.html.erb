@@ -57,9 +57,6 @@
           <% char_index = char_index.next %>
         <% end %>
       </table>
-
-      <%= link_to "Know of anything closer?" , { :controller => "toilets", :action => "new", :search_location => params[:location]} %>
-      <%= link_to "Add a new toilet here." , { :controller => "toilets", :action => "new", :search_location => params[:location]} %>
 	<%= will_paginate @toilets %>
       <%= link_to "Know of anything closer?" , new_toilet_path(:search_location => params[:location]) %>
       <%= link_to "Add a new toilet here." , new_toilet_path(:search_location => params[:location]) %>
