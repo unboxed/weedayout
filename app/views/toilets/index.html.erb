@@ -44,7 +44,7 @@
               <%= content_tag :span, 'Changing Bench', :class => (toilet.changingbench ? 'checked' : 'cross' ) %>
             </td>
             <td class="details">
-              <%= link_to "View Details", {:controller => 'toilets', :action => 'show', :permalink => toilet.permalink, :index_value => index}, :id => "details_link_#{index+1}"%>
+              <%= link_to "View Details", permalink_to_toilet_path(toilet.permalink, :index_value => index, :location => params[:location]), :id => "details_link_#{index+1}"%>
             </td>
           </tr>
           <% unless toilet == @toilets.last %>
@@ -57,13 +57,13 @@
           <% char_index = char_index.next %>
         <% end %>
       </table>
+
       <%= link_to "Know of anything closer?" , { :controller => "toilets", :action => "new", :search_location => params[:location]} %>
       <%= link_to "Add a new toilet here." , { :controller => "toilets", :action => "new", :search_location => params[:location]} %>
 	<%= will_paginate @toilets %>
+      <%= link_to "Know of anything closer?" , new_toilet_path(:search_location => params[:location]) %>
+      <%= link_to "Add a new toilet here." , new_toilet_path(:search_location => params[:location]) %>
     <% end %>
     
   </div><!-- /.right -->
-
-  <%#= link_to "Add a Toilet", { :controller => "toilets", :action => "new" , :search_location=> params[:location]} %>
-
 </div><!-- /.main_inner -->
