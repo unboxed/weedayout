@@ -29,7 +29,7 @@ Rails::Initializer.run do |config|
     config.gem 'rack', :lib => false, :version => '= 1.0.1'
     config.gem 'factory_girl', :lib => false, :version => '= 1.2.3'
     
-    config.gem "cucumber", :lib => false, :version => "= 0.6.2"
+    config.gem "cucumber", :lib => false, :version => ">= 0.6.2"
     config.gem 'cucumber-rails', :lib => false, :version => '= 0.3.0'
 
     config.gem 'rspec', :lib => false, :version => '= 1.3.0'
