@@ -71,8 +71,8 @@
   		var map = new google.maps.Map2(document.getElementById("map"));
   		var geocoder = new GClientGeocoder();
 
-  		var point = new GLatLng(51.5, -0.121);
-  		map.setCenter(point, 11);
+  		var point = new GLatLng(53, -1.5);
+	    map.setCenter(point, 6);
 
   		var myIcon = new GIcon(G_DEFAULT_ICON, "http://www.google.com/mapfiles/marker.png");
   
@@ -107,9 +107,10 @@
 		      map.setCenter(point, 13);
 
 		      // Create a marker
-		      marker = new GMarker(point);
+		      marker = new GMarker(point, {draggable:true});
 
 		      // Add the marker to map
+			  map.clearOverlays();
 		      map.addOverlay(marker);
 			
 			  $('#toilet_lat').val(marker.getLatLng().lat());

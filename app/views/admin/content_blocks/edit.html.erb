@@ -1,4 +1,4 @@
-<h1>Admin::ContentBlocks#edit</h1>
+<h1>Edit Content Blocks</h1>
 <% form_for([:admin, @content_block]) do |f| %>
     <%= f.error_messages %>
     <%= flash[:notice] %>
@@ -15,6 +15,7 @@
 
       <div>
         <%= f.submit "Submit" %>
+		<%= link_to "Back", :action => "index"%>
       </div>
     </div>
 <% end %>

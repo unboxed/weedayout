@@ -1,10 +1,12 @@
-<h1>Admin::ContentBlocks#index</h1>
+<h1>Content Blocks</h1>
 <%= will_paginate @content_blocks %>
+
 
 <table id="results">
   <tr>
     <th>key</th>
     <th>text</th>
+	<th>edit</th>
   </tr>
   <% @content_blocks.each_with_index do |content_block, index| %>
       <tr id="row_<%= index +  1%>" >
