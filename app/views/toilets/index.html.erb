@@ -26,7 +26,11 @@
   <% end %>
     
   <% if @toilets %>
-    <h2>Closest Facilities...</h2>
+	<% if (params[:location] and params[:location].present?) %>
+      <h2>Closest Facilities...</h2>
+	<%else%>
+      <h2>Recently added Facilities...</h2>
+	<%end%>
     <table class="search_results">
       <tr class="separator">
         <td colspan="3"><hr /></td>
@@ -55,10 +59,52 @@
   <% end %>
   </table>
 
-
-  <%= link_to "Know of anything closer?" , new_toilet_path(:search_location => params[:location]) %>
-  <%= link_to "Add a new toilet here." , new_toilet_path(:search_location => params[:location]) %>
+  <% if (params[:location] and params[:location].present?) %>
+    <%= link_to "Know of anything closer?" , new_toilet_path(:search_location => params[:location]) %>
+    <%= link_to "Add a new toilet here." , new_toilet_path(:search_location => params[:location]) %>
+  <%end%>
  <% end %>
  </div><!-- /.right -->
 </div><!-- /.main_inner -->
 
+<!-- Google maps-->
+<script type="text/javascript"
+	src="http://www.google.com/jsapi?key=ABQIAAAAlyeJljQH98VMTkAORPPxhxRi_j0U6kJrkFvY4-OX2XYmEAa76BR1dkIiZ5uJBrN49TH92bIh5AJW7w">
+</script>
+<script type="text/javascript">
+	google.load("maps", "2");
+	
+function initialize() {
+	var map = new google.maps.Map2(document.getElementById("map"));
+
+	var point, letter, myIcon, marker;
+	
+	<% if(@toilets) %>
+	  <% @toilets.each_with_index do |toilet, index|%>
+	
+	    point = new GLatLng(<%= toilet.lat %>,<%= toilet.long %>);	
+  	    letter = String.fromCharCode("A".charCodeAt(0) + <%=index%>);
+	    myIcon = new GIcon(G_DEFAULT_ICON, "http://www.google.com/mapfiles/marker" + letter + ".png");
+	
+	    marker = new GMarker(point, {draggable:false, icon:myIcon});
+	    marker.setImage();
+	    map.addOverlay(marker);
+	
+		var mapControl = new GMapTypeControl();
+	  	map.addControl(mapControl);
+	  	map.addControl(new GLargeMapControl())
+	
+      <% end %>
+	<% end %>
+
+	<% if (params[:location] and params[:location].present?) %>  
+		point = new GLatLng(<%= @toilets[0].lat %>,<%= @toilets[0].long %>);    
+		map.setCenter(point, 13);
+	<% else %>
+	point = new GLatLng(53, -1.5);
+    map.setCenter(point, 6);
+	<% end %>
+}
+
+    google.setOnLoadCallback(initialize);		
+</script>
