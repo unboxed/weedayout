@@ -6,7 +6,7 @@ $(document).ready(function(){
 
 
 $(document).ready(function(){
-	$('#location').bind('focusout',function(){
+	$('#location').bind('blur',function(){
 		if(!$(this).val()){
 			$(this).val("Enter your town or postcode...");}
 	});
