@@ -84,6 +84,8 @@
     	map.addControl(mapControl);
     	map.addControl(new GLargeMapControl());
 		
+		
+			
 		GEvent.addListener(marker, 'dragend', function() {  
 			$('#toilet_lat').val(marker.getLatLng().lat());
 			$('#toilet_long').val(marker.getLatLng().lng()); 
@@ -91,7 +93,7 @@
 		
 		$('#toilet_address').bind('blur', function(){
 			if($(this).val()){
-				geocoder.getLocations($(this).val(), addToMap);
+				geocoder.getLocations($(this).val() +", UK", addToMap);
 			}
 		}); 
 		
@@ -111,14 +113,24 @@
 		      marker = new GMarker(point);
 
 		      // Add the marker to map
-		      map.addOverlay(marker);
-
+			
+			GDownloadUrl("http://maps.google.com/maps/api/geocode/xml?address="+point+"&sensor=false", function(data, responseCode) {
+			  var xml = GXml.parse(data);
+			  var markers = xml.documentElement.getElementsByTagName("marker");
+			  for (var i = 0; i < markers.length; i++) {
+			    var point = new GLatLng(parseFloat(markers[i].getAttribute("lat")),
+			                            parseFloat(markers[i].getAttribute("lng")));
+			    map.addOverlay(new GMarker(point));
+			  }
+			});
+			
+			
 			  $('#toilet_lat').val(marker.getLatLng().lat());
 	       	  $('#toilet_long').val(marker.getLatLng().lng());
+			
 		   }
 			
  	}
-
      	google.setOnLoadCallback(initialize);  
  	</script>
   <% end %>

@@ -39,7 +39,7 @@
 		
 		var point = new GLatLng(<%= @toilet.lat%>, <%=@toilet.long%>);
 		map.setCenter(point, 15);
-		
+				
 		var index = <%= @display_index %>;
 		var letter = String.fromCharCode("A".charCodeAt(0) + (index - 1));
 		var myIcon = new GIcon(G_DEFAULT_ICON, "http://www.google.com/mapfiles/marker" + letter + ".png");
