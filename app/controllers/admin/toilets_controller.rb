@@ -1,5 +1,5 @@
 class Admin::ToiletsController < ApplicationController
-  before_filter :authenticate
+ # before_filter :authenticate
 
   def index
     @toilets = Toilet.paginate :page => params[:page], :per_page => 10, :order => 'name ASC'
