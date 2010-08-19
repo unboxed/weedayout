@@ -1,4 +1,6 @@
 <h1>Content Blocks</h1>
+<td class="link"><%= link_to "NEW", new_admin_content_block_path %></td>
+
 <%= will_paginate @content_blocks %>
 
 
@@ -6,13 +8,14 @@
   <tr>
     <th>key</th>
     <th>text</th>
-	<th>edit</th>
+	  <th colspan="3">Action</th>
   </tr>
   <% @content_blocks.each_with_index do |content_block, index| %>
       <tr id="row_<%= index +  1%>" >
         <td class="key"><%= content_block.key %></td>
         <td class="text"><%= content_block.text_content %></td>
         <td class="link"><%= link_to "Edit", edit_admin_content_block_path(content_block) %></td>
+        <td class="link"><%= link_to "Delete", admin_content_block_path(content_block), :method => "delete" %></td>
      </tr>
   <% end %>
 </table>

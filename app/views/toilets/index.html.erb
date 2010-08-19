@@ -1,4 +1,6 @@
-<%= flash[:notice]%>
+<div class="errorExplanation">
+	<%= flash[:notice]%>
+</div>
 
 <div class="main_inner">
   
@@ -97,7 +99,7 @@ function initialize() {
       <% end %>
 	<% end %>
 
-	<% if (params[:location] and params[:location].present?) %>  
+	<% if (params[:location] and params[:location].present? unless @toilet.nil?) %>  
 		point = new GLatLng(<%= @toilets[0].lat %>,<%= @toilets[0].long %>);    
 		map.setCenter(point, 13);
 	<% else %>

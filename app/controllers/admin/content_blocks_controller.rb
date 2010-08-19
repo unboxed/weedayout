@@ -32,4 +32,14 @@ class Admin::ContentBlocksController < ApplicationController
       render :action => "new"
     end
   end
+  
+  def destroy
+    @content_block = ContentBlock.find(params[:id])
+    if @content_block.destroy
+      flash[:notice] = "Content deleted successfully"
+      redirect_to :action => "index"
+    else
+      flash[:notice] = "Deletion was unsuccessful"
+    end
+  end
 end
