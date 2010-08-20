@@ -112,7 +112,7 @@
 
   <% if @toilets %>
     <% @toilets.each_with_index do |toilet, index| %>
-       addMarker(<%=index+1%>, <%= "%0.2f" % toilet.long %>, <%= "%0.2f" % toilet.lat %>, "<%= toilet.name %>", "<%= toilet.address %>",
+       addMarker(<%=index+1%>, <%=toilet.long %>, <%=toilet.lat %>, "<%= toilet.name %>", "<%= toilet.address %>",
                "<%= url_for :controller => 'toilets', :action => 'show', :permalink => toilet.permalink %>" ); 
     <% end %>
   <% end %>
