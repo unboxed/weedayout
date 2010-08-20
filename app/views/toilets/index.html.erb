@@ -71,8 +71,9 @@
 
 <% javascript_tag do %>
 	map = new GMap2(document.getElementById("map"));
-  function addMarker(index, lng, lat, name, address, link) {
 
+  function addMarker(index, lng, lat, name, address, link) {
+	
 	var point = new GPoint(lng, lat);
 	
 		// use a custom icon with letter A - Z
@@ -82,11 +83,21 @@
 		myIcon.mozPrintImage = "http://maps.google.com/mapfiles/marker"+letter+"ff.gif"
 
 		var thisHTML = "<h4 class='name'>" + name + "<\/h4><p class='address'>" + address + "<\/p><p><a href='" + link + "'>details<\/a><\/p>";
-		var marker = new GMarker(point, {draggable:false, icon:myIcon});
+		var marker = new GMarker(point, {draggable:false, icon:myIcon, zIndexProcess:orderOfCreation});
+			
 		var infoFunction = function() {
-			marker.openInfoWindowHtml(thisHTML);
+			marker.openInfoWindowHtml(thisHTML, {onCloseFn: onInfoClose});
+			marker.importance = 100;
 		};
-
+		
+		var onInfoClose = function(){
+			marker.importance=0;
+		}
+		
+		function orderOfCreation(marker) { 
+			return marker.importance;
+    }
+		
 		GEvent.addListener(marker, "click", infoFunction);
 		map.addOverlay(marker);
 		$('#row_' + index).find('td[class!=details]').click(infoFunction);
