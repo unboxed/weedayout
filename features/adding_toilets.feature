@@ -1,9 +1,9 @@
 Feature: Adding toilets
   As a user
-  I should be able to add a toilet
+  I want to add a toilet
   So that I can share my knowledge of disabled toilets
   So that others can find disabled toilets
-  
+
   Scenario: Successful adding of toilet
     When I go to add toilet page
     And I fill in "Location Name" with "Westminster Bridge"
@@ -16,8 +16,9 @@ Feature: Adding toilets
     And I fill in "Who can use" with "Members of Parliament"
     And I pass the spam test
     And I press "Submit"
- 	And I should see "Toilet created"
-  
+    Then I should see "Toilet created"
+    And I should see "Westminster Bridge" inside the recently added facilities list
+
   Scenario: Submitting a blank form
     When I go to add toilet page
     And I pass the spam test
@@ -30,4 +31,26 @@ Feature: Adding toilets
     When I go to add toilet page
     And I press "Submit"
     Then I should see "It appears you're a spam bot"
-    
+
+  Scenario: Adding toilets as a wily hacker
+    When I go to add toilet page
+    And I fill in "Location Name" with "W<ul><li>e</li><li>s</li></ul>tminster <h1>Bridge</h1><"
+    And I fill in "Address" with "Westmi<script>alert('woo');</script>nster Bridge London"
+    And I fill in "Venue Type" with "<span>Bridge</span"
+    And I fill in "How to access" with "Walk <blink>onto</blink> the bridge"
+    And I check "Changing Bench?"
+    And I check "Hoist?"
+    And I fill in "Toilet Location" with "Left hand rail<h1>"
+    And I fill in "Who can use" with "Members of Parliament</h1>"
+    And I pass the spam test
+    And I press "Submit"
+    Then I should see "Toilet created"
+    And I should see "W<ul><li>e</li><li>s</li></ul>tminster <h1>Bridge</h1><" inside the recently added facilities list
+    And I should see "Westmi<script>alert('woo');</script>nster Bridge London" inside the recently added facilities list
+    When I follow "View Details" inside the recently added facilities list
+    Then I should see "W<ul><li>e</li><li>s</li></ul>tminster <h1>Bridge</h1><"
+    And I should see "Westmi<script>alert('woo');</script>nster Bridge London"
+    And I should see "Venue Type: <span>Bridge</span"
+    And I should see "How to Access: Walk <blink>onto</blink> the bridge"
+    And I should see "Toilet Location: Left hand rail<h1>"
+    And I should see "Who can use: Members of Parliament</h1>"

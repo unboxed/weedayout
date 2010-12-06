@@ -1,0 +1,30 @@
+<table class="search_results">
+  <tr class="separator">
+    <td colspan="3"><hr /></td>
+  </tr>
+  <% char_index = 'A' %>
+  <% toilet_results.each_with_index do |toilet, index| %>
+    <tr id="row_<%=index+1%>">
+      <td class="marker"><span class="pin"><%= char_index %></span></td>
+      <td class="address">
+        <%=h toilet.name %><br />
+        <%=h toilet.address %><br />
+        <%= content_tag :span, 'Hoist', :class => (toilet.hoist ? 'checked' : 'cross' ) %>
+        <%= content_tag :span, 'Changing Bench', :class => (toilet.changingbench ? 'checked' : 'cross' ) %>
+      </td>
+      <td class="details">
+        <%= link_to "View Details",
+                    permalink_to_toilet_path(toilet.permalink,
+                                             :index_value => index,
+                                             :location => params[:location]),
+                    :id => "details_link_#{index+1}" %>
+      </td>
+    </tr>
+    <% unless toilet == toilet_results.last %>
+      <tr class="separator">
+        <td colspan="3"><hr /></td>
+      </tr>
+    <% end %>
+    <% char_index = char_index.next %>
+  <% end %>
+</table>

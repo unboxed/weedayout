@@ -1,131 +1,107 @@
 <span style="color: #FF0000; font-size: 1.5em" ><%= flash[:notice]%></span>
 
 <div class="main_inner">
-  
+
   <div class="left">
     <h1 class="text_replacement search_results">Search Results</h1>
     <div id="map" style="height: 350px; width: 350px"></div>
   </div><!-- /.left -->
-  
+
   <div class="right">
     <% form_tag toilets_path, :method => :get, :class => 'refine_search clearfix' do %>
-    <%= "Type a location to find toilets" if params[:location] == "" %>
-    <div class="location_param clearfix">
-      <label for="location">Location:</label>
-      <%= text_field_tag :location, params[:location] %>
-    </div>
-    
-	<span class="refine_search_container"><%= submit_tag "Refine Search", :class => 'button refine_search_button' %></span>
-      
-	<div class="attributes">
-      <%= check_box_tag :hoist %>
-      <label for="hoist">Hoist</label><br />
-      <%= check_box_tag :changingbench %>
-      <label for="changingbench">Changing Bench</label>
-    </div><!-- /.attributes -->
-  <% end %>
-    
-  <% if @toilets %>
-	<% if (params[:location] and params[:location].present?) %>
-      <h2>Closest Facilities...</h2>
-	<%else%>
-      <h2>Recently added Facilities...</h2>
-	<%end%>
-    <table class="search_results">
-      <tr class="separator">
-        <td colspan="3"><hr /></td>
-      </tr>
-      <% char_index = 'A' %>
-      <% @toilets.each_with_index do |toilet, index| %>
-        <tr id="row_<%=index+1%>">
-        <td class="marker"><span class="pin"><%= char_index %></span></td>
-        <td class="address">
-          <%= toilet.name %><br />
-          <%= toilet.address %><br />
-          <%= content_tag :span, 'Hoist', :class => (toilet.hoist ? 'checked' : 'cross' ) %>
-          <%= content_tag :span, 'Changing Bench', :class => (toilet.changingbench ? 'checked' : 'cross' ) %>
-        </td>
-        <td class="details">
-          <%= link_to "View Details", permalink_to_toilet_path(toilet.permalink, 
-          :index_value => index, :location => params[:location]), :id => "details_link_#{index+1}"%>
-        </td>
-      </tr>
-      <% unless toilet == @toilets.last %>
-      <tr class="separator">
-        <td colspan="3"><hr /></td>
-      </tr>
-      <% end %>
-     <% char_index = char_index.next %>
-  <% end %>
-  </table>
+      <%= "Type a location to find toilets" if params[:location] == "" %>
+      <div class="location_param clearfix">
+        <label for="location">Location:</label>
+        <%= text_field_tag :location, params[:location] %>
+      </div>
 
-  <% if (params[:location] and params[:location].present?) %>
-    <%= link_to "Know of anything closer?" , new_toilet_path(:search_location => params[:location]) %>
-    <%= link_to "Add a new toilet here." , new_toilet_path(:search_location => params[:location]) %>
-  <%end%>
- <% end %>
- </div><!-- /.right -->
+      <span class="refine_search_container"><%= submit_tag "Refine Search", :class => 'button refine_search_button' %></span>
+
+      <div class="attributes">
+        <%= check_box_tag :hoist %>
+        <label for="hoist">Hoist</label><br />
+        <%= check_box_tag :changingbench %>
+        <label for="changingbench">Changing Bench</label>
+      </div><!-- /.attributes -->
+    <% end %>
+
+    <% if @toilets %>
+      <% if (params[:location] and params[:location].present?) %>
+        <div id="closest_facilities" class="toilet_results_container">
+          <h2>Closest Facilities...</h2>
+          <%= render :partial => 'toilet_results', :object => @toilets %>
+          <%= link_to "Know of anything closer?" , new_toilet_path(:search_location => params[:location]) %>
+          <%= link_to "Add a new toilet here." , new_toilet_path(:search_location => params[:location]) %>
+        </div>
+      <% else %>
+        <div id="recently_added_facilities" class="toilet_results_container">
+          <h2>Recently added Facilities...</h2>
+          <%= render :partial => 'toilet_results', :object => @toilets %>
+        </div>
+      <% end %>
+    <% end %>
+  </div><!-- /.right -->
 </div><!-- /.main_inner -->
 
 <!-- Google maps-->
 
 <% javascript_tag do %>
-	map = new GMap2(document.getElementById("map"));
+  map = new GMap2(document.getElementById("map"));
 
   function addMarker(index, lng, lat, name, address, link) {
-	
-	var point = new GPoint(lng, lat);
-	
-		// use a custom icon with letter A - Z
-		var letter = String.fromCharCode("A".charCodeAt(0) + (index - 1));
-		var myIcon = new GIcon(G_DEFAULT_ICON, "http://www.google.com/mapfiles/marker" + letter + ".png");
-		myIcon.printImage = "http://maps.google.com/mapfiles/marker"+letter+"ie.gif"
-		myIcon.mozPrintImage = "http://maps.google.com/mapfiles/marker"+letter+"ff.gif"
 
-		var thisHTML = "<h4 class='name'>" + name + "<\/h4><p class='address'>" + address + "<\/p><p><a href='" + link + "'>details<\/a><\/p>";
-		var marker = new GMarker(point, {draggable:false, icon:myIcon, zIndexProcess:orderOfCreation});
-			
-		var infoFunction = function() {
-			marker.openInfoWindowHtml(thisHTML, {onCloseFn: onInfoClose});
-			marker.importance = 100;
-		};
-		
-		var onInfoClose = function(){
-			marker.importance=0;
-		}
-		
-		function orderOfCreation(marker) { 
-			return marker.importance;
+    var point = new GPoint(lng, lat);
+
+    // use a custom icon with letter A - Z
+    var letter = String.fromCharCode("A".charCodeAt(0) + (index - 1));
+    var myIcon = new GIcon(G_DEFAULT_ICON, "http://www.google.com/mapfiles/marker" + letter + ".png");
+    myIcon.printImage = "http://maps.google.com/mapfiles/marker"+letter+"ie.gif"
+    myIcon.mozPrintImage = "http://maps.google.com/mapfiles/marker"+letter+"ff.gif"
+
+    var thisHTML = "<h4 class='name'>" + name + "<\/h4><p class='address'>" + address + "<\/p><p><a href='" + link + "'>details<\/a><\/p>";
+    var marker = new GMarker(point, {draggable:false, icon:myIcon, zIndexProcess:orderOfCreation});
+
+    var infoFunction = function() {
+      marker.openInfoWindowHtml(thisHTML, {onCloseFn: onInfoClose});
+      marker.importance = 100;
+    };
+
+    var onInfoClose = function() {
+      marker.importance=0;
     }
-		
-		GEvent.addListener(marker, "click", infoFunction);
-		map.addOverlay(marker);
-		$('#row_' + index).find('td[class!=details]').click(infoFunction);
-  }
-   
-  if (GBrowserIsCompatible()) {
-		geocoder = new GClientGeocoder();
-    geocoder.setBaseCountryCode("GB");
-		
-		<% if params[:location].blank? %>
-			geocoder.getLatLng("<%= @toilets.first["address"] %>", function(point) { 
-				map.setCenter(point, 12);
-	    });
-		<% else%>
-			geocoder.getLatLng("<%= params[:location] %>", function(point) { 
-				map.setCenter(point, 12);
-	    });
-		<% end%>
-	
-  map.addControl(new GMapTypeControl());
-  map.addControl(new GLargeMapControl());
-  map.enableDoubleClickZoom();
 
-  <% if @toilets %>
-    <% @toilets.each_with_index do |toilet, index| %>
-       addMarker(<%=index+1%>, <%=toilet.long %>, <%=toilet.lat %>, "<%= toilet.name %>", "<%= toilet.address %>",
-               "<%= url_for :controller => 'toilets', :action => 'show', :permalink => toilet.permalink %>" ); 
+    function orderOfCreation(marker) {
+      return marker.importance;
+    }
+
+    GEvent.addListener(marker, "click", infoFunction);
+    map.addOverlay(marker);
+    $('#row_' + index).find('td[class!=details]').click(infoFunction);
+  }
+
+  if (GBrowserIsCompatible()) {
+    geocoder = new GClientGeocoder();
+    geocoder.setBaseCountryCode("GB");
+
+    <% if params[:location].blank? %>
+      geocoder.getLatLng("<%=h @toilets.first["address"] %>", function(point) {
+        map.setCenter(point, 12);
+      });
+    <% else%>
+      geocoder.getLatLng("<%= params[:location] %>", function(point) {
+        map.setCenter(point, 12);
+      });
+    <% end%>
+
+    map.addControl(new GMapTypeControl());
+    map.addControl(new GLargeMapControl());
+    map.enableDoubleClickZoom();
+
+    <% if @toilets %>
+      <% @toilets.each_with_index do |toilet, index| %>
+         addMarker(<%=index+1%>, <%=toilet.long %>, <%=toilet.lat %>, "<%=h toilet.name %>", "<%=h toilet.address %>",
+                   "<%= url_for :controller => 'toilets', :action => 'show', :permalink => toilet.permalink %>" );
+      <% end %>
     <% end %>
-  <% end %>
-}
+  }
 <% end %>

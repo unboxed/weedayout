@@ -1,59 +1,58 @@
 <div class="main_inner">
 
-  	<div class="left">
-	    <h1 class="text_replacement facility_details">Facility Details</h1>
-	    <div id="map" style="height: 350px; width: 350px"></div>
-	  </div><!-- /.left -->
-	
-	<div class="right">
-		<div class="facility_details">
-			<h2 id="name"><%= @toilet.name %></h2> 
-			<p id="address"><%= @toilet.address %></p>
-			<div class="facility_images">
-				<div class="image"></div>
-				<div class="image"></div>
-				<div class="image"></div>
-			</div>
-			<p id="venuetype"><b>Venue Type:</b> <%= @toilet.venuetype %></p>
-			<p id="howtoaccess"><b>How to Access:</b> <%= @toilet.howtoaccess %></p>
-			<p id="changingbench"><b>Changing bench:</b> <%= @toilet.changingbench ? "<span style='color:green;'>Yes</span>" : "<span style='color:red;'>No</span>" %></p>
-			<p id="hoist"><b>Hoist:</b> <%= @toilet.hoist ? "<span style='color:green;'>Yes</span>" : "<span style='color:red;'>No</span>" %></p>
-			<p id="toiletlocation"><b>Toilet Location:</b> <%= @toilet.toiletlocation %></p>
-			<p id="whocanuse"><b>Who can use:</b> <%= @toilet.whocanuse %></p>	
-		</div>
-		<div class="facility_links">
-			<div class="link"><%= link_to "Edit these details" , edit_toilet_path(@toilet) %></div>
-			<span class="back_container"><%= link_to 'Back to results', toilets_path(:location => params[:location]), :class => 'button back_button' %></span>
-		</div>
-	</div>
-	
-	<!-- Google maps-->
-	<script type="text/javascript"
-		src="http://www.google.com/jsapi?key=ABQIAAAAtKHuZgZ6ZYmkr7zOvb3BEBQZuDB81lYR9ehagyKbdtoSfbk_cxSfrlO1nBnD40vVsqVh48IztGmTJw">
-	</script>
-	<script type="text/javascript">
-		google.load("maps", "2");
-		
-	function initialize() {
-		var map = new google.maps.Map2(document.getElementById("map"));
-		
-		var point = new GLatLng(<%= @toilet.lat%>, <%=@toilet.long%>);
-		map.setCenter(point, 15);
-				
-		var index = <%= @display_index %>;
-		var letter = String.fromCharCode("A".charCodeAt(0) + (index - 1));
-		var myIcon = new GIcon(G_DEFAULT_ICON, "http://www.google.com/mapfiles/marker" + letter + ".png");
-		
-		var marker = new GMarker(point, {draggable:false, icon:myIcon});
-		marker.setImage();
-		map.addOverlay(marker);
-		
-	  	var mapControl = new GMapTypeControl();
-	  	map.addControl(mapControl);
-	  	map.addControl(new GLargeMapControl());
-	}
+  <div class="left">
+    <h1 class="text_replacement facility_details">Facility Details</h1>
+    <div id="map" style="height: 350px; width: 350px"></div>
+  </div><!-- /.left -->
 
-	    google.setOnLoadCallback(initialize);		
-	</script>
+  <div class="right">
+    <div class="facility_details">
+      <h2 id="name"><%=h @toilet.name %></h2>
+      <p id="address"><%=h @toilet.address %></p>
+      <div class="facility_images">
+        <div class="image"></div>
+        <div class="image"></div>
+        <div class="image"></div>
+      </div>
+      <p id="venuetype"><b>Venue Type:</b> <%=h @toilet.venuetype %></p>
+      <p id="howtoaccess"><b>How to Access:</b> <%=h @toilet.howtoaccess %></p>
+      <p id="changingbench"><b>Changing bench:</b> <%= @toilet.changingbench ? "<span style='color:green;'>Yes</span>" : "<span style='color:red;'>No</span>" %></p>
+      <p id="hoist"><b>Hoist:</b> <%= @toilet.hoist ? "<span style='color:green;'>Yes</span>" : "<span style='color:red;'>No</span>" %></p>
+      <p id="toiletlocation"><b>Toilet Location:</b> <%=h @toilet.toiletlocation %></p>
+      <p id="whocanuse"><b>Who can use:</b> <%=h @toilet.whocanuse %></p>
+    </div>
+    <div class="facility_links">
+      <div class="link"><%= link_to "Edit these details" , edit_toilet_path(@toilet) %></div>
+      <span class="back_container"><%= link_to 'Back to results', toilets_path(:location => params[:location]), :class => 'button back_button' %></span>
+    </div>
+  </div>
 
+  <!-- Google maps-->
+  <script type="text/javascript"
+    src="http://www.google.com/jsapi?key=ABQIAAAAtKHuZgZ6ZYmkr7zOvb3BEBQZuDB81lYR9ehagyKbdtoSfbk_cxSfrlO1nBnD40vVsqVh48IztGmTJw">
+  </script>
+  <% javascript_tag do %>
+    google.load("maps", "2");
+
+    function initialize() {
+      var map = new google.maps.Map2(document.getElementById("map"));
+
+      var point = new GLatLng(<%= @toilet.lat%>, <%=@toilet.long%>);
+      map.setCenter(point, 15);
+
+      var index = <%= @display_index %>;
+      var letter = String.fromCharCode("A".charCodeAt(0) + (index - 1));
+      var myIcon = new GIcon(G_DEFAULT_ICON, "http://www.google.com/mapfiles/marker" + letter + ".png");
+
+      var marker = new GMarker(point, {draggable:false, icon:myIcon});
+      marker.setImage();
+      map.addOverlay(marker);
+
+      var mapControl = new GMapTypeControl();
+      map.addControl(mapControl);
+      map.addControl(new GLargeMapControl());
+    }
+
+    google.setOnLoadCallback(initialize);
+  <% end %>
 </div>
