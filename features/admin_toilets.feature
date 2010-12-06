@@ -109,3 +109,25 @@ Feature: Administering toilets
     When I visit "/admin/toilets"
     And I follow "delete"
     Then I should see "Toilet deleted successfully"
+
+  Scenario: Long details should be truncated
+    Given I am logged in
+    And the following toilets exist:
+    | name                                   | address                                       | long  | lat  |
+    | long and interesting name for a toilet | address that goes on and on and is very exact | 55.00 | 0.05 |
+    When I visit "/admin/toilets"
+    Then I should see "long and interest..."
+    And I should see "address that goes..."
+
+  Scenario: Wily hacker details should be escaped
+    Given I am logged in
+    And the following toilets exist:
+    | name                 | address                              | long  | lat  |
+    | <h1>toilet yeah</h1> | address<script>alert('woo')</script> | 55.00 | 0.05 |
+    When I visit "/admin/toilets"
+    Then I should see "<h1>toilet yeah</h1>"
+    And I should see "address<script>al..."
+    When I follow "edit" inside the row for toilet "<h1>toilet yeah</h1>"
+    Then I should see the form filled in like this:
+    | name            | <h1>toilet yeah</h1>                 |
+    | address         | address<script>alert('woo')</script> |

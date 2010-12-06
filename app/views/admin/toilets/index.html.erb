@@ -5,19 +5,22 @@
 <%= will_paginate @toilets %>
 
 <table id="results">
-  <tr>
-    <th>name</th>
-    <th>address</th>
-    <th>edit</th>
-    <th>Delete</th>
-
-  </tr>
-  <% @toilets.each_with_index do |toilet, index| %>
-      <tr>
-        <td class="name"><%= truncate(toilet.name,20,"...") %></td>
-        <td class="address"><%= truncate(toilet.address,20,"...") %></td>
+  <thead>
+    <tr>
+      <th>name</th>
+      <th>address</th>
+      <th>edit</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @toilets.each_with_index do |toilet, index| %>
+      <tr id="<%= dom_id(toilet) %>" class="toilet_row">
+        <td class="name"><%=h truncate(toilet.name,20,"...") %></td>
+        <td class="address"><%=h truncate(toilet.address,20,"...") %></td>
         <td class="edit"><%= link_to "edit", {:controller => "toilets", :action => "edit", :id => toilet}, :id => "edit_link_#{index+1}" %></td>
-		<td class="delete"><%= link_to "delete", {:controller => "toilets", :action => "destroy", :id => toilet}, :method => :delete%></td>
-     </tr>
-  <% end %>
+        <td class="delete"><%= link_to "delete", {:controller => "toilets", :action => "destroy", :id => toilet}, :method => :delete%></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
