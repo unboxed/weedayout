@@ -15,12 +15,10 @@
   <div class="header">
     <%= link_to 'weedayout.com', root_path, :class => 'logo_link' %>
     <h2>Putting accessible features on the map.</h2>
-  
     <div class="main_nav">
       <ul>
         <li class="home<%= print_if_params(' home_active', :controller => 'pages', :action => 'index') %>"><%= link_to 'Home', root_path %></li>
         <li class="add_facility<%= print_if_params ' add_facility_active', :controller => 'toilets', :action => ['new', 'create'] %>"><%= link_to 'Add a Facility', new_toilet_path %></li>
-        <!-- <li class="add_gap"><%= link_to 'Add a Gap', 'add/gap/path' %></li> -->
       </ul>
       <div class="bar"></div>
     </div>
