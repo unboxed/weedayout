@@ -16,3 +16,4 @@ public/specs.html
 *.tmproj
 .idea
 .rvmrc
+tmp/webrat-*.html
