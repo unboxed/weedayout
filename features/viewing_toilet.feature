@@ -24,8 +24,8 @@ Feature: Viewing Toilets
     | #toiletlocation | location 1          |
     | #whocanuse      | use 1               |
     | #howtoaccess    | access 1            |
-    | #changingbench  | Yes					|
-    | #hoist          | No					|
+    | #changingbench  | Yes					        |
+    | #hoist          | No					        |
 
   Scenario: Check that toilet details pages have seo urls
     When I go to the homepage
@@ -33,4 +33,3 @@ Feature: Viewing Toilets
     And I press "Search"
     When I follow "details_link_2"
     Then my url should end with "toilet-2"
-    

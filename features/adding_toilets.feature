@@ -18,6 +18,7 @@ Feature: Adding toilets
     And I press "Submit"
     Then I should see "Toilet created"
     And I should see "Westminster Bridge" inside the recently added facilities list
+    And I should see "Westminster Bridge London" inside the recently added facilities list
 
   Scenario: Submitting a blank form
     When I go to add toilet page
