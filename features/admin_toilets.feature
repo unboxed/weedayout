@@ -15,11 +15,11 @@ Feature: Administering toilets
     Given I am logged in
     When I visit "/admin/toilets"
     Then I should see the following table "results":
-    | name      | address   | 
-    | toilet 01 | address 1 | 
-    | toilet 02 | address 2 | 
-    | toilet 03 | address 3 | 
-    | toilet 04 | address 4 | 
+    | name      | address   |
+    | toilet 01 | address 1 |
+    | toilet 02 | address 2 |
+    | toilet 03 | address 3 |
+    | toilet 04 | address 4 |
 
   Scenario: The admin page should paginate if there are too many toilets
     Given the following toilets exist:
@@ -105,9 +105,7 @@ Feature: Administering toilets
     Then I should see "Name can't be blank"
 
   Scenario: Delete toilets
-	Given I am logged in
-	When I visit "/admin/toilets"
-	And I follow "delete"
-	Then I should see "Toilet deleted successfully"
-
-
+    Given I am logged in
+    When I visit "/admin/toilets"
+    And I follow "delete"
+    Then I should see "Toilet deleted successfully"
