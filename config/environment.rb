@@ -29,13 +29,15 @@ Rails::Initializer.run do |config|
     config.gem 'rack', :lib => false, :version => '= 1.0.1'
     config.gem 'factory_girl', :lib => false, :version => '= 1.2.3'
     
-    config.gem "cucumber", :lib => false, :version => "= 0.6.2"
+    config.gem "cucumber", :lib => false, :version => "= 0.6.4"
     config.gem 'cucumber-rails', :lib => false, :version => '= 0.3.0'
 
     config.gem 'rspec', :lib => false, :version => '= 1.3.0'
     config.gem 'rspec-rails', :lib => false, :version => '= 1.3.2'
 
     config.gem 'webrat', :lib => false, :version => '= 0.7.0'
+
+    config.gem 'database_cleaner', :lib => false, :version => '= 0.2.3'
   end
 
   # Only load the plugins named here, in the order given (default is alphabetical).

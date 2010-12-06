@@ -1,5 +1,5 @@
 
-defaults : &defaults
+defaults: &defaults
   adapter: mysql
   encoding: utf8
   username: weedayout
@@ -9,9 +9,12 @@ development:
   <<: *defaults
   database: weedayout_development
 
-test:
+test: &test
   <<: *defaults
   database: weedayout_test
+
+cucumber:
+  <<: *test
 
 production:
   <<: *defaults
