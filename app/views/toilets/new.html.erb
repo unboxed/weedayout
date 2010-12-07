@@ -38,6 +38,17 @@
         <%= f.label :whocanuse, "Who can use:" %>
         <%= f.text_field :whocanuse %>
       </div>
+      <fieldset>
+        <legend>Opening Times</legend>
+        <div class="form_entry">
+          <%= f.label :opening_time, "Opens at:" %>
+          <%= f.time_select :opening_time, :include_seconds => false, :prompt => true, :minute_step => 15, :ignore_date => true %>
+        </div>
+        <div class="form_entry">
+          <%= f.label :closing_time, "Closes at:" %>
+          <%= f.time_select :closing_time, :include_seconds => false, :prompt => true, :minute_step => 15, :ignore_date => true %>
+        </div>
+      </fieldset>
     <p class="note"><span style='color:#FF0000'>*</span>Required field</p>
     </div><!-- /.left -->
 
