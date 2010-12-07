@@ -50,8 +50,8 @@
       </div>
     </div>
 
-    <div class="location_selector" style="display:none;">
-      <div id="map" style="height: 500px; width: 500px"></div>
+    <div class="location_selector hidden">
+      <div id="map"></div>
       <div class="field">
         <%= f.label :lat, "Latitude" %>
         <%= f.text_field :lat %>
@@ -60,7 +60,7 @@
         <%= f.label :long, "Longitude" %>
         <%= f.text_field :long %>
       </div>
-      <input type="button" value="Update map" id="update_map" class="updatemap" style="display:none"/>
+      <input type="button" value="Update map" id="update_map" class="updatemap" />
     </div><!-- location_selector -->
 
     <p>
@@ -75,42 +75,42 @@
 <% end %>
 
 <!-- R-rated code ahead, parental advisory -->
-<script type="text/javascript" charset="utf-8">
-    $(".location_selector").show();
-    $(".updatemap").show();
+<% javascript_tag do %>
+  $(".location_selector").show();
+  $(".updatemap").show();
 
-    function load() {
-        if (GBrowserIsCompatible()) {
+  function load() {
+      if (GBrowserIsCompatible()) {
 
-            var start_lat = <%= @lat %>;
-            var start_lng = <%= @long%>;
-            var search_location = "<%= params[:search_location] %>";
+          var start_lat = <%= @lat %>;
+          var start_lng = <%= @long%>;
+          var search_location = "<%= params[:search_location] %>";
 
-            if (start_lat != null && start_lng != null) {
-                setup(new GLatLng(start_lat, start_lng));
-            } else {
-                setup(new GLatLng(51.4987, -0.1097));
-            }
-        }
-    }
+          if (start_lat != null && start_lng != null) {
+              setup(new GLatLng(start_lat, start_lng));
+          } else {
+              setup(new GLatLng(51.4987, -0.1097));
+          }
+      }
+  }
 
-    function setup(start_point) {
-        var llmap = new LatLongMap(
-                start_point,
-                document.getElementById("map"),
-                document.getElementById('toilet_lat'),
-                document.getElementById('toilet_long'));
+  function setup(start_point) {
+      var llmap = new LatLongMap(
+              start_point,
+              document.getElementById("map"),
+              document.getElementById('toilet_lat'),
+              document.getElementById('toilet_long'));
 
-        $("#locate_on_map").bind("click", function() {
-            var address = document.getElementById('MapAddressSearch').value;
-            llmap.showLocation(address);
-        });
-        $("#update_map").bind("click", function() {
-            llmap.recenterMarker();
-        });
-    }
+      $("#locate_on_map").bind("click", function() {
+          var address = document.getElementById('MapAddressSearch').value;
+          llmap.showLocation(address);
+      });
+      $("#update_map").bind("click", function() {
+          llmap.recenterMarker();
+      });
+  }
 
-    $(document).ready(function() {
-        load();
-    });
-</script>
+  $(document).ready(function() {
+      load();
+  });
+<% end %>

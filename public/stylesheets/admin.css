@@ -98,3 +98,11 @@ tr {
     height:25px;
     float:left;
 }
+
+#map {
+  width: 500px;
+  height: 500px;
+}
+.hidden {
+  display: none;
+}

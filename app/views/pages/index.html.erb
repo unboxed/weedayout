@@ -1,11 +1,11 @@
 <div class="find_a_facility_box">
-  
+
   <h1 class="text_replacement">Find a facility:</h1>
-  
+
   <% form_tag toilets_path, :method => :get do %>
     <%= text_field_tag :location, params[:location], :value => 'Enter your town or postcode...', :class => 'search_input' %>
-    
-	<span style="display: none">
+
+    <span style="display: none">
       <label for="hoist">Hoist?</label>
       <%= check_box_tag :hoist %>
       <label for="changingbench">Changing Bench?</label>
@@ -20,7 +20,7 @@
 
 <div class="find_new_places_box">
   <p>
-    Find new places to visit that have 
+    Find new places to visit that have
     the facities you need:
   </p>
   <span class="where_can_i_go_container">
@@ -30,12 +30,12 @@
 
 <div id="intro">
   <p>
-    Pinpoint accessible toilets across 
-    the UK so you can enjoy a fun day 
+    Pinpoint accessible toilets across
+    the UK so you can enjoy a fun day
     out without getting caught short.
   </p>
   <p>
-    We don’t yet know where all the facilities are. 
+    We don’t yet know where all the facilities are.
     It’s up to you to let us know by adding them to the map or telling us where there’s a gap.
   </p>
 </div>
