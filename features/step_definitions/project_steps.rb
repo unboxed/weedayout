@@ -24,9 +24,9 @@ Then /^I should see the following table "(.*)":$/ do |table, expected_table|
   expected_table.diff!(tableish("table##{table} tr", 'td,th'))
 end
 
-Then /^I should be redirected to "(.*)"$/ do |url|   
-  response.should redirect_to(url) 
-end 
+Then /^I should be redirected to "(.*)"$/ do |url|
+  response.should redirect_to(url)
+end
 
 
 
@@ -68,4 +68,17 @@ end
 
 Then /^I should see a page title of: "([^"]+)"$/ do |title|
   response.should have_tag("title", title)
+end
+
+Then %r{^I should see "([^"]+)" as the "([^"]+)" time$} do |time, field|
+  time = Time.parse(time)
+
+  id_prefix = webrat_session.current_scope.send(:locate_id_prefix, :from => field) do
+    hour_field = FieldByIdLocator.new(webrat_session, webrat_session.dom, /(.*?)_#{Webrat::Scope::DATE_TIME_SUFFIXES[:hour]}$/).locate
+    raise NotFoundError.new("No time fields were found") unless hour_field && hour_field.id =~ /(.*?)_4i/
+    $1
+  end
+
+  field_with_id("#{id_prefix}_#{Webrat::Scope::DATE_TIME_SUFFIXES[:hour]}").value.should == time.hour.to_s.rjust(2, '0')
+  field_with_id("#{id_prefix}_#{Webrat::Scope::DATE_TIME_SUFFIXES[:minute]}").value.should == time.min.to_s.rjust(2, '0')
 end
