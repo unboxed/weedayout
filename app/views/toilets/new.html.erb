@@ -3,9 +3,9 @@
   <% form_for(@toilet) do |f| %>
     <div class="left">
       <h2 class="tall">1. Enter the facility’s details below...</h2>
-   
-  	  <%= f.error_messages %>
-  	  <%= flash[:notice] %>
+
+      <%= f.error_messages %>
+      <%= flash[:notice] %>
       <div class="form_entry">
         <%= f.label :name, "Location Name: <span style='color:#FF0000'>*</span>", :class => 'first' %>
         <%= f.text_field :name %>
@@ -38,9 +38,9 @@
         <%= f.label :whocanuse, "Who can use:" %>
         <%= f.text_field :whocanuse %>
       </div>
- 	  <p class="note"><span style='color:#FF0000'>*</span>Required field</p>
+    <p class="note"><span style='color:#FF0000'>*</span>Required field</p>
     </div><!-- /.left -->
-  
+
     <div class="right">
       <h2 class="tall"> 2. Drag the marker to refine the  location on the map...</h2>
       <div id="map" style="height: 350px; width: 350px"></div>
@@ -60,65 +60,67 @@
       </p>
     </div><!-- /.right -->
 
- <!-- Google maps-->
- 	<script type="text/javascript"
-  		src="http://www.google.com/jsapi?key=ABQIAAAAtKHuZgZ6ZYmkr7zOvb3BEBQZuDB81lYR9ehagyKbdtoSfbk_cxSfrlO1nBnD40vVsqVh48IztGmTJw">
- 	</script>
- 	<script type="text/javascript">
-  	google.load("maps", "2");
-  
- 	function initialize() {
-  		var map = new google.maps.Map2(document.getElementById("map"));
-  		var geocoder = new GClientGeocoder();
+    <!-- Google maps-->
+    <script type="text/javascript"
+        src="http://www.google.com/jsapi?key=ABQIAAAAtKHuZgZ6ZYmkr7zOvb3BEBQZuDB81lYR9ehagyKbdtoSfbk_cxSfrlO1nBnD40vVsqVh48IztGmTJw">
+    </script>
+    <% javascript_tag do %>
+      google.load("maps", "2");
 
-  		var point = new GLatLng(53, -1.5);
-	    map.setCenter(point, 6);
+      function initialize() {
+        var map = new google.maps.Map2(document.getElementById("map"));
+        var geocoder = new GClientGeocoder();
 
-  		var myIcon = new GIcon(G_DEFAULT_ICON, "http://www.google.com/mapfiles/marker.png");
-  
-  		var marker = new GMarker(point, {draggable:true, icon:myIcon, title : "Place this marker to your location"});
+        var point = new GLatLng(53, -1.5);
+        map.setCenter(point, 6);
 
-  
-    	var mapControl = new GMapTypeControl();
-    	map.addControl(mapControl);
-    	map.addControl(new GLargeMapControl());
-		
-		GEvent.addListener(marker, 'dragend', function() {  
-			$('#toilet_lat').val(marker.getLatLng().lat());
-			$('#toilet_long').val(marker.getLatLng().lng()); 
-		});
-		
-		$('#toilet_address').bind('blur', function(){
-			if($(this).val()){
-				geocoder.getLocations($(this).val()+ ", UK", addToMap);
-			}
-		}); 
-		
-		function addToMap(response)
-		   {
-		      // Retrieve the object
-		      place = response.Placemark[0];
+        var myIcon = new GIcon(G_DEFAULT_ICON, "http://www.google.com/mapfiles/marker.png");
 
-		      // Retrieve the latitude and longitude
-		      point = new GLatLng(place.Point.coordinates[1],
-		                          place.Point.coordinates[0]);
+        var marker = new GMarker(point, {draggable:true, icon:myIcon, title : "Place this marker to your location"});
 
-		      // Center the map on this point
-		      map.setCenter(point, 13);
+        var mapControl = new GMapTypeControl();
+        map.addControl(mapControl);
+        map.addControl(new GLargeMapControl());
 
-		      // Create a marker
-		      marker = new GMarker(point, {draggable:true});
+        GEvent.addListener(marker, 'dragend', function() {
+          $('#toilet_lat').val(marker.getLatLng().lat());
+          $('#toilet_long').val(marker.getLatLng().lng());
+        });
 
-		      // Add the marker to map
-			  map.clearOverlays();
-		      map.addOverlay(marker);
-			
-			  $('#toilet_lat').val(marker.getLatLng().lat());
-	       	  $('#toilet_long').val(marker.getLatLng().lng());			
-		   }
-			
- 	}
-     	google.setOnLoadCallback(initialize);  
- 	</script>
+        $('#toilet_address').bind('blur', function(){
+          if($(this).val()){
+            geocoder.getLocations($(this).val()+ ", UK", addToMap);
+          }
+        });
+
+        function addToMap(response) {
+          // Retrieve the object
+          place = response.Placemark[0];
+
+          // Retrieve the latitude and longitude
+          point = new GLatLng(place.Point.coordinates[1],
+                              place.Point.coordinates[0]);
+
+          // Center the map on this point
+          map.setCenter(point, 13);
+
+          // Create a marker
+          marker = new GMarker(point, {draggable:true});
+
+          // Add the marker to map
+          map.clearOverlays();
+          map.addOverlay(marker);
+
+          $('#toilet_lat').val(marker.getLatLng().lat());
+          $('#toilet_long').val(marker.getLatLng().lng());
+
+          GEvent.addListener(marker, 'dragend', function() {
+            $('#toilet_lat').val(marker.getLatLng().lat());
+            $('#toilet_long').val(marker.getLatLng().lng());
+          });
+        }
+      }
+      google.setOnLoadCallback(initialize);
+    <% end %>
   <% end %>
 </div>
