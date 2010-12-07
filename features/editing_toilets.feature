@@ -15,7 +15,7 @@ Feature: Editing toilets
     Scenario: Visit the edit page
       Given I visit "/toilets/toilet-01/edit"
       Then I should see the form filled in like this:
-      | name            | toilet 01           |
+      | location name   | toilet 01           |
       | address         | address 1           |
       | venue type      | venue 1             |
       | toilet location | location 1          |
@@ -26,7 +26,7 @@ Feature: Editing toilets
       And I should see "16:45" as the "Opens at" time
       And I should see "07:30" as the "Closes at" time
       When I fill in the following:
-      | name            | toilet A            |
+      | location name   | toilet A            |
       | address         | address A           |
       | venue type      | venue A             |
       | toilet location | location A          |
@@ -38,7 +38,7 @@ Feature: Editing toilets
       And I select "21:15" as the "Closes at" time
       And I press "Submit"
       Then I should see the form filled in like this:
-      | name            | toilet A            |
+      | location name   | toilet A            |
       | address         | address A           |
       | venue type      | venue A             |
       | toilet location | location A          |

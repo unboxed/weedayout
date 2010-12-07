@@ -1,137 +1,63 @@
 <div class="main_inner">
 
-  <% form_for(@toilet) do |f| %>
-    <div class="left">
-      <h2 class="tall">1. Enter the facility’s details below...</h2>
+  <%= render 'form', :back_text => 'Back Home', :back_link => root_path %>
 
-      <%= f.error_messages %>
-      <%= flash[:notice] %>
-      <div class="form_entry">
-        <%= f.label :name, "Location Name: <span style='color:#FF0000'>*</span>", :class => 'first' %>
-        <%= f.text_field :name %>
-      </div>
-      <div class="form_entry">
-        <%= f.label :address, "Address: <span style='color:#FF0000'>*</span>" %>
-        <%= f.text_field :address %>
-      </div>
-      <div class="form_entry">
-        <%= f.label :venuetype, 'Venue Type:' %>
-        <%= f.text_field :venuetype %>
-      </div>
-      <div class="form_entry">
-        <%= f.label :howtoaccess, 'How to Access:' %>
-        <%= f.text_field :howtoaccess %>
-      </div>
-      <div class="with_checkboxes clearfix">
-        <%= f.label :changingbench, "Changing Bench?" %>
-        <%= f.check_box :changingbench %>
-      </div>
-      <div class="with_checkboxes clearfix">
-        <%= f.label :hoist, "Hoist?" %>
-        <%= f.check_box :hoist %>
-      </div>
-      <div class="form_entry">
-        <%= f.label :toiletlocation, "Toilet Location:" %>
-        <%= f.text_field :toiletlocation %>
-      </div>
-      <div class="form_entry">
-        <%= f.label :whocanuse, "Who can use:" %>
-        <%= f.text_field :whocanuse %>
-      </div>
-      <fieldset>
-        <legend>Opening Times</legend>
-        <div class="form_entry">
-          <%= f.label :opening_time, "Opens at:" %>
-          <%= f.time_select :opening_time, :include_seconds => false, :prompt => true, :minute_step => 15, :ignore_date => true %>
-        </div>
-        <div class="form_entry">
-          <%= f.label :closing_time, "Closes at:" %>
-          <%= f.time_select :closing_time, :include_seconds => false, :prompt => true, :minute_step => 15, :ignore_date => true %>
-        </div>
-      </fieldset>
-    <p class="note"><span style='color:#FF0000'>*</span>Required field</p>
-    </div><!-- /.left -->
+  <% javascript_tag do %>
+    google.load("maps", "2");
 
-    <div class="right">
-      <h2 class="tall"> 2. Drag the marker to refine the  location on the map...</h2>
-      <div id="map" style="height: 350px; width: 350px"></div>
-      <div style="display: none">
-        <%= f.text_field :lat %>
-        <%= f.text_field :long %>
-      </div>
-      <fieldset class="spamcheck_fields">
-        <label for="spamcheck">To prove you're not a spam bot, please put 'rabbit' into this field</label>
-        <%= text_field_tag :spamcheck %>
-      </fieldset>
-      <p class="navig">
-        <span class="submit_container">
-        <%= f.submit "Submit", :class => 'button submit_button', :id => "Submit" %>
-        </span>
-        <%= link_to 'Back Home', root_path %>
-      </p>
-    </div><!-- /.right -->
+    function initialize() {
+      var map = new google.maps.Map2(document.getElementById("map"));
+      var geocoder = new GClientGeocoder();
 
-    <!-- Google maps-->
-    <script type="text/javascript"
-        src="http://www.google.com/jsapi?key=ABQIAAAAtKHuZgZ6ZYmkr7zOvb3BEBQZuDB81lYR9ehagyKbdtoSfbk_cxSfrlO1nBnD40vVsqVh48IztGmTJw">
-    </script>
-    <% javascript_tag do %>
-      google.load("maps", "2");
+      var point = new GLatLng(53, -1.5);
+      map.setCenter(point, 6);
 
-      function initialize() {
-        var map = new google.maps.Map2(document.getElementById("map"));
-        var geocoder = new GClientGeocoder();
+      var myIcon = new GIcon(G_DEFAULT_ICON, "http://www.google.com/mapfiles/marker.png");
 
-        var point = new GLatLng(53, -1.5);
-        map.setCenter(point, 6);
+      var marker = new GMarker(point, {draggable:true, icon:myIcon, title : "Place this marker to your location"});
 
-        var myIcon = new GIcon(G_DEFAULT_ICON, "http://www.google.com/mapfiles/marker.png");
+      var mapControl = new GMapTypeControl();
+      map.addControl(mapControl);
+      map.addControl(new GLargeMapControl());
 
-        var marker = new GMarker(point, {draggable:true, icon:myIcon, title : "Place this marker to your location"});
+      GEvent.addListener(marker, 'dragend', function() {
+        $('#toilet_lat').val(marker.getLatLng().lat());
+        $('#toilet_long').val(marker.getLatLng().lng());
+      });
 
-        var mapControl = new GMapTypeControl();
-        map.addControl(mapControl);
-        map.addControl(new GLargeMapControl());
+      $('#toilet_address').bind('blur', function(){
+        if($(this).val()){
+          geocoder.getLocations($(this).val()+ ", UK", addToMap);
+        }
+      });
+
+      function addToMap(response) {
+        // Retrieve the object
+        place = response.Placemark[0];
+
+        // Retrieve the latitude and longitude
+        point = new GLatLng(place.Point.coordinates[1],
+                            place.Point.coordinates[0]);
+
+        // Center the map on this point
+        map.setCenter(point, 13);
+
+        // Create a marker
+        marker = new GMarker(point, {draggable:true});
+
+        // Add the marker to map
+        map.clearOverlays();
+        map.addOverlay(marker);
+
+        $('#toilet_lat').val(marker.getLatLng().lat());
+        $('#toilet_long').val(marker.getLatLng().lng());
 
         GEvent.addListener(marker, 'dragend', function() {
           $('#toilet_lat').val(marker.getLatLng().lat());
           $('#toilet_long').val(marker.getLatLng().lng());
         });
-
-        $('#toilet_address').bind('blur', function(){
-          if($(this).val()){
-            geocoder.getLocations($(this).val()+ ", UK", addToMap);
-          }
-        });
-
-        function addToMap(response) {
-          // Retrieve the object
-          place = response.Placemark[0];
-
-          // Retrieve the latitude and longitude
-          point = new GLatLng(place.Point.coordinates[1],
-                              place.Point.coordinates[0]);
-
-          // Center the map on this point
-          map.setCenter(point, 13);
-
-          // Create a marker
-          marker = new GMarker(point, {draggable:true});
-
-          // Add the marker to map
-          map.clearOverlays();
-          map.addOverlay(marker);
-
-          $('#toilet_lat').val(marker.getLatLng().lat());
-          $('#toilet_long').val(marker.getLatLng().lng());
-
-          GEvent.addListener(marker, 'dragend', function() {
-            $('#toilet_lat').val(marker.getLatLng().lat());
-            $('#toilet_long').val(marker.getLatLng().lng());
-          });
-        }
       }
-      google.setOnLoadCallback(initialize);
-    <% end %>
+    }
+    google.setOnLoadCallback(initialize);
   <% end %>
 </div>

@@ -1,109 +1,33 @@
 <%= flash[:notice] %>
 
 <div class="main_inner">
+  <%= render 'form', :back_text => 'Back', :back_link => toilet_path(@toilet) %>
 
-  <% form_for(@toilet) do |f| %>
-    <div class="left">
-      <h2 class="tall">1. Enter the facility’s details below...</h2>
-      <%= f.error_messages %>
-      <%= flash[:notice] %>
-      <div class="form_entry">
-        <%= f.label :name, "Name: <span style='color:#FF0000'>*</span>", :class => 'first' %>
-        <%= f.text_field :name %>
-      </div>
-      <div class="form_entry">
-        <%= f.label :address, "Address: <span style='color:#FF0000'>*</span>" %>
-        <%= f.text_field :address %>
-      </div>
-      <div class="form_entry">
-        <%= f.label :venuetype, 'Venue Type:' %>
-        <%= f.text_field :venuetype %>
-      </div>
-      <div class="form_entry">
-        <%= f.label :howtoaccess, 'How to Access:' %>
-        <%= f.text_field :howtoaccess %>
-      </div>
-      <div class="with_checkboxes clearfix">
-        <%= f.label :changingbench, "Changing Bench?" %>
-        <%= f.check_box :changingbench %>
-      </div>
-      <div class="with_checkboxes clearfix">
-        <%= f.label :hoist, "Hoist?" %>
-        <%= f.check_box :hoist %>
-      </div>
-      <div class="form_entry">
-        <%= f.label :toiletlocation, "Toilet Location:" %>
-        <%= f.text_field :toiletlocation %>
-      </div>
-      <div class="form_entry">
-        <%= f.label :whocanuse, "Who can use:" %>
-        <%= f.text_field :whocanuse %>
-      </div>
-      <fieldset>
-        <legend>Opening Times</legend>
-        <div class="form_entry">
-          <%= f.label :opening_time, "Opens at:" %>
-          <%= f.time_select :opening_time, :include_seconds => false, :prompt => true, :minute_step => 15, :ignore_date => true %>
-        </div>
-        <div class="form_entry">
-          <%= f.label :closing_time, "Closes at:" %>
-          <%= f.time_select :closing_time, :include_seconds => false, :prompt => true, :minute_step => 15, :ignore_date => true %>
-        </div>
-      </fieldset>
-      <p class="note"><span style='color:#FF0000'>*</span>Required field</p>
-    </div><!-- /.left -->
+  <% javascript_tag do %>
+    google.load("maps", "2");
+    var marker;
 
-    <div class="right">
-      <h2 class="tall">2. Drag the marker to refine the  location on the map...</h2>
-      <div id="map" style="height: 350px; width: 350px"></div>
-      <div style="display: none">
-        <%= f.text_field :lat %>
-        <%= f.text_field :long %>
-      </div>
+    function initialize() {
+      var map = new google.maps.Map2(document.getElementById("map"));
 
-      <fieldset class="spamcheck_fields">
-        <label for="spamcheck">To prove you're not a spam bot, please put 'rabbit' into this field</label>
-        <%= text_field_tag :spamcheck %>
-      </fieldset>
+      var point = new GLatLng(<%= @toilet.lat%>, <%=@toilet.long%>);
+      map.setCenter(point, 15);
 
-      <p class="navig">
-        <span class="submit_container">
-        <%= f.submit "Submit", :class => 'button submit_button', :id => "Submit" %>
-        </span>
-        <%= link_to 'Back', toilet_path(@toilet) %>
-      </p>
-    </div>
+      marker = new GMarker(point, {draggable:true});
+      marker.setImage();
+      map.addOverlay(marker);
 
-    <!-- Google maps-->
-    <script type="text/javascript"
-      src="http://www.google.com/jsapi?key=ABQIAAAAtKHuZgZ6ZYmkr7zOvb3BEBQZuDB81lYR9ehagyKbdtoSfbk_cxSfrlO1nBnD40vVsqVh48IztGmTJw">
-    </script>
-    <% javascript_tag do %>
-      google.load("maps", "2");
-      var marker;
+      var mapControl = new GMapTypeControl();
+      map.addControl(mapControl);
+      map.addControl(new GLargeMapControl());
 
-      function initialize() {
-        var map = new google.maps.Map2(document.getElementById("map"));
+      GEvent.addListener(marker, 'dragend', function() {
+        $('#toilet_lat').val(marker.getLatLng().lat());
+        $('#toilet_long').val(marker.getLatLng().lng());
+      });
 
-        var point = new GLatLng(<%= @toilet.lat%>, <%=@toilet.long%>);
-        map.setCenter(point, 15);
+    }
 
-        marker = new GMarker(point, {draggable:true});
-        marker.setImage();
-        map.addOverlay(marker);
-
-        var mapControl = new GMapTypeControl();
-        map.addControl(mapControl);
-        map.addControl(new GLargeMapControl());
-
-        GEvent.addListener(marker, 'dragend', function() {
-          $('#toilet_lat').val(marker.getLatLng().lat());
-          $('#toilet_long').val(marker.getLatLng().lng());
-        });
-
-      }
-
-      google.setOnLoadCallback(initialize);
-    <% end %>
+    google.setOnLoadCallback(initialize);
   <% end %>
 </div>
