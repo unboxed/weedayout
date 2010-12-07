@@ -4,11 +4,11 @@
     <%= f.error_messages %>
     <%= flash[:notice] %>
     <div class="form_entry">
-      <%= f.label :name, "Location Name: <span style='color:#FF0000'>*</span>", :class => 'first' %>
+      <%= f.label :name, mark_text_required("Location Name:"), :class => 'first' %>
       <%= f.text_field :name %>
     </div>
     <div class="form_entry">
-      <%= f.label :address, "Address: <span style='color:#FF0000'>*</span>" %>
+      <%= f.label :address, mark_text_required("Address:") %>
       <%= f.text_field :address %>
     </div>
     <div class="form_entry">
@@ -46,11 +46,11 @@
         <%= f.time_select :closing_time, :include_seconds => false, :prompt => true, :minute_step => 15, :ignore_date => true %>
       </div>
     </fieldset>
-    <p class="note"><span style='color:#FF0000'>*</span>Required field</p>
+    <p class="note"><%= required_icon %>Required field</p>
   </div><!-- /.left -->
 
   <div class="right">
-    <h2 class="tall">2. Drag the marker to refine the  location on the map...</h2>
+    <h2 class="tall">2. Drag the marker to refine the location on the map...</h2>
     <div id="map" style="height: 350px; width: 350px"></div>
     <div style="display: none">
       <%= f.text_field :lat %>
@@ -64,7 +64,7 @@
 
     <p class="navig">
       <span class="submit_container">
-      <%= f.submit "Submit", :class => 'button submit_button', :id => "Submit" %>
+        <%= f.submit "Submit", :class => 'button submit_button', :id => "Submit" %>
       </span>
       <%= link_to back_text, back_link %>
     </p>
