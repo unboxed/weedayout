@@ -46,8 +46,19 @@
 
       <div>
         <%= f.label :description, "Description" %>
-        <%= f.text_area :description %>
+        <%= f.text_area :description, :size => '26x13' %>
       </div>
+      <fieldset>
+        <legend>Opening Times</legend>
+        <div class="form_entry">
+          <%= f.label :opening_time, "Opens at:" %>
+          <%= f.time_select :opening_time, :include_seconds => false, :prompt => true, :minute_step => 15, :ignore_date => true %>
+        </div>
+        <div class="form_entry">
+          <%= f.label :closing_time, "Closes at:" %>
+          <%= f.time_select :closing_time, :include_seconds => false, :prompt => true, :minute_step => 15, :ignore_date => true %>
+        </div>
+      </fieldset>
     </div>
 
     <div class="location_selector hidden">
