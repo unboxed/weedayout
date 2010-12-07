@@ -24,4 +24,12 @@ module ApplicationHelper
     return if text.blank?
     %{#{text} #{required_icon}}
   end
+
+  def yes_or_no(booleanish)
+    if booleanish
+      content_tag(:span, 'Yes', :class => 'yes_value')
+    else
+      content_tag(:span, 'No', :class => 'no_value')
+    end
+  end
 end

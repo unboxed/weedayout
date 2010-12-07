@@ -344,7 +344,7 @@ form.refine_search {
 }
 
 .right .facility_links {
-	margin-top:70px;
+	margin-top:30px;
 	height:52px;
 	width:275px;
 	float:right;
@@ -388,4 +388,10 @@ h1.facility_details {
 .flash_notice {
   color: #FF0000;
   font-size: 1.5em;
+}
+.yes_value {
+   color: green;
+}
+.no_value {
+  color: red;
 }

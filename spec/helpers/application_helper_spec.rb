@@ -20,4 +20,14 @@ describe ApplicationHelper do
       helper.mark_text_required("Some field").should match(/#{Regexp.escape(helper.required_icon)}$/)
     end
   end
+
+  describe "yes_or_no" do
+    it "should return a span with class 'yes_value' that contains the word 'Yes' if the supplied value is truthy" do
+      helper.yes_or_no(true).should == '<span class="yes_value">Yes</span>'
+    end
+
+    it "should return a span with class 'no_value' that contains the word 'No' if the supplied value is falsy" do
+      helper.yes_or_no(false).should == '<span class="no_value">No</span>'
+    end
+  end
 end
