@@ -11,25 +11,29 @@
 </head>
 <body>
 <div class="outer_wrapper">
-<div class="inner_wrapper">
-  <div class="header">
-    <%= link_to 'weedayout.com', root_path, :class => 'logo_link' %>
-    <h2>Putting accessible features on the map.</h2>
-    <div class="main_nav">
-      <ul>
-        <li class="home<%= print_if_params(' home_active', :controller => 'pages', :action => 'index') %>"><%= link_to 'Home', root_path %></li>
-        <li class="add_facility<%= print_if_params ' add_facility_active', :controller => 'toilets', :action => ['new', 'create'] %>"><%= link_to 'Add a Facility', new_toilet_path %></li>
-      </ul>
-      <div class="bar"></div>
-    </div>
-  </div>
+	<div class="inner_wrapper">
+		
+	  <div class="header">
+	    <%= link_to 'weedayout.com', root_path, :class => 'logo_link' %>
+	    <h2>Putting accessible features on the map.</h2>
+	
+	
+	    <div class="main_nav">
+	      <ul>
+	        <li class="home<%= print_if_params(' home_active', :controller => 'pages', :action => 'index') %>"><%= link_to 'Home', root_path %></li>
+	        <li class="add_facility<%= print_if_params ' add_facility_active', :controller => 'toilets', :action => ['new', 'create'] %>"><%= link_to 'Add a Facility', new_toilet_path %></li>
+					<li class="about_us<%= print_if_params ' about_us_active', :controller => 'pages', :action => 'about_us' %>"><%= link_to 'About Us', about_path %></li>
+					<li class="twitter"><%= link_to 'Twitter', "http://www.twitter.com" %></li>
+	      </ul>
+	      <div class="bar"></div>
+	    </div>
+	  </div>
   
-  <div class="main">
-    <%= yield %>
-  </div>
 
+	  <div class="<%= print_if_params('home_page ', :controller => 'pages', :action => 'index') %> main">
+	    <%= yield %>
+	  </div>
+	</div>
 </div>
-</div>
-<!-- WeeDayOut at <%= request.domain(5) %> -->
 </body>
 </html>

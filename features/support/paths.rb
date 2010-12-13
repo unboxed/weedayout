@@ -10,6 +10,8 @@ module NavigationHelpers
     
     when /the home ?page/
       '/'
+    when /the about us page/
+      about_path
     when /add toilet page/
       new_toilet_path
     when /toilet home page/

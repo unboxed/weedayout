@@ -1,6 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :toilets, :content_blocks
   map.root  :controller => "pages"
+  map.about '/about_us', :controller => "pages", :action => "about_us"
 
   map.namespace :admin do |admin|
     admin.resources :toilets, :content_blocks

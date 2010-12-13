@@ -10,3 +10,6 @@ Feature:
   Then I should be on the add toilet page
   And I follow "Home"
   Then I should be on the home page
+
+	When I follow "About Us"
+	Then I should be on the about us page
