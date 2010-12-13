@@ -7,7 +7,7 @@ class ToiletsController < ApplicationController
       begin
         @toilets = Toilet.find(:all,:origin => params[:location]+ " GB",:limit => 3, :order => "distance ASC", :conditions => filter_conditions)
       rescue Geokit::Geocoders::GeocodeError
-        flash[:notice] = "An error occurred when we looked up '#{params[:location]}'"
+        flash[:errors] = "An error occurred when we looked up '#{params[:location]}'"
         redirect_to toilets_path
       end
     end
@@ -19,7 +19,7 @@ class ToiletsController < ApplicationController
 
   def create
     @toilet = Toilet.new(params[:toilet])
-    flash[:notice] = "It appears you're a spam bot" if params[:spamcheck] != "rabbit"
+    flash[:errors] = "It appears you're a spam bot" if params[:spamcheck] != "rabbit"
     if @toilet.save && params[:spamcheck] == "rabbit"
       flash[:notice] = "Toilet created"
       redirect_to toilets_path
@@ -40,9 +40,10 @@ class ToiletsController < ApplicationController
   def update
     @toilet = Toilet.find_by_permalink(params[:id])
     if @toilet.update_attributes(params[:toilet])
-      flash[:notice] = "Toilet Updated"
+      flash[:notice] = "Toilet updated"
       redirect_to :action=>"edit"
     else 
+      flash[:errors] = "Toilet was not updated"
       render :action => "edit"
     end
   end

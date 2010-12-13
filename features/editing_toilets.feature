@@ -48,5 +48,5 @@ Feature: Editing toilets
       | hoist           | true                |
       And I should see "10:30" as the "Opens at" time
       And I should see "21:15" as the "Closes at" time
-      And I should see "Toilet Updated"
+      And I should see "Toilet updated"
       

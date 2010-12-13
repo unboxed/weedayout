@@ -2,7 +2,6 @@
   <div class="left">
     <h2 class="tall">1. Enter the facility’s details below...</h2>
     <%= f.error_messages %>
-    <%= flash[:notice] %>
     <div class="form_entry">
       <%= f.label :name, mark_text_required("Location Name:"), :class => 'first' %>
       <%= f.text_field :name %>
@@ -70,8 +69,3 @@
     </p>
   </div>
 <% end %>
-
-<!-- Google maps-->
-<script type="text/javascript"
-  src="http://www.google.com/jsapi?key=ABQIAAAAtKHuZgZ6ZYmkr7zOvb3BEBQZuDB81lYR9ehagyKbdtoSfbk_cxSfrlO1nBnD40vVsqVh48IztGmTJw">
-</script>

@@ -1,8 +1,12 @@
-<div class="main_inner">
-
+<div class="main_inner clearfix">
+	<div class="flash_messages">
+		<span class="notice"><%= flash[:notice] %></span>
+		<span class="errors"><%= flash[:errors] %></span>
+	</div>
+	
   <div class="left">
     <h1 class="text_replacement facility_details">Facility Details</h1>
-    <div id="map"></div>
+    <div id="map"><%= image_tag "http://maps.google.com/maps/api/staticmap?center=#{@toilet.lat},#{@toilet.long}&zoom=14&size=350x350&markers=color:red|label:#{@display_index}|#{@toilet.lat},#{@toilet.long}&sensor=false", :alt => "Map to #{@toilet.name}" %></div>
   </div><!-- /.left -->
 
   <div class="right">
@@ -27,33 +31,29 @@
       <span class="back_container"><%= link_to 'Back to results', toilets_path(:location => params[:location]), :class => 'button back_button' %></span>
     </div>
   </div>
-
-  <!-- Google maps-->
-  <script type="text/javascript"
-    src="http://www.google.com/jsapi?key=ABQIAAAAtKHuZgZ6ZYmkr7zOvb3BEBQZuDB81lYR9ehagyKbdtoSfbk_cxSfrlO1nBnD40vVsqVh48IztGmTJw">
-  </script>
-  <% javascript_tag do %>
-    google.load("maps", "2");
-
-    function initialize() {
-      var map = new google.maps.Map2(document.getElementById("map"));
-
-      var point = new GLatLng(<%= @toilet.lat%>, <%=@toilet.long%>);
-      map.setCenter(point, 15);
-
-      var index = <%= @display_index %>;
-      var letter = String.fromCharCode("A".charCodeAt(0) + (index - 1));
-      var myIcon = new GIcon(G_DEFAULT_ICON, "http://www.google.com/mapfiles/marker" + letter + ".png");
-
-      var marker = new GMarker(point, {draggable:false, icon:myIcon});
-      marker.setImage();
-      map.addOverlay(marker);
-
-      var mapControl = new GMapTypeControl();
-      map.addControl(mapControl);
-      map.addControl(new GLargeMapControl());
-    }
-
-    google.setOnLoadCallback(initialize);
-  <% end %>
 </div>
+
+
+
+<% javascript_tag do %>
+  function initialize() {
+    var map = new google.maps.Map2(document.getElementById("map"));
+
+    var point = new GLatLng(<%= @toilet.lat%>, <%=@toilet.long%>);
+    map.setCenter(point, 15);
+
+    var index = <%= @display_index %>;
+    var letter = String.fromCharCode("A".charCodeAt(0) + (index - 1));
+    var myIcon = new GIcon(G_DEFAULT_ICON, "http://www.google.com/mapfiles/marker" + letter + ".png");
+
+    var marker = new GMarker(point, {draggable:false, icon:myIcon});
+    marker.setImage();
+    map.addOverlay(marker);
+
+    var mapControl = new GMapTypeControl();
+    map.addControl(mapControl);
+    map.addControl(new GLargeMapControl());
+  }
+	google.load("maps", "2");
+  google.setOnLoadCallback(initialize);
+<% end %>

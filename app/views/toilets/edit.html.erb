@@ -1,6 +1,9 @@
-<%= flash[:notice] %>
-
-<div class="main_inner">
+<div class="main_inner clearfix">
+	<div class="flash_messages">
+		<span class="notice"><%= flash[:notice] %></span>
+		<span class="errors"><%= flash[:errors] %></span>
+	</div>
+	
   <%= render 'form', :back_text => 'Back', :back_link => toilet_path(@toilet) %>
 
   <% javascript_tag do %>
@@ -9,7 +12,8 @@
 
     function initialize() {
       var map = new google.maps.Map2(document.getElementById("map"));
-
+			var geocoder = new GClientGeocoder();
+			
       var point = new GLatLng(<%= @toilet.lat%>, <%=@toilet.long%>);
       map.setCenter(point, 15);
 
@@ -26,8 +30,39 @@
         $('#toilet_long').val(marker.getLatLng().lng());
       });
 
-    }
+			$('#toilet_address').bind('blur', function(){
+        if($(this).val()){
+          geocoder.getLocations($(this).val()+ ", UK", addToMap);
+        }
+      });
 
+			function addToMap(response) {
+        // Retrieve the object
+        place = response.Placemark[0];
+
+        // Retrieve the latitude and longitude
+        point = new GLatLng(place.Point.coordinates[1],
+                            place.Point.coordinates[0]);
+
+        // Center the map on this point
+        map.setCenter(point, 13);
+
+        // Create a marker
+        marker = new GMarker(point, {draggable:true});
+
+        // Add the marker to map
+        map.clearOverlays();
+        map.addOverlay(marker);
+
+        $('#toilet_lat').val(marker.getLatLng().lat());
+        $('#toilet_long').val(marker.getLatLng().lng());
+
+        GEvent.addListener(marker, 'dragend', function() {
+          $('#toilet_lat').val(marker.getLatLng().lat());
+          $('#toilet_long').val(marker.getLatLng().lng());
+        });
+      }
+    }
     google.setOnLoadCallback(initialize);
   <% end %>
 </div>

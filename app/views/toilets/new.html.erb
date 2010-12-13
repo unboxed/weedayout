@@ -1,5 +1,9 @@
-<div class="main_inner">
-
+<div class="main_inner clearfix">
+	<div class="flash_messages">
+		<span class="notice"><%= flash[:notice] %></span>
+		<span class="errors"><%= flash[:errors] %></span>
+	</div>
+	
   <%= render 'form', :back_text => 'Back Home', :back_link => root_path %>
 
   <% javascript_tag do %>
