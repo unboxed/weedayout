@@ -6,7 +6,8 @@
 	
   <%= render 'form', :back_text => 'Back Home', :back_link => root_path %>
 
-  <% javascript_tag do %>
+  <script type="text/javascript">
+	//<![CDATA[
     google.load("maps", "2");
 
     function initialize() {
@@ -29,7 +30,7 @@
         $('#toilet_long').val(marker.getLatLng().lng());
       });
 
-      $('#toilet_address').bind('blur', function(){
+      $('#toilet_address').keyup(function(){
         if($(this).val()){
           geocoder.getLocations($(this).val()+ ", UK", addToMap);
         }
@@ -60,8 +61,31 @@
           $('#toilet_lat').val(marker.getLatLng().lat());
           $('#toilet_long').val(marker.getLatLng().lng());
         });
-      }
-    }
+			}
+			
+			$('form#new_toilet').submit(function(){	
+				if($('#toilet_address').val()){
+	        geocoder.getLocations($('#toilet_address').val()+ ", UK", submitLatLong);
+					return false;
+				}
+			});
+
+			function submitLatLong(response) {
+				// Retrieve the object
+	      place = response.Placemark[0];
+
+				// Retrieve the latitude and longitude
+	      point = new GLatLng(place.Point.coordinates[1],
+	                           place.Point.coordinates[0]);
+
+				$('#toilet_lat').val(point.lat());
+	      $('#toilet_long').val(point.lng());
+
+				document.forms[0].submit();
+	    }
+		}
+		
     google.setOnLoadCallback(initialize);
-  <% end %>
+		//]]>
+	  </script>
 </div>

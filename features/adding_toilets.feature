@@ -17,6 +17,7 @@ Feature: Adding toilets
     And I select "09:30" as the "Opens at" time
     And I select "16:45" as the "Closes at" time
     And I pass the spam test
+		And the lat and long values are correctly generated
     And I press "Submit"
     Then I should see "Toilet created"
     And I should see "Westminster Bridge" inside the recently added facilities list
@@ -36,9 +37,10 @@ Feature: Adding toilets
     When I go to add toilet page
     And I pass the spam test
     And I press "Submit"
-    Then I should see "2 errors"
+    Then I should see "3 errors"
     Then I should see "Address can't be blank"
     Then I should see "Name can't be blank"
+		Then I should see "The address was not found correctly in google maps"
 
   Scenario: Adding toilets as a spammer
     When I go to add toilet page
@@ -56,6 +58,7 @@ Feature: Adding toilets
     And I fill in "Toilet Location" with "Left hand rail<h1>"
     And I fill in "Who can use" with "Members of Parliament</h1>"
     And I pass the spam test
+		And the lat and long values are correctly generated
     And I press "Submit"
     Then I should see "Toilet created"
     And I should see "W<ul><li>e</li><li>s</li></ul>tminster <h1>Bridge</h1><" inside the recently added facilities list

@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Toilet do
   before(:each) do
-    @toilet = Toilet.new(:name => "Toilet", :address => "Address")
+    @toilet = Toilet.new(:name => "Toilet", :address => "Address", :lat => "-1", :long => "-1")
   end
 
   it "should create a new instance given valid attributes" do
@@ -16,6 +16,16 @@ describe Toilet do
 
   it "should not be valid without a address" do
     @toilet.address = ""
+    @toilet.should_not be_valid
+  end
+  
+  it "should not be valid without latitiude" do
+    @toilet.lat = ""
+    @toilet.should_not be_valid
+  end
+  
+  it "should not be valid without longitude" do
+    @toilet.long = ""
     @toilet.should_not be_valid
   end
 

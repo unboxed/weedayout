@@ -104,3 +104,17 @@ tr {
 .hidden {
   display: none;
 }
+
+p.errors {
+	font: bold 15px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+  color: red;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+p.notice {
+	font: bold 15px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+  color: green;
+  letter-spacing: 2px;
+  text-align: center;
+}

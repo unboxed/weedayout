@@ -34,7 +34,7 @@ Feature: Searching Toilets
     | #row_1  | Westminster Bridge  |
     | #row_2  | Lambeth Bridge      |
     | #row_3  | London Bridge       |
-    And the "Location" field should contain "E11 1PB"
+    And the "Enter your location:" field should contain "E11 1PB"
 
 
   Scenario: Finding the 3 nearest toilets that have a hoist
@@ -52,7 +52,7 @@ Feature: Searching Toilets
   Scenario: Finding the 3 nearest toilets that have a changing bench
     Given the toilet "Jubilee Bridge" has a changing bench
     When I visit "/toilets"
-    And I fill in "Location" with "E11 1PB"
+    And I fill in "location" with "E11 1PB"
     And I check "Changing Bench"
     And I press "Refine Search"
     Then I should not see "Lambeth Bridge"
@@ -79,7 +79,7 @@ Feature: Searching Toilets
 
   Scenario: Search results should have a "know of anything closer" link
     When I visit "/toilets"
-    And I fill in "Location" with "E11 1PB"
+    And I fill in "location" with "E11 1PB"
     And I press "Refine Search"
     And I follow "Know of anything closer?"
     Then I should see "Enter the facility’s details below..."
@@ -88,7 +88,7 @@ Feature: Searching Toilets
 
   Scenario: Search results should have a "Add a Toilet" link
     When I visit "/toilets"
-    And I fill in "Location" with "E11 1PB"
+    And I fill in "location" with "E11 1PB"
     And I press "Refine Search"
     And I follow "Add a new toilet here"
     Then I should see "Enter the facility’s details below..."

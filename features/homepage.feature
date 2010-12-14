@@ -25,7 +25,7 @@ Feature: Homepage
     | #row_1  | Westminster Bridge  |
     | #row_2  | Lambeth Bridge      |
     | #row_3  | London Bridge       |
-    And the "Location" field should contain "E11 1PB"
+    And the "Enter your location:" field should contain "E11 1PB"
 
   Scenario: Homepage should have a "Add a Toilet" link
     When I go to the homepage

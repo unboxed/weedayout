@@ -39,3 +39,8 @@ end
 When /^I pass the spam test$/ do
   When('I fill in "To prove you\'re not a spam bot, please put \'rabbit\' into this field" with "rabbit"')
 end
+
+When /^the lat and long values are correctly generated$/ do
+  When 'I fill in "toilet_lat" with "-1"'
+  When 'I fill in "toilet_long" with "1"'
+end
