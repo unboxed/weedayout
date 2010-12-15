@@ -8,6 +8,9 @@ module SectionHelpers
 
     when /the row for toilet "([^\"]+)"/
       "##{ActionController::RecordIdentifier.dom_id(Toilet.find_by_name($1))}"
+      
+    when /the footer bar/
+      '#footer'
 
     else
       raise "Can't find mapping from \"#{section_name}\" to a section.\n" +
