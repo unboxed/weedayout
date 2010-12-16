@@ -31,7 +31,7 @@
         $('#toilet_long').val(marker.getLatLng().lng());
       });
 
-			$('#toilet_address').bind('blur', function(){
+			$('#toilet_address').keyup(function(){
         if($(this).val()){
           geocoder.getLocations($(this).val()+ ", UK", addToMap);
         }
