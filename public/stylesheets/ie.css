@@ -1,0 +1,27 @@
+#intro {
+	margin-left:-480px;
+}
+
+input.button {
+	text-indent:-99999999;
+	font-size: 0;
+	display:block;
+	line-height: 0;
+	color:none;
+}
+
+.right .facility_links .link {
+	display:inline;
+}
+
+.back_container  {
+	margin-top: -43px;
+}
+
+.where_can_i_go_container {
+	width:240px;
+}
+
+.search_container {
+	height:66px;
+}
