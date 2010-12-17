@@ -25,7 +25,7 @@ html[xmlns] .clearfix {
 body {
     font-family: "Trebuchet MS";
     font-size: 62.5%;
-		background-color:#774C29;
+		background-color:#724D2A;
 }
 
 
@@ -75,6 +75,10 @@ body {
 
 .main_inner h2.tall {
   min-height: 50px;
+}
+
+.about_us h2 {
+	margin-bottom:30px;
 }
 
 .right p.navig {
@@ -147,7 +151,7 @@ tr.separator td {
 
 #footer li {
 	color: white;
-	margin:25px;
+	margin:20px;
 	display: inline;
 	font-size:1.2em;
 	font-weight:bold;
@@ -169,7 +173,7 @@ tr.separator td {
   background: url('/images/backgrounds/home_clouds.png');
   width: 250px;
   height: 261px;
-  padding: 100px 153px 0 50px;
+  padding: 106px 153px 0 50px;
   z-index: 1000;
 }
 
@@ -178,7 +182,8 @@ tr.separator td {
   color: #58595B;
   font-size: 1.5em;
   text-align: left;
-  margin-bottom: 25px;
+  margin-bottom: 19px;
+	line-height:1.4em;
 }
 
 h1.about_us {
@@ -230,13 +235,14 @@ h1.about_us {
   top: 215px;
   text-align: left;
   background: url('/images/backgrounds/box_find_new_places.png');
-  padding: 25px 42px 0 26px;
+  padding: 22px 42px 0 26px;
   width: 248px;
   height: 135px;
 }
 
 .search_input {
   width: 235px;
+	font-size: 1.4em;
 }
 
 .find_a_facility_box h1 {
@@ -255,7 +261,7 @@ h1.search_results {
 
 .find_new_places_box p {
   font-family: "Trebuchet MS";
-  font-size: 1.3em;
+  font-size: 1.5em;
   color: #58595B;
 }
 
@@ -304,15 +310,6 @@ h1.search_results {
 	padding-left:40px;
 }
 
-.facility_details .facility_images {
-	height:150px;
-}
-
-.facility_details .facility_images .image {
-	width:150px;
-	margin-right:20px;
-}
-
 .right .facility_links {
 	margin-top:30px;
 	height:52px;
@@ -342,6 +339,15 @@ h1.facility_details {
 	line-height:2em;
 	font-size:1.3em;
 	color: #58595B;
+}
+.facility_details p#address {
+	padding-bottom:16px;
+	border-bottom:2px solid #999;
+	margin-bottom:16px;
+}
+
+.new_toilet	.left h2, .edit_toilet	.left h2 {
+	min-height:36px;
 }
 
 
@@ -404,7 +410,7 @@ form {
 form label {
   font-size: 1.3em;
   display: inline-block;
-  margin: 5px 0 0 0;
+  margin: 5px 0 2px 0;
 }
 
 form label h1 {
@@ -428,6 +434,8 @@ form fieldset legend {
 input, textarea {
   border: 2px solid #D1D2D4;
   padding: 5px;
+  color: #58595B;
+  font-family: "Trebuchet MS";
 }
 
 fieldset {
@@ -440,7 +448,7 @@ fieldset {
   /* min-height: 507px; */
   margin: 20px auto 0;
   background-color: white;
-  padding: 10px 0 30px 0;
+  padding: 10px 0 60px 0;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 }
@@ -457,7 +465,7 @@ fieldset {
 }
 
 label.first {
-  margin:0;
+  margin:0 0 2px 0;
 }
 
 form.refine_search div.attributes {

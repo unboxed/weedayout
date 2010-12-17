@@ -58,7 +58,7 @@ a.button {
   background: url('/images/buttons/search_button_container.gif');
   padding: 4px 0 0 4px;
   width: 177px;
-  height: 73px;
+  height: 68px;
   float: right;
   position: relative;
   right: -19px;
@@ -71,7 +71,7 @@ a.button {
   display: block;
   background: url('/images/buttons/where_can_i_go_container.gif');
   padding: 7px 0 0 7px;
-  width: 245px;
+  width: 239px;
   height: 66px;
   float: right;
   position: relative;
@@ -96,7 +96,7 @@ a.button {
   float: right;
   position: relative;
   right: -13px;
-  margin-top: 3px;
+  margin-top: 6px;
 }
 
 .refine_search_button {
