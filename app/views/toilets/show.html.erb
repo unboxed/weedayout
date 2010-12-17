@@ -13,11 +13,6 @@
     <div class="facility_details">
       <h2 id="name"><%=h @toilet.name %></h2>
       <p id="address"><%=h @toilet.address %></p>
-      <div class="facility_images">
-        <div class="image"></div>
-        <div class="image"></div>
-        <div class="image"></div>
-      </div>
       <p id="venuetype"><b>Venue Type:</b> <%=h @toilet.venuetype %></p>
       <p id="howtoaccess"><b>How to Access:</b> <%=h @toilet.howtoaccess %></p>
       <p id="changingbench"><b>Changing Bench:</b> <%= yes_or_no(@toilet.changingbench) %></p>
