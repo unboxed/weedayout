@@ -122,7 +122,7 @@ a {
 }
 
 tr.separator td {
-  padding: 0;
+  padding: 4px;
 }
 
 .required_icon {
@@ -189,7 +189,6 @@ tr.separator td {
 h1.about_us {
   width:162px;
   height:22px;
-  background: url('/images/text_replacement/about_us.gif') no-repeat;
   margin-bottom: 20px;
 }
 .about_us .right {
@@ -200,8 +199,16 @@ h1.about_us {
   font-family: "Trebuchet MS";
   color: #58595B;
   font-size: 1.5em;
+	line-height:1.5em;
   text-align: left;
   margin-bottom: 25px;
+}
+
+p.about_us_header {
+	background:url('/images/text_replacement/about_us.png');
+	width:301px;
+	height:132px;
+	text-indent:-999999px;
 }
 
 .about_us a {
@@ -280,6 +287,7 @@ h1.search_results {
 
 .search_results .address {
   text-align: left;
+	line-height:1.4em;
 }
 
 .search_results .details {
@@ -440,7 +448,12 @@ input, textarea {
 
 fieldset {
   border: 2px solid #D1D2D4;
-  padding: 5px;
+  padding: 3px 5px;
+	padding-bottom:9px;
+}
+
+label.fieldset {
+	margin-bottom: 3px;
 }
 
 .main_inner {
@@ -453,6 +466,9 @@ fieldset {
 	-webkit-border-radius: 10px;
 }
 
+.checkbox_row {
+	margin: 10px 0;
+}
 
 .with_checkboxes label {
   float: left;
@@ -461,7 +477,7 @@ fieldset {
 
 .with_checkboxes input {
   width: auto !important;
-  margin: 10px 0 0;
+  margin: 6px 0 0;
 }
 
 label.first {
@@ -491,6 +507,13 @@ form.refine_search {
   margin-bottom: 20px;
 }
 
+fieldset .form_entry label {
+	margin-right:113px;
+}
+
+.refine_search .attributes input {
+	margin-right:5px;
+}
 
 
 

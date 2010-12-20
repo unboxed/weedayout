@@ -18,14 +18,16 @@
       <%= f.label :howtoaccess, 'How to Access:' %>
       <%= f.text_field :howtoaccess %>
     </div>
-    <div class="with_checkboxes clearfix">
-      <%= f.label :changingbench, "Changing Bench?" %>
-      <%= f.check_box :changingbench %>
-    </div>
-    <div class="with_checkboxes clearfix">
-      <%= f.label :hoist, "Hoist?" %>
-      <%= f.check_box :hoist %>
-    </div>
+		<div class="checkbox_row">
+	    <div class="with_checkboxes clearfix">
+	      <%= f.label :changingbench, "Changing Bench?" %>
+	      <%= f.check_box :changingbench %>
+	    </div>
+	    <div class="with_checkboxes clearfix">
+	      <%= f.label :hoist, "Hoist?" %>
+	      <%= f.check_box :hoist %>
+	    </div>
+		</div>
     <div class="form_entry">
       <%= f.label :toiletlocation, "Toilet Location:" %>
       <%= f.text_field :toiletlocation %>
@@ -34,8 +36,8 @@
       <%= f.label :whocanuse, "Who can use:" %>
       <%= f.text_field :whocanuse %>
     </div>
+		<label class="fieldset">Opening Times:</label>
     <fieldset>
-      <legend>Opening Times</legend>
       <div class="form_entry">
         <%= f.label :opening_time, "Opens at:" %>
         <%= f.time_select :opening_time, :include_seconds => false, :prompt => true, :minute_step => 15, :ignore_date => true %>
@@ -45,7 +47,7 @@
         <%= f.time_select :closing_time, :include_seconds => false, :prompt => true, :minute_step => 15, :ignore_date => true %>
       </div>
     </fieldset>
-    <p class="note"><%= required_icon %>Required field</p>
+    <p class="note"><%= required_icon %> Required field</p>
   </div><!-- /.left -->
 
   <div class="right">
